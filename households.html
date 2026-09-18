@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adam for households — household pilot</title>
+  <meta name="description" content="Adam is a home computer we're piloting with families and care homes. Tell us about your household.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Fragment+Mono&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0C0C0D;
+      color: #C8C2B9;
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(12,12,13,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1E1E20;
+    }
+    nav .wrap {
+      max-width: 1200px;
+      height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { font-size: 20px; color: #F2EDE4; text-decoration: none; letter-spacing: -0.02em; }
+    .tag {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #8A8682;
+    }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-links a {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #9A9590; text-decoration: none;
+    }
+    .nav-links a:hover { color: #F2EDE4; }
+    @media (max-width: 700px) { .nav-links a.textlink { display: none; } .tag { display: none; } }
+    header { padding: 72px 0 8px; }
+    h1 {
+      color: #F2EDE4;
+      font-size: clamp(40px, 7vw, 68px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      text-wrap: balance;
+    }
+    h1 em { font-style: italic; font-weight: 300; }
+    .lede { margin-top: 24px; font-size: 21px; line-height: 1.45; max-width: 600px; }
+    section { padding: 56px 0; border-top: 1px solid #1E1E20; margin-top: 56px; }
+    h2 {
+      color: #F2EDE4;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+      margin-bottom: 20px;
+      text-wrap: balance;
+    }
+    p + p { margin-top: 16px; }
+    ul.fit { list-style: none; margin-top: 24px; border-top: 1px solid #1E1E20; }
+    ul.fit li {
+      padding: 14px 0;
+      border-bottom: 1px solid #1E1E20;
+      color: #F2EDE4;
+      font-size: 20px;
+    }
+    ul.fit li span { color: #8A8682; font-size: 16px; display: block; margin-top: 2px; }
+    .apply {
+      margin-top: 28px;
+      border: 1px solid #1E1E20;
+      border-radius: 16px;
+      background: #101011;
+      overflow: hidden;
+    }
+    .apply-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 44px;
+      border-bottom: 1px solid #1E1E20;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: #6E6A66;
+    }
+    .apply-head button {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 10px; letter-spacing: 0.1em;
+      color: #7CFF7C; text-decoration: underline;
+      padding: 0;
+    }
+    .apply-body { padding: 28px 24px; }
+    .steps { list-style: none; margin-top: 20px; }
+    .steps li {
+      display: flex; gap: 16px;
+      padding: 12px 0;
+      font-size: 18px;
+    }
+    .steps .n {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 11px; color: #6E6A66;
+      flex-shrink: 0; width: 28px; padding-top: 5px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center;
+      height: 44px; padding: 0 26px;
+      border-radius: 999px;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+      cursor: pointer;
+    }
+    .btn-solid { background: #F2EDE4; color: #0C0C0D; border: 1px solid #F2EDE4; }
+    .btn-solid:hover { background: #fff; }
+    .btn-ghost { background: transparent; color: #C8C2B9; border: 1px solid #2A2A2C; }
+    .btn-ghost:hover { border-color: #3A3A3C; background: #161618; }
+    .fine {
+      font-family: 'Fragment Mono', monospace;
+      font-size: 11px; line-height: 1.7; color: #6E6A66;
+      margin-top: 18px;
+    }
+    #toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Fragment Mono', monospace;
+      font-size: 11px; letter-spacing: 0.08em;
+      background: #F2EDE4; color: #0C0C0D;
+      padding: 10px 18px; border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    #toast.show { opacity: 1; }
+    footer {
+      border-top: 1px solid #1E1E20;
+      margin-top: 72px; padding: 40px 0 56px;
+      font-family: 'Fragment Mono', monospace;
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #3A3835;
+    }
+    footer .wrap { max-width: 1200px; display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: space-between; }
+    footer a { color: #9A9590; text-decoration: none; }
+    footer a:hover { color: #F2EDE4; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      #toast { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <div style="display:flex;align-items:center;gap:32px;">
+        <a class="brand" href="index.html">Adam</a>
+        <span class="tag">Working prototype</span>
+      </div>
+      <div class="nav-links">
+        <a class="textlink" href="index.html">Company</a>
+        <a href="mailto:chizigamonyewuchi@gmail.com?subject=Adam%20pilot%20-%20my%20household&amp;body=Household%3A%0A%0ABiggest%20home%20annoyance%3A%0A">Email us</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <header>
+      <h1>Adam for <em>your home.</em></h1>
+      <p class="lede">Adam is a home computer we're piloting with families and care homes. If your home feels like a coordination problem, we want to hear from you.</p>
+    </header>
+
+    <section>
+      <h2>Who it's for</h2>
+      <p>We're looking for households where a home that actually helps would matter day to day — not smart-home hobbyists, but people with real mornings, real evenings, and real edge cases.</p>
+      <ul class="fit">
+        <li>Parents with young children<span>Nothing to wear, nothing to charge, no cameras.</span></li>
+        <li>Elder-care families<span>Quiet reassurance without surveillance.</span></li>
+        <li>Shared flats and shift workers<span>Homes where nobody quite knows what's happening.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>How to apply</h2>
+      <p>Three things, two minutes. We reply within 24 hours.</p>
+      <ol class="steps">
+        <li><span class="n">01</span><span>Email us at the address below.</span></li>
+        <li><span class="n">02</span><span>Tell us your household and your biggest home annoyance.</span></li>
+        <li><span class="n">03</span><span>We reply within 24h and take it from there.</span></li>
+      </ol>
+      <div class="apply">
+        <div class="apply-head">
+          <span>Apply</span>
+          <button type="button" id="copyBtn">chizigamonyewuchi@gmail.com</button>
+        </div>
+        <div class="apply-body">
+          <div class="cta-row">
+            <a class="btn btn-solid" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam%20pilot%20-%20my%20household&amp;body=Household%3A%0A%0ABiggest%20home%20annoyance%3A%0A">Email to apply &rarr;</a>
+            <button class="btn btn-ghost" type="button" id="copyBtn2">Copy address</button>
+          </div>
+          <p class="fine">No cameras. No video.<br>One speaker &bull; plug-in nodes.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" role="status"></div>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Adam &bull; Private by design &bull; No cameras</span>
+      <a href="index.html">&larr; Back to Adam</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var email = 'chizigamonyewuchi@gmail.com';
+      var toast = document.getElementById('toast');
+      var timer = null;
+      function show(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+      }
+      function copy() {
+        function done() { show('Copied ' + email + ' to clipboard'); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(done, function () { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+          var input = document.createElement('input');
+          input.value = email;
+          document.body.appendChild(input);
+          input.select();
+          try { document.execCommand('copy'); done(); }
+          catch (e) { show(email); }
+          document.body.removeChild(input);
+        }
+      }
+      document.getElementById('copyBtn').addEventListener('click', copy);
+      document.getElementById('copyBtn2').addEventListener('click', copy);
+    })();
+  </script>
+</body>
+</html>
