@@ -55,6 +55,12 @@
     .progress { margin-top: 28px; height: 2px; width: 220px; background: #1E1E20; border-radius: 2px; overflow: hidden; }
     .progress i { display: block; height: 100%; width: 0; background: #F2EDE4; }
     .device-col { position: relative; height: 460px; }
+    .hero-photo { margin-top: 40px; border-radius: 20px; overflow: hidden; border: 1px solid #1E1E20; background: #F4F4F2; display: flex; justify-content: center; }
+    .hero-photo img { display: block; width: auto; max-width: 100%; max-height: 460px; }
+    .device-photo { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; will-change: transform; }
+    .device-photo img { width: min(320px, 78%); height: auto; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+    .views-photo, .living-photo { margin-top: 16px; border-radius: 16px; overflow: hidden; border: 1px solid #1E1E20; background: #F4F4F2; }
+    .views-photo img, .living-photo img { display: block; width: 100%; height: auto; }
     .layer { position: absolute; left: 50%; transform: translateX(-50%); will-change: transform; }
     .cap { bottom: 288px; width: 132px; height: 34px; }
     .cap-body { width: 132px; height: 34px; border-radius: 17px; border: 1px solid #2A2A2E; background: linear-gradient(180deg, #262628, #151516); position: relative; }
@@ -144,6 +150,7 @@
       <p class="eyebrow reveal">Adam &mdash; the home computer &middot; in development</p>
       <h1 class="reveal" style="margin-top:20px">Adam looks after<br><em>your home</em><br>when you can&rsquo;t.</h1>
       <p class="lede reveal">Adam takes care of your home and the life that happens around it. A home computer that maps your home and handles the messy everyday stuff.</p>
+      <figure class="hero-photo reveal"><img src="adam-hero.jpg" alt="Adam smart speaker prototype"></figure>
       <div class="scroll-cue reveal"><span class="line"></span><span>Scroll &mdash; take it apart</span></div>
     </header>
   </div>
@@ -164,11 +171,7 @@
           <div class="callout co-compute" data-from="0.48"><b>Local compute</b><span>Your household&rsquo;s memory, on device</span></div>
           <div class="callout co-driver" data-from="0.66"><b>Full-range driver</b><span>Adam&rsquo;s voice, tuned for rooms</span></div>
           <div class="callout co-plugs" data-from="0.82"><b>Plug nodes &times;2</b><span>Presence, sound, air, light &mdash; where the speaker can&rsquo;t reach</span></div>
-          <div class="layer cap" data-up="168"><div class="cap-body"><div class="mic-holes"></div><div class="led"></div></div></div>
-          <div class="layer board" data-up="84"><div class="board-body"><div class="chip"></div></div></div>
-          <div class="layer shell" data-up="0"><div class="shell-body"></div></div>
-          <div class="layer driver" data-up="-96"><div class="driver-body"></div></div>
-          <div class="layer base" data-up="-168"><div class="base-body"></div></div>
+          <div class="device-photo" id="devicePhoto"><img src="adam-hero.jpg" alt="Adam speaker"></div>
         </div>
       </div>
     </div>
@@ -221,6 +224,8 @@
           <p>The speaker stays put, so two plugs cover the rooms it cannot reach &mdash; bedrooms, hallway, kitchen. They read presence, sound, air and light, giving Adam the whole house. Two plugs in every package.</p>
         </div>
       </div>
+      <figure class="views-photo reveal"><img src="adam-views.jpg" alt="Adam speaker from three angles"></figure>
+      <figure class="living-photo reveal"><img src="adam-living.jpg" alt="Adam speaker in a family living room"></figure>
       <div class="panel">
         <div class="panel-head"><span>03 &mdash; Together</span><span>Live map</span></div>
         <div class="panel-body">
@@ -288,7 +293,7 @@
       document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
       // exploded view
       var wrap = document.querySelector('.explode-wrap');
-      var layers = Array.prototype.slice.call(document.querySelectorAll('#device .layer'));
+      var photo = document.getElementById('devicePhoto');
       var callouts = Array.prototype.slice.call(document.querySelectorAll('#device .callout'));
       var capTitle = document.getElementById('capTitle');
       var capBody = document.getElementById('capBody');
@@ -300,10 +305,7 @@
       ];
       var stage = -1, ticking = false;
       function render(p) {
-        layers.forEach(function (l) {
-          var up = parseFloat(l.getAttribute('data-up')) || 0;
-          l.style.transform = 'translateX(-50%) translateY(' + (-up * p).toFixed(1) + 'px)';
-        });
+        if (photo) { photo.style.transform = 'scale(' + (1 + p * 0.12).toFixed(3) + ') translateY(' + (-p * 30).toFixed(1) + 'px)'; }
         callouts.forEach(function (c) {
           var from = parseFloat(c.getAttribute('data-from')) || 0;
           c.classList.toggle('on', p >= from);
