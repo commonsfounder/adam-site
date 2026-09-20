@@ -94,6 +94,13 @@
     ul.fit { list-style: none; margin-top: 24px; border-top: 1px solid #1E1E20; }
     ul.fit li { padding: 15px 0; border-bottom: 1px solid #1E1E20; color: #F2EDE4; font-size: 20px; }
     ul.fit li span { color: #8A8682; font-size: 16px; display: block; margin-top: 2px; }
+    .tabs { display: flex; gap: 10px; margin-top: 26px; overflow-x: auto; padding-bottom: 4px; }
+    .tab { flex: 1 0 auto; font-family: 'Fragment Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #9A9590; background: transparent; border: 1px solid #2A2A2E; border-radius: 999px; padding: 13px 22px; cursor: pointer; transition: all .25s ease; white-space: nowrap; }
+    .tab:hover { color: #F2EDE4; border-color: #3A3A3C; }
+    .tab.on { background: #F2EDE4; color: #0C0C0D; border-color: #F2EDE4; }
+    .tabpanel { display: none; }
+    .tabpanel.on { display: block; animation: panelIn .4s ease; }
+    @keyframes panelIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
     .aud { font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2EDE4; margin-top: 40px; }
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
@@ -190,35 +197,13 @@
     <section class="block reveal">
       <p class="eyebrow">Who it&rsquo;s for</p>
       <h2>Real mornings.<br>Real evenings.</h2>
-      <p class="aud">Adam for parents</p>
-      <ul class="fit">
-        <li>We&rsquo;re teaching the prototype to tell crying from fussing<span>So you&rsquo;ll know whether to go in.</span></li>
-        <li>Overnight patterns across the week<span>Adam can track them.</span></li>
-        <li>Bedtime cover when you&rsquo;re stretched<span>Adam can cover it.</span></li>
-        <li>A toddler wandering after lights-out<span>We&rsquo;re teaching the prototype to notice.</span></li>
-        <li>When to intervene &mdash; and when not<span>Adam can tell you.</span></li>
-      </ul>
-      <p class="aud">Adam for flatmates</p>
-      <ul class="fit">
-        <li>Shared chores, actually getting done</li>
-        <li>Energy waste cut when the flat sits empty</li>
-        <li>Deliveries and shared shopping, handled between you</li>
-        <li>Quiet hours without the group-chat nagging</li>
-        <li>Bins out, washing moved, remembered</li>
-      </ul>
-      <p class="aud">Adam for professionals</p>
-      <ul class="fit">
-        <li>Daytime sleep after night shifts, adapted to</li>
-        <li>Doorbell suppressed on sleep days</li>
-        <li>Interruptions fielded through deep-work hours</li>
-        <li>Family needs coordinated without pulling you out of calls</li>
-      </ul>
-      <p class="aud">Adam for care</p>
-      <ul class="fit">
-        <li>Heavy falls, choking, overnight distress<span>We&rsquo;re exploring how the prototype might raise these.</span></li>
-        <li>Lights, locks, family or nurse alerts<span>Exploring &mdash; with no raw audio leaving the home.</span></li>
-        <li>No streaming, ever<span>Nothing raw goes to any third-party cloud.</span></li>
-      </ul>
+      <div class="tabs" role="tablist">
+        <button class="tab on" data-tab="parents" role="tab">Parents</button>
+        <button class="tab" data-tab="flatmates" role="tab">Flatmates</button>
+        <button class="tab" data-tab="pros" role="tab">Professionals</button>
+        <button class="tab" data-tab="care" role="tab">Care</button>
+      </div>
+      <div class="tabpanels"><ul class="fit tabpanel on" data-panel="parents"><li>Adam can tell crying from fussing, so you know whether to go in.</li><li>Adam can track overnight patterns across the week.</li><li>Adam can cover bedtime when both of you are stretched.</li><li>Adam can notice a toddler wandering after lights-out.</li><li>Adam can tell you when to intervene — and when not to.</li></ul><ul class="fit tabpanel" data-panel="flatmates"><li>Adam can keep shared chores actually getting done.</li><li>Adam can cut energy waste when the flat sits empty all day.</li><li>Adam can handle deliveries and shared shopping between you.</li><li>Adam can hold quiet hours without the group-chat nagging.</li><li>Adam can remind you about bins out and washing moved.</li></ul><ul class="fit tabpanel" data-panel="pros"><li>Adam can adapt the home to daytime sleep after night shifts.</li><li>Adam can suppress the doorbell and hold noise down on sleep days.</li><li>Adam can field interruptions through deep-work hours.</li><li>Adam can coordinate family needs without pulling you out of calls.</li></ul><ul class="fit tabpanel" data-panel="care"><li>Adam can raise heavy falls, choking and overnight distress in care settings.</li><li>Adam can trigger lights, locks and family or nurse alerts<span>No raw audio leaves the home.</span></li><li>Adam can do it without streaming raw audio or video to any third-party cloud.</li></ul></div>
     </section>
 
     <section class="block reveal" id="make">
@@ -343,6 +328,17 @@
       window.addEventListener('resize', onScroll);
       if (reduce) { callouts.forEach(function (c) { c.classList.add('on'); }); }
       update();
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+      var panels = Array.prototype.slice.call(document.querySelectorAll('.tabpanel'));
+      tabs.forEach(function (t) {
+        t.addEventListener('click', function () {
+          tabs.forEach(function (x) { x.classList.remove('on'); });
+          panels.forEach(function (p) { p.classList.remove('on'); });
+          t.classList.add('on');
+          var p = document.querySelector('.tabpanel[data-panel="' + t.getAttribute('data-tab') + '"]');
+          if (p) p.classList.add('on');
+        });
+      });
     })();
   </script>
 </body>
