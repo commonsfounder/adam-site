@@ -135,3 +135,28 @@ footer a:hover { color: var(--paper); }
 .copy-link { background: none; border: none; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--sky); text-decoration: underline; padding: 8px 0; min-height: 44px; word-break: break-all; text-align: left; }
 #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); font-family: 'Archivo Narrow', sans-serif; font-weight: 500; font-size: 15px; letter-spacing: .1em; background: var(--paper); color: var(--void); padding: 12px 20px; border-radius: 0; box-shadow: 0 0 32px rgba(0,125,255,.5); opacity: 0; pointer-events: none; transition: opacity .25s; max-width: 90vw; }
 #toast.show { opacity: 1; }
+
+/* ---- ghost.ai structure: dark hero, light paper sections ---- */
+.wordmark { display: flex; justify-content: space-between; font-weight: 200; color: var(--ice); text-transform: uppercase; line-height: 1; font-size: clamp(56px, 22vw, 200px); letter-spacing: 0; margin: 28px 0 0; user-select: none; }
+.hero { padding: clamp(40px, 8vw, 90px) 0 clamp(24px, 4vw, 40px); text-align: center; }
+.hero h1 { font-size: clamp(30px, 6vw, 56px); margin-top: 36px; }
+.hero p.sub { margin: 20px auto 0; }
+.hero .row { justify-content: center; }
+.light { background: #e4e4e1; color: var(--void); border-top: 0 !important; }
+.light h2, .light h3, .light h1 { color: var(--void); }
+.light h2 span, .light h1 span { color: #006ddf; }
+.light p.sub { color: var(--void); opacity: .72; }
+.light .label { color: #006ddf; }
+.light .card { background: rgba(255,255,255,.55); border: 1px solid #c4c4c0; border-top-color: #006ddf; box-shadow: none; }
+.light .card p { color: var(--void); opacity: .68; }
+.light .pills span { color: #006ddf; border-color: #006ddf; background: transparent; }
+.light .tab { color: #006ddf; }
+.light .tab.on { color: #fff; }
+.light .tabpanel, .light .tabpanel li { border-color: #c4c4c0; }
+.light .tabpanel li { color: var(--void); }
+.light .tabpanel li span { color: #4d5660; }
+.light .btn.ghost { color: #006ddf; }
+.fade-in { height: 120px; background: linear-gradient(to bottom, var(--void), #e4e4e1); }
+.light + .light { border-top: 1px solid #c4c4c0 !important; }
+section.block.light + section.block.closing { border-top: 0; }
+@media (max-width: 860px) { .wordmark { padding: 0 4px; } }
