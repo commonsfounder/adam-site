@@ -94,7 +94,7 @@ h2 { font-size: 36px; line-height: 40px; letter-spacing: -0.03em; }
 @media (min-width: 861px) {
   .explode-sticky { padding-top: var(--sp-600); }
   .stage { grid-template-columns: 5fr 6fr; gap: var(--sp-600); }
-  .caption h1 { font-size: 80px; }
+  .caption h1 { font-size: 64px; }
   .caption .sub { font-size: 20px; line-height: 30px; }
   .chips { display: flex; }
   .parts li { display: flex; align-items: baseline; color: rgba(32, 30, 27, 0.32); }
