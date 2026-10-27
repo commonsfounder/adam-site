@@ -2,7 +2,7 @@
 // site.js drives it through window.AdamDevice.setProgress(0..1).
 (function () {
   var COUNT = 36;
-  var VER = '9';
+  var VER = '10';
   var host = document.getElementById('device');
   if (!host) return;
 

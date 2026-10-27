@@ -25,72 +25,23 @@
     window.addEventListener('resize', function () { if (window.innerWidth >= 860) setMenu(false); });
   }
 
-  // tagline: words activate one at a time as they cross the trigger line
-  var tagline = document.getElementById('tagline');
-  if (tagline) {
-    var words = tagline.textContent.trim().split(/\s+/);
-    tagline.textContent = '';
-    words.forEach(function (w, i) {
-      var s = document.createElement('span');
-      s.className = 'w';
-      s.textContent = w;
-      tagline.appendChild(s);
-      if (i < words.length - 1) tagline.appendChild(document.createTextNode(' '));
-    });
-    var spans = tagline.querySelectorAll('.w');
-    if (reduce) {
-      spans.forEach(function (s) { s.classList.add('on'); });
-    } else {
-      var wordIO = new IntersectionObserver(function (entries) {
-        var step = 0;
-        entries.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          var el = e.target;
-          wordIO.unobserve(el);
-          setTimeout(function () { el.classList.add('on'); }, step * 60);
-          step += 1;
-        });
-      }, { rootMargin: '0px 0px -35% 0px', threshold: 0 });
-      spans.forEach(function (s) { wordIO.observe(s); });
-    }
-  }
-
-  // exploded device
+  // speaker: scroll drives the opening and the parts list
   var wrap = document.querySelector('.explode-wrap');
   if (wrap) {
-    var layers = Array.prototype.slice.call(document.querySelectorAll('#device .layer'));
-    var callouts = Array.prototype.slice.call(document.querySelectorAll('#device .callout'));
-    var capTitle = document.getElementById('capTitle');
-    var capBody = document.getElementById('capBody');
-    var prog = document.getElementById('prog');
-    var stages = [
-      { t: 'One object. One home computer.', b: 'One speaker, two plugs, no cameras. Scroll to take it apart.' },
-      { t: 'It opens. Every layer counts.', b: 'Mic array, compute, driver, sensing. Nothing that watches.' },
-      { t: 'Nothing that watches.', b: 'Presence, sound, air and light at room level. Never a recording of your life.' }
-    ];
-    var plan = document.querySelector('.plan');
-    var dev = document.getElementById('device');
-    var fit = function () {
-      if (dev.classList.contains('gl')) { dev.style.transform = ''; return; }
-      if (window.innerWidth >= 861) {
-        var sc = Math.max(0.55, Math.min(1.1, (window.innerHeight - 130) / 640));
-        dev.style.transform = 'scale(' + sc.toFixed(3) + ')';
-      } else { dev.style.transform = ''; }
-    };
-    fit();
-    window.addEventListener('resize', fit);
-    var stage = -1, ticking = false;
+    var parts = Array.prototype.slice.call(document.querySelectorAll('#parts li'));
+    var stage = wrap.querySelector('.stage');
+    var cur = -2, ticking = false;
     var render = function (p) {
-      layers.forEach(function (l) {
-        var up = parseFloat(l.getAttribute('data-up')) || 0;
-        l.style.transform = 'translateX(-50%) translateY(' + (-up * p).toFixed(1) + 'px)';
-      });
-      callouts.forEach(function (c) {
-        c.classList.toggle('on', p >= (parseFloat(c.getAttribute('data-from')) || 0));
-      });
-      var s = p < 0.3 ? 0 : (p < 0.62 ? 1 : 2);
-      if (s !== stage) { stage = s; capTitle.textContent = stages[s].t; capBody.textContent = stages[s].b; }
-      prog.style.transform = 'scaleX(' + p.toFixed(3) + ')';
+      var idx = -1;
+      parts.forEach(function (li, i) { if (p >= parseFloat(li.getAttribute('data-from'))) idx = i; });
+      if (idx !== cur) {
+        cur = idx;
+        parts.forEach(function (li, i) {
+          li.classList.toggle('on', i <= idx && i >= 0);
+          li.classList.toggle('cur', i === idx);
+        });
+        stage.classList.toggle('has-cur', idx >= 0);
+      }
       if (window.AdamDevice) window.AdamDevice.setProgress(reduce ? 0 : p);
     };
     var update = function () {
@@ -103,30 +54,8 @@
     var onScroll = function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
-    if (reduce) callouts.forEach(function (c) { c.classList.add('on'); });
+    if (reduce) parts.forEach(function (li) { li.classList.add('on', 'cur'); });
     update();
-  }
-
-  // tabs
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  var panels = Array.prototype.slice.call(document.querySelectorAll('.tabpanel'));
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { select(t); });
-    t.addEventListener('keydown', function (e) {
-      var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : null;
-      if (n === null) return;
-      var next = tabs[(n + tabs.length) % tabs.length];
-      next.focus();
-      select(next);
-    });
-  });
-  function select(t) {
-    tabs.forEach(function (x) { x.setAttribute('aria-selected', 'false'); x.tabIndex = -1; });
-    panels.forEach(function (p) { p.classList.remove('on'); });
-    t.setAttribute('aria-selected', 'true');
-    t.tabIndex = 0;
-    var p = document.querySelector('.tabpanel[data-panel="' + t.getAttribute('data-tab') + '"]');
-    if (p) p.classList.add('on');
   }
 
   // copy email (pilot page)
