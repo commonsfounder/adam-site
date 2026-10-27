@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=15">
+  <link rel="stylesheet" href="site.css?v=16">
   <script>document.documentElement.className = 'js';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. There are no cameras in the speaker or the plugs, and no wearables to charge."}},
@@ -138,14 +138,14 @@
         <dl class="specs reveal">
           <div><dt>Size</dt><dd>21 &times; 14 &times; 14 cm</dd></div>
           <div><dt>Body</dt><dd>Woven acoustic fabric over a hollow shell</dd></div>
-          <div><dt>Base</dt><dd>Matte anodised aluminium, 2 cm, inset from the body</dd></div>
-          <div><dt>Top</dt><dd>Frosted polymer panel with a diffused light field and microphones</dd></div>
+          <div><dt>Base</dt><dd>Matte anodised aluminium<span class="hint">2 cm, inset from the body</span></dd></div>
+          <div><dt>Top</dt><dd>Frosted polymer panel<span class="hint">With a diffused light field and microphones</span></dd></div>
           <div><dt>Processor</dt><dd>Quad-core Arm Cortex-A55 with a neural engine</dd></div>
           <div><dt>Memory</dt><dd>2 GB LPDDR4 and 16 GB eMMC storage</dd></div>
           <div><dt>Microphones</dt><dd>4 digital MEMS microphones</dd></div>
           <div><dt>Speaker</dt><dd>3 inch full-range driver with a Class-D amplifier</dd></div>
           <div><dt>Sensing</dt><dd>Sound, air, light and room-level presence, with 24 GHz radar</dd></div>
-          <div><dt>Sound recognition</dt><dd>15 household sounds, including smoke and CO alarm patterns, glass breaking, knocks, doorbells and a baby crying</dd></div>
+          <div><dt>Sound recognition</dt><dd>15 household sounds<span class="hint">Including smoke and CO alarm patterns, glass breaking, knocks, doorbells and a baby crying</span></dd></div>
           <div><dt>Radio</dt><dd>Wi-Fi 6, Bluetooth 5 and Thread</dd></div>
           <div><dt>Cameras</dt><dd>None</dd></div>
           <div><dt>Microphone</dt><dd>Physical mute switch on the rear panel</dd></div>
@@ -153,7 +153,7 @@
           <div><dt>Memory</dt><dd>Kept on the device</dd></div>
           <div><dt>In the box</dt><dd>One speaker, two plugs</dd></div>
           <div><dt>Plugs</dt><dd>Wi-Fi 6, Bluetooth 5 and Thread, with radar, microphone, temperature and light sensing</dd></div>
-          <div><dt>Status</dt><dd>Working prototype. Processor, memory and sensor specs are design targets.</dd></div>
+          <div><dt>Status</dt><dd>Working prototype<span class="hint">Processor, memory and sensor specs are design targets</span></dd></div>
         </dl>
         <h3 class="works-h reveal">Works with</h3>
         <ul class="works reveal">
@@ -167,12 +167,27 @@
         <div class="head reveal">
           <h2>Common questions.</h2>
         </div>
-        <div class="faq reveal">
-          <details><summary>Does Adam have cameras?</summary><p>No. There are no cameras in the speaker or the plugs, and no wearables to charge.</p></details>
-          <details><summary>Does my audio go to the cloud?</summary><p>No raw audio or video streams to any third party cloud. Your household&rsquo;s memory stays on the device.</p></details>
-          <details><summary>How does it know which room someone is in?</summary><p>The speaker and plugs sense sound, air, light and presence at room level, and WiFi fills the gaps between rooms. It never tracks exact positions.</p></details>
-          <details><summary>Can I keep using the assistant I already have?</summary><p>Yes. Your agent can run on Adam hardware while you keep using it the way you do today. Bringing your own models is our direction.</p></details>
-          <details><summary>Can I buy it?</summary><p>Not yet. Adam is in development, with a working prototype in a real home. We are looking for pilot households.</p></details>
+        <div class="faq reveal" id="acc">
+          <div class="acc-item">
+            <h3><button type="button" class="acc-q" id="aq0" aria-expanded="false" aria-controls="ap0"><span>Does Adam have cameras?</span><span class="pm" aria-hidden="true"></span></button></h3>
+            <div class="acc-p" id="ap0" role="region" aria-labelledby="aq0"><div><p>No. There are no cameras in the speaker or the plugs, and no wearables to charge.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button type="button" class="acc-q" id="aq1" aria-expanded="false" aria-controls="ap1"><span>Does my audio go to the cloud?</span><span class="pm" aria-hidden="true"></span></button></h3>
+            <div class="acc-p" id="ap1" role="region" aria-labelledby="aq1"><div><p>No raw audio or video streams to any third party cloud. Your household&rsquo;s memory stays on the device.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button type="button" class="acc-q" id="aq2" aria-expanded="false" aria-controls="ap2"><span>How does it know which room someone is in?</span><span class="pm" aria-hidden="true"></span></button></h3>
+            <div class="acc-p" id="ap2" role="region" aria-labelledby="aq2"><div><p>The speaker and plugs sense sound, air, light and presence at room level, and WiFi fills the gaps between rooms. It never tracks exact positions.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button type="button" class="acc-q" id="aq3" aria-expanded="false" aria-controls="ap3"><span>Can I keep using the assistant I already have?</span><span class="pm" aria-hidden="true"></span></button></h3>
+            <div class="acc-p" id="ap3" role="region" aria-labelledby="aq3"><div><p>Yes. Your agent can run on Adam hardware while you keep using it the way you do today. Bringing your own models is our direction.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button type="button" class="acc-q" id="aq4" aria-expanded="false" aria-controls="ap4"><span>Can I buy it?</span><span class="pm" aria-hidden="true"></span></button></h3>
+            <div class="acc-p" id="ap4" role="region" aria-labelledby="aq4"><div><p>Not yet. Adam is in development, with a working prototype in a real home. We are looking for pilot households.</p></div></div>
+          </div>
         </div>
       </div>
     </section>
@@ -194,7 +209,7 @@
     </div>
   </footer>
 
-  <script src="site.js?v=13"></script>
-  <script src="adam-device.js?v=14"></script>
+  <script src="site.js?v=14"></script>
+  <script src="adam-device.js?v=15"></script>
 </body>
 </html>

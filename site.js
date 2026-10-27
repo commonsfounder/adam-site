@@ -23,7 +23,6 @@
   var wrap = document.querySelector('.explode-wrap');
   if (wrap) {
     var parts = Array.prototype.slice.call(document.querySelectorAll('#parts li'));
-    var stage = wrap.querySelector('.stage');
     var cur = -2, ticking = false;
     var render = function (p) {
       var idx = -1;
@@ -34,7 +33,6 @@
           li.classList.toggle('on', i <= idx && i >= 0);
           li.classList.toggle('cur', i === idx);
         });
-        stage.classList.toggle('has-cur', idx >= 0);
       }
       if (window.AdamDevice) window.AdamDevice.setProgress(reduce ? 0 : p);
     };
@@ -51,6 +49,20 @@
     if (reduce) parts.forEach(function (li) { li.classList.add('on', 'cur'); });
     update();
   }
+  var accQ = Array.prototype.slice.call(document.querySelectorAll('.acc-q'));
+  accQ.forEach(function (q) {
+    q.addEventListener('click', function () {
+      var open = q.getAttribute('aria-expanded') === 'true';
+      accQ.forEach(function (x) {
+        x.setAttribute('aria-expanded', 'false');
+        document.getElementById(x.getAttribute('aria-controls')).classList.remove('open');
+      });
+      if (!open) {
+        q.setAttribute('aria-expanded', 'true');
+        document.getElementById(q.getAttribute('aria-controls')).classList.add('open');
+      }
+    });
+  });
   var copyBtns = document.querySelectorAll('[data-copy]');
   var toast = document.getElementById('toast');
   var timer = null;

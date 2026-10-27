@@ -1,6 +1,6 @@
 (function () {
   var COUNT = 36;
-  var VER = '14';
+  var VER = '15';
   var HALF = [0.107, 0.12, 0.16, 0.115, 0.13];
   var SIDE = [1, -1, 1, -1, 1];
   var host = document.getElementById('device');
@@ -99,10 +99,24 @@
     document.querySelectorAll('#parts li').forEach(function (li) {
       var el = document.createElement('div');
       el.className = 'tag';
-      el.title = li.getAttribute('data-tip') || '';
       el.innerHTML = '<i class="td"></i><i class="tl"></i><span class="tt"><b></b><span></span></span>';
       el.querySelector('b').textContent = li.querySelector('b').textContent;
       el.querySelector('.tt span').textContent = li.querySelector('span').textContent;
+      var tipText = li.getAttribute('data-tip');
+      if (tipText) {
+        var id = 'tip-' + tags.length, tip = document.createElement('span');
+        tip.className = 'tip'; tip.id = id; tip.setAttribute('role', 'tooltip'); tip.textContent = tipText;
+        el.querySelector('.tt').appendChild(tip);
+        el.tabIndex = 0; el.setAttribute('aria-describedby', id);
+        var timer = 0;
+        var show = function (now) { clearTimeout(timer); timer = setTimeout(function () { el.classList.add('tipon'); }, now ? 0 : 150); };
+        var hide = function () { clearTimeout(timer); el.classList.remove('tipon'); };
+        el.addEventListener('pointerenter', function () { show(false); });
+        el.addEventListener('pointerleave', hide);
+        el.addEventListener('focus', function () { show(true); });
+        el.addEventListener('blur', hide);
+        el.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+      }
       host.appendChild(el);
       if (tags.length % 2 === 1) el.classList.add('l');
       tags.push({ el: el, from: parseFloat(li.getAttribute('data-from')) });

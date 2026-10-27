@@ -82,8 +82,6 @@ h2 { font-size: 36px; line-height: 40px; letter-spacing: -0.03em; }
 .parts li { display: none; padding: var(--sp-75) 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 22px; color: var(--mut); transition: color 400ms var(--ease); }
 .parts li.cur { display: block; color: var(--ink); }
 .parts b { font-weight: 600; margin-right: var(--sp-100); }
-.hint { margin-top: var(--sp-100); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; line-height: 16px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mut); }
-.stage.has-cur .hint { display: none; }
 .device-col { position: relative; height: 330px; order: -1; }
 .device-col.gl { height: 330px; }
 .gl-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -129,13 +127,6 @@ h2 { font-size: 36px; line-height: 40px; letter-spacing: -0.03em; }
 .card h3 { margin-top: var(--sp-200); font-size: 26px; line-height: 32px; letter-spacing: -0.03em; }
 .card p:not(.label) { margin-top: var(--sp-100); color: var(--mut); font-size: 17px; line-height: 26px; }
 
-.faq { border-top: 1px solid var(--line); max-width: 820px; }
-.faq details { border-bottom: 1px solid var(--line); }
-.faq summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: var(--sp-200); padding: var(--sp-300) 0; cursor: pointer; font-size: 20px; line-height: 28px; font-weight: 500; letter-spacing: -0.02em; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; flex-shrink: 0; font-size: 28px; line-height: 28px; color: var(--acc); transition: transform 500ms var(--ease); }
-.faq details[open] summary::after { transform: rotate(45deg); }
-.faq details p { padding: 0 0 var(--sp-300); max-width: 640px; color: var(--mut); font-size: 17px; line-height: 26px; }
 
 .closing { text-align: center; padding: var(--sp-900) 0; background: var(--ink); color: var(--bg); }
 .closing h2 { margin: 0 auto var(--sp-200); max-width: 760px; font-size: 44px; line-height: 1; }
@@ -201,12 +192,44 @@ footer a:hover { color: var(--bg); }
 .shot img { display: block; width: 100%; height: auto; }
 
 .block#specs .head { margin-bottom: var(--sp-400); }
-.specs { border-top: 1px solid var(--ink); }
-.specs > div { display: grid; grid-template-columns: 1fr; gap: 4px; padding: var(--sp-200) 0; border-bottom: 1px solid var(--line); }
-.specs dt { font-size: 15px; line-height: 22px; color: var(--mut); }
-.specs dd { font-size: 20px; line-height: 28px; letter-spacing: -0.015em; font-weight: 500; max-width: 720px; }
-@media (min-width: 768px) { .specs > div { grid-template-columns: 260px 1fr; gap: var(--sp-300); padding: var(--sp-300) 0; } .specs dd { font-size: 24px; line-height: 32px; } }
 .works-h { margin-top: var(--sp-700); font-size: 28px; line-height: 34px; letter-spacing: -0.03em; }
 .works { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-100); margin-top: var(--sp-200); }
 .works li { padding: var(--sp-200) var(--sp-300); background: var(--card); border: 1px solid var(--line); border-radius: 16px; font-size: 18px; line-height: 26px; font-weight: 500; }
 @media (min-width: 768px) { .works { grid-template-columns: repeat(4, 1fr); } }
+
+.faq { border-top: 1px solid var(--line); max-width: 820px; }
+.acc-item { border-bottom: 1px solid var(--line); }
+.acc-item h3 { font-size: inherit; font-weight: inherit; letter-spacing: 0; }
+.acc-q { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: var(--sp-300); padding: var(--sp-300) 0; border: 0; background: none; font: inherit; font-size: 20px; line-height: 28px; font-weight: 500; letter-spacing: -0.02em; text-align: left; color: var(--ink); cursor: pointer; transition: color 300ms var(--ease); }
+.acc-q:hover { color: var(--mut); }
+.acc-q:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; border-radius: 8px; }
+.pm { position: relative; flex: 0 0 auto; width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 50%; transition: transform 300ms var(--ease), border-color 300ms var(--ease); }
+.pm::before, .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: var(--ink); transform: translate(-50%, -50%); }
+.pm::after { transform: translate(-50%, -50%) rotate(90deg); }
+.acc-q:hover .pm { border-color: var(--mut); }
+.acc-q[aria-expanded="true"] .pm { transform: rotate(45deg); }
+.acc-p { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 400ms var(--ease), opacity 300ms var(--ease); }
+.acc-p > div { overflow: hidden; }
+.acc-p.open { grid-template-rows: 1fr; opacity: 1; }
+.acc-p p { padding: 0 var(--sp-600) var(--sp-300) 0; max-width: 640px; color: var(--mut); font-size: 17px; line-height: 26px; }
+
+.specs { border-top: 1px solid var(--ink); }
+.specs > div { display: grid; grid-template-columns: 1fr; gap: 4px; padding: var(--sp-200) 0; border-bottom: 1px solid var(--line); }
+.specs > div:last-child { border-bottom: 0; }
+.specs dt { font-size: 15px; line-height: 22px; color: var(--mut); }
+.specs dd { font-size: 20px; line-height: 28px; letter-spacing: -0.015em; font-weight: 500; }
+.specs .hint { display: block; margin-top: 2px; font-size: 14px; line-height: 20px; letter-spacing: 0; font-weight: 400; color: var(--mut); }
+@media (min-width: 768px) {
+  .specs > div { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--sp-300); align-items: baseline; padding: var(--sp-300) 0; }
+  .specs dd { text-align: right; font-size: 22px; line-height: 30px; }
+  .specs .hint { margin-left: auto; max-width: 480px; }
+}
+
+.tag .tt .tip { position: absolute; display: block; left: 50%; top: calc(100% + 10px); transform: translateX(-50%); z-index: 6; width: max-content; max-width: 220px; padding: 8px 12px; border-radius: 10px; background: var(--ink); color: var(--bg); font-size: 13px; line-height: 18px; font-weight: 400; text-align: left; white-space: normal; opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease); }
+.tag .tt .tip::before { content: ""; position: absolute; left: 50%; top: -4px; width: 8px; height: 8px; background: var(--ink); transform: translateX(-50%) rotate(45deg); }
+.tag .tt { position: relative; }
+.tag.tipon .tt .tip { opacity: 1; }
+.tag { visibility: hidden; transition: opacity 400ms var(--ease), visibility 0s linear 400ms; }
+.tag.on { visibility: visible; transition-delay: 0s; }
+.tag:focus-visible { outline: 2px solid var(--acc); outline-offset: 4px; border-radius: 6px; }
+@media (prefers-reduced-motion: reduce) { .acc-p, .pm, .tag .tt .tip { transition: none; } }
