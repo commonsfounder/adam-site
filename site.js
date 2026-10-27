@@ -64,9 +64,9 @@
     var capBody = document.getElementById('capBody');
     var prog = document.getElementById('prog');
     var stages = [
-      { t: 'One object.<br>One home computer.', b: 'One speaker in the room you use most, two plugs covering the rest. No cameras, anywhere.' },
-      { t: 'It opens.<br>Every layer counts.', b: 'Mic array, compute, driver, sensing. Nothing that watches. Keep scrolling.' },
-      { t: 'Nothing<br>that watches.', b: 'Presence, sound, air and light at room level. Never a recording of your life.' }
+      { t: 'One object. One home computer.', b: 'One speaker, two plugs, no cameras. Scroll to take it apart.' },
+      { t: 'It opens. Every layer counts.', b: 'Mic array, compute, driver, sensing. Nothing that watches.' },
+      { t: 'Nothing that watches.', b: 'Presence, sound, air and light at room level. Never a recording of your life.' }
     ];
     var stage = -1, ticking = false;
     var render = function (p) {
@@ -78,7 +78,7 @@
         c.classList.toggle('on', p >= (parseFloat(c.getAttribute('data-from')) || 0));
       });
       var s = p < 0.3 ? 0 : (p < 0.62 ? 1 : 2);
-      if (s !== stage) { stage = s; capTitle.innerHTML = stages[s].t; capBody.textContent = stages[s].b; }
+      if (s !== stage) { stage = s; capTitle.textContent = stages[s].t; capBody.textContent = stages[s].b; }
       prog.style.transform = 'scaleX(' + p.toFixed(3) + ')';
     };
     var update = function () {
