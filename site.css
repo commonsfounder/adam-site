@@ -99,17 +99,16 @@ h2 { font-size: 36px; line-height: 40px; letter-spacing: -0.03em; }
 
 .block { padding: var(--sp-700) 0; }
 .block.alt { background: var(--alt); }
-@media (min-width: 768px) { .block { padding: 128px 0; } }
+@media (min-width: 768px) { .block { padding: 104px 0; } }
 .head { max-width: 760px; margin-bottom: var(--sp-500); }
 .head h2 { margin: var(--sp-100) 0 var(--sp-200); }
 @media (min-width: 768px) { .head { margin-bottom: var(--sp-700); } }
 
 .examples { list-style: none; border-top: 1px solid var(--line); }
 .examples li { display: grid; grid-template-columns: 1fr; gap: var(--sp-75); padding: var(--sp-300) 0; border-bottom: 1px solid var(--line); }
-.examples .tag { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; line-height: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mut); padding-top: 6px; }
 .examples p { font-size: 22px; line-height: 28px; letter-spacing: -0.02em; font-weight: 500; max-width: 720px; }
 @media (min-width: 768px) {
-  .examples li { grid-template-columns: 200px 1fr; gap: var(--sp-300); padding: var(--sp-400) 0; }
+  .examples li { padding: var(--sp-400) 0; }
   .examples p { font-size: 32px; line-height: 38px; }
 }
 
@@ -196,3 +195,18 @@ footer a:hover { color: var(--bg); }
 .tag .tt span { display: block; font-size: 13px; line-height: 18px; color: var(--mut); }
 @media (min-width: 861px) { .tag { display: flex; } }
 .tag.l { flex-direction: row-reverse; text-align: right; }
+
+.shot { margin-bottom: var(--sp-200); border-radius: 24px; background: var(--alt); overflow: hidden; }
+.block.alt .shot { background: var(--bg); }
+.shot img { display: block; width: 100%; height: auto; }
+
+.block#specs .head { margin-bottom: var(--sp-400); }
+.specs { border-top: 1px solid var(--ink); }
+.specs > div { display: grid; grid-template-columns: 1fr; gap: 4px; padding: var(--sp-200) 0; border-bottom: 1px solid var(--line); }
+.specs dt { font-size: 15px; line-height: 22px; color: var(--mut); }
+.specs dd { font-size: 20px; line-height: 28px; letter-spacing: -0.015em; font-weight: 500; max-width: 720px; }
+@media (min-width: 768px) { .specs > div { grid-template-columns: 260px 1fr; gap: var(--sp-300); padding: var(--sp-300) 0; } .specs dd { font-size: 24px; line-height: 32px; } }
+.works-h { margin-top: var(--sp-700); font-size: 28px; line-height: 34px; letter-spacing: -0.03em; }
+.works { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-100); margin-top: var(--sp-200); }
+.works li { padding: var(--sp-200) var(--sp-300); background: var(--card); border: 1px solid var(--line); border-radius: 16px; font-size: 18px; line-height: 26px; font-weight: 500; }
+@media (min-width: 768px) { .works { grid-template-columns: repeat(4, 1fr); } }

@@ -1,6 +1,6 @@
 (function () {
   var COUNT = 36;
-  var VER = '12';
+  var VER = '13';
   var HALF = [0.107, 0.12, 0.16, 0.115, 0.13];
   var SIDE = [1, -1, 1, -1, 1];
   var host = document.getElementById('device');
