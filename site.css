@@ -103,15 +103,15 @@ h2 { font-size: 36px; line-height: 40px; letter-spacing: -0.03em; }
 .layer { position: absolute; left: 50%; transform: translateX(-50%); will-change: transform; }
 .edge { border: 1px solid rgba(255, 230, 184, 0.16); border-top-color: rgba(255, 230, 184, 0.34); }
 .cap { bottom: 288px; width: 136px; height: 34px; }
-.cap-body { position: relative; width: 136px; height: 34px; border-radius: 17px; background: linear-gradient(180deg, #8a5aa6, #1f0c2c); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); }
+.cap-body { position: relative; width: 136px; height: 34px; border-radius: 17px; background: linear-gradient(180deg, #8a5aa6, #1f0c2c); box-shadow: 0 8px 24px rgba(26, 11, 36, 0.5); }
 .mic-holes { position: absolute; left: 24px; top: 9px; width: 4px; height: 4px; border-radius: 50%; background: #12061b; box-shadow: 14px 0 #12061b, 28px 0 #12061b, 42px 0 #12061b, 56px 0 #12061b, 70px 0 #12061b, 84px 0 #12061b, 0 12px #12061b, 14px 12px #12061b, 28px 12px #12061b, 42px 12px #12061b, 56px 12px #12061b, 70px 12px #12061b, 84px 12px #12061b; }
 .led { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; border-radius: 50%; background: #fff1c9; box-shadow: 0 0 12px var(--marigold), 0 0 32px var(--ember), 0 0 64px var(--ember); animation: breathe 3s ease-in-out infinite; }
 @keyframes breathe { 50% { opacity: 0.55; } }
 .board { bottom: 236px; width: 108px; height: 40px; }
-.board-body { position: relative; width: 108px; height: 40px; border-radius: 8px; background: linear-gradient(180deg, #ffb627, #c47a0a); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); }
+.board-body { position: relative; width: 108px; height: 40px; border-radius: 8px; background: linear-gradient(180deg, #ffb627, #c47a0a); box-shadow: 0 8px 24px rgba(26, 11, 36, 0.5); }
 .chip { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 4px; background: #12061b; border: 1px solid var(--marigold); box-shadow: 0 0 16px rgba(255, 182, 39, 0.5); }
 .shell { bottom: 96px; width: 136px; height: 136px; }
-.shell-body { position: relative; width: 136px; height: 136px; border-radius: 36px; background: linear-gradient(155deg, #f0845a 0%, #c34a2c 45%, #7a2314 100%); overflow: hidden; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 230, 184, 0.2); }
+.shell-body { position: relative; width: 136px; height: 136px; border-radius: 36px; background: linear-gradient(155deg, #f0845a 0%, #c34a2c 45%, #7a2314 100%); overflow: hidden; box-shadow: 0 24px 60px rgba(26, 11, 36, 0.6), inset 0 1px 0 rgba(255, 230, 184, 0.2); }
 .shell-body::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(255, 230, 184, 0.16), transparent 40%); }
 .shell-body::after { content: ""; position: absolute; left: 16px; right: 16px; top: 20px; height: 1px; background: rgba(255, 230, 184, 0.07); box-shadow: 0 12px rgba(255, 230, 184, 0.07), 0 24px rgba(255, 230, 184, 0.07), 0 36px rgba(255, 230, 184, 0.07), 0 48px rgba(255, 230, 184, 0.07), 0 60px rgba(255, 230, 184, 0.07), 0 72px rgba(255, 230, 184, 0.07), 0 84px rgba(255, 230, 184, 0.07); }
 .driver { bottom: 44px; width: 116px; height: 44px; }
