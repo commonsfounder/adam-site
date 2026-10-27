@@ -1,15 +1,11 @@
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // scroll reveals, once per element
   var revealIO = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
     });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(function (el) { revealIO.observe(el); });
-
-  // mobile menu
   var toggle = document.querySelector('.menu-toggle');
   var menu = document.getElementById('menu');
   function setMenu(open) {
@@ -24,8 +20,6 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
     window.addEventListener('resize', function () { if (window.innerWidth >= 860) setMenu(false); });
   }
-
-  // speaker: scroll drives the opening and the parts list
   var wrap = document.querySelector('.explode-wrap');
   if (wrap) {
     var parts = Array.prototype.slice.call(document.querySelectorAll('#parts li'));
@@ -57,8 +51,6 @@
     if (reduce) parts.forEach(function (li) { li.classList.add('on', 'cur'); });
     update();
   }
-
-  // copy email (pilot page)
   var copyBtns = document.querySelectorAll('[data-copy]');
   var toast = document.getElementById('toast');
   var timer = null;

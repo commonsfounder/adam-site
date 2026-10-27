@@ -1,8 +1,8 @@
-// Scroll-driven product render: pre-rendered frames of the speaker opening up.
-// site.js drives it through window.AdamDevice.setProgress(0..1).
 (function () {
   var COUNT = 36;
-  var VER = '10';
+  var VER = '11';
+  var HALF = [0.107, 0.12, 0.16, 0.115, 0.13];
+  var SIDE = [1, -1, 1, -1, 1];
   var host = document.getElementById('device');
   if (!host) return;
 
@@ -14,10 +14,14 @@
   if (!ctx) return;
 
   var frames = new Array(COUNT);
+  var pts = null;
+  var tags = [];
   var target = 0, shown = 0, raf = 0, dpr = 1;
   var px = 0, py = 0, tx = 0, ty = 0;
+  var rect = { x: 0, y: 0, w: 1, h: 1 };
 
   function url(i) { return 'frames/f' + (i < 10 ? '0' + i : i) + '.webp?v=' + VER; }
+  function ready(img) { return img && img.complete && img.naturalWidth; }
 
   function size() {
     var r = host.getBoundingClientRect();
@@ -27,13 +31,34 @@
     draw();
   }
 
-  function ready(img) { return img && img.complete && img.naturalWidth; }
-
   function blit(img, a) {
     var s = Math.min(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
     var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+    var x = (canvas.width - dw) / 2 + px * dpr, y = (canvas.height - dh) / 2 + py * dpr;
+    rect = { x: x / dpr, y: y / dpr, w: dw / dpr, h: dh / dpr };
     ctx.globalAlpha = a;
-    ctx.drawImage(img, (canvas.width - dw) / 2 + px * dpr, (canvas.height - dh) / 2 + py * dpr, dw, dh);
+    ctx.drawImage(img, x, y, dw, dh);
+  }
+
+  function place(f) {
+    if (!pts || !tags.length) return;
+    var i = Math.floor(f), t = f - i, j = Math.min(COUNT - 1, i + 1);
+    var hw = host.clientWidth;
+    tags.forEach(function (tag, k) {
+      var a = pts[i][k], b = pts[j][k];
+      var ax = rect.x + (a[0] + (b[0] - a[0]) * t) * rect.w;
+      var ay = rect.y + (a[1] + (b[1] - a[1]) * t) * rect.h;
+      var edge = ax + SIDE[k] * (HALF[k] + 0.025) * rect.w;
+      var col = rect.x + (SIDE[k] > 0 ? 0.76 : 0.24) * rect.w;
+      tag.el.style.setProperty('--w', Math.max(14, Math.abs(col - edge)) + 'px');
+      tag.el.style.top = ay + 'px';
+      if (SIDE[k] > 0) { tag.el.style.left = edge + 'px'; tag.el.style.right = 'auto'; }
+      else { tag.el.style.right = (hw - edge) + 'px'; tag.el.style.left = 'auto'; }
+    });
+  }
+
+  function mark() {
+    tags.forEach(function (tag) { tag.el.classList.toggle('on', target >= tag.from); });
   }
 
   function draw() {
@@ -44,6 +69,7 @@
     if (ready(a)) blit(a, 1);
     if (ready(b) && t > 0.001) blit(b, t);
     ctx.globalAlpha = 1;
+    place(f);
   }
 
   function tick() {
@@ -58,7 +84,7 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   window.AdamDevice = {
-    setProgress: function (p) { target = reduce ? 0 : p; if (reduce) shown = 0; kick(); }
+    setProgress: function (p) { target = reduce ? 0 : p; if (reduce) shown = 0; mark(); kick(); }
   };
 
   if (!reduce && window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
@@ -67,6 +93,22 @@
       ty = (e.clientY / window.innerHeight - 0.5) * 5;
       kick();
     }, { passive: true });
+  }
+
+  function buildTags() {
+    document.querySelectorAll('#parts li').forEach(function (li) {
+      var el = document.createElement('div');
+      el.className = 'tag';
+      el.title = li.getAttribute('data-tip') || '';
+      el.innerHTML = '<i class="td"></i><i class="tl"></i><span class="tt"><b></b><span></span></span>';
+      el.querySelector('b').textContent = li.querySelector('b').textContent;
+      el.querySelector('.tt span').textContent = li.querySelector('span').textContent;
+      host.appendChild(el);
+      if (tags.length % 2 === 1) el.classList.add('l');
+      tags.push({ el: el, from: parseFloat(li.getAttribute('data-from')) });
+    });
+    mark();
+    draw();
   }
 
   function load(i, first) {
@@ -79,6 +121,7 @@
         size();
         window.addEventListener('resize', size);
         for (var k = 1; k < COUNT; k++) load(k, false);
+        fetch('frames/pts.json?v=' + VER).then(function (r) { return r.json(); }).then(function (d) { pts = d; buildTags(); }).catch(function () {});
       } else { draw(); }
     };
     img.src = url(i);
