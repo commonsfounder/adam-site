@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=16">
+  <link rel="stylesheet" href="site.css?v=17">
   <script>document.documentElement.className = 'js';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. There are no cameras in the speaker or the plugs, and no wearables to charge."}},
@@ -42,6 +42,7 @@
     <a class="brand" href="index.html">Adam</a>
     <div class="nav-links">
       <a href="#does">What it does</a>
+      <a href="#inside">Inside</a>
       <a href="#privacy">Privacy</a>
       <a href="#box">In the box</a>
       <a href="#specs">Specs</a>
@@ -53,6 +54,7 @@
   <div class="menu" id="menu">
     <ul>
       <li><a href="#does">What it does</a></li>
+      <li><a href="#inside">Inside</a></li>
       <li><a href="#privacy">Privacy</a></li>
       <li><a href="#box">In the box</a></li>
       <li><a href="#specs">Specs</a></li>
@@ -79,6 +81,21 @@
           </div>
           <div class="device-col" id="device" role="img" aria-label="The Adam speaker, assembled and opened to show its top panel, compute board, fabric shell, speaker driver and base"></div>
         </div>
+      </div>
+    </section>
+
+    <section class="block" id="inside">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2>Inside Adam.</h2>
+        </div>
+        <div class="seg" id="seg">
+          <button type="button" data-set="speaker" aria-pressed="true">Speaker</button>
+          <button type="button" data-set="plug" aria-pressed="false">Plug</button>
+        </div>
+        <div class="gstage" id="stage"></div>
+        <ul class="plist" id="plist"></ul>
+        <div class="mcard" id="mcard"></div>
       </div>
     </section>
 
@@ -211,5 +228,7 @@
 
   <script src="site.js?v=14"></script>
   <script src="adam-device.js?v=15"></script>
+  <script src="inside/data.js?v=1"></script>
+  <script src="inside.js?v=2"></script>
 </body>
 </html>

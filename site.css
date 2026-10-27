@@ -233,3 +233,51 @@ footer a:hover { color: var(--bg); }
 .tag.on { visibility: visible; transition-delay: 0s; }
 .tag:focus-visible { outline: 2px solid var(--acc); outline-offset: 4px; border-radius: 6px; }
 @media (prefers-reduced-motion: reduce) { .acc-p, .pm, .tag .tt .tip { transition: none; } }
+
+.seg { display: inline-flex; padding: 4px; margin-bottom: var(--sp-200); border: 1px solid var(--line); border-radius: 9999px; background: var(--card); }
+.seg button { padding: 8px 20px; border: 0; border-radius: 9999px; background: transparent; font: inherit; font-size: 15px; line-height: 20px; font-weight: 500; color: var(--mut); cursor: pointer; transition: background-color 300ms var(--ease), color 300ms var(--ease); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.gstage { position: relative; width: 100%; aspect-ratio: 4 / 3; margin: 0 auto; max-width: calc((100svh - 150px) * 4 / 3); }
+.lay, .lin { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; transition: opacity 500ms var(--ease), transform 600ms var(--ease); }
+.lin { opacity: 0; }
+.gstage.focus .lay { opacity: 0; }
+.gstage.focus .lin { opacity: 1; }
+.gstage.focus .lay.sel { opacity: 1; transform: scale(1.06); }
+.gstage.focus .lin.sel { opacity: 0; }
+.lay.hov { transform: scale(1.025); }
+.gstage.focus .lay.sel.hov { transform: scale(1.06); }
+.hit { position: absolute; border: 0; background: transparent; cursor: pointer; padding: 0; }
+.macro { position: absolute; top: 0; bottom: 0; left: 0; aspect-ratio: 1 / 1; opacity: 0; transform: scale(0.6); pointer-events: none; transition: opacity 600ms var(--ease), transform 800ms var(--ease); touch-action: none; }
+.macro img { display: block; width: 100%; height: 100%; -webkit-mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #000 58%, transparent 100%); mask-image: radial-gradient(ellipse 74% 74% at 50% 50%, #000 58%, transparent 100%); }
+.macro .screen { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.gstage.zoomed .macro { opacity: 1; transform: none; pointer-events: auto; }
+.gstage.zoomed .lay, .gstage.zoomed .lin, .gstage.zoomed .ptag, .gstage.zoomed .hit { opacity: 0 !important; pointer-events: none; }
+.ptag, .pcard { position: absolute; z-index: 4; }
+.ptag { display: none; }
+.ptagb { display: inline-block; padding: 4px 10px; border: 1px solid var(--ink); background: var(--card); font-size: 13px; line-height: 18px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: opacity 400ms var(--ease), background-color 300ms var(--ease), color 300ms var(--ease); }
+.ptagb:hover { background: var(--ink); color: var(--bg); }
+.gstage.focus .ptag { opacity: 0.35; }
+.pcard { display: none; width: min(340px, 36%); min-width: 250px; background: var(--card); border: 1px solid var(--ink); }
+.pcard.on { display: block; animation: cardIn 450ms var(--ease); }
+@keyframes cardIn { from { opacity: 0; } to { opacity: 1; } }
+.pcard .key { flex: 0 0 auto; padding: 8px 12px; background: var(--acc); color: #fff; font-size: 13px; line-height: 18px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; align-self: flex-start; }
+.pcard .ctop { display: flex; }
+.pcard .rows { flex: 1; min-width: 0; }
+.pcard .rows div { padding: 8px 12px; font-size: 14px; line-height: 20px; border-bottom: 1px solid var(--line); }
+.pcard .rows div:last-child { border-bottom: 0; }
+.pcard .rows div.m { color: var(--mut); }
+.pcard .weave, .pcard .game { display: block; width: 100%; aspect-ratio: 2 / 1; border-top: 1px solid var(--ink); touch-action: none; cursor: crosshair; }
+.plist { list-style: none; margin-top: var(--sp-200); border-top: 1px solid var(--ink); }
+.plist button { display: block; width: 100%; padding: var(--sp-100) 0; border: 0; border-bottom: 1px solid var(--line); background: none; font: inherit; font-size: 17px; line-height: 24px; font-weight: 500; text-align: left; color: var(--ink); cursor: pointer; }
+.mcard { margin-top: var(--sp-200); }
+.mcard .pcard { position: static; display: none; width: 100%; }
+.mcard .pcard.on { display: block; }
+@media (min-width: 861px) {
+  .ptag { display: block; }
+  .plist, .mcard { display: none; }
+}
+@media (max-width: 860px) {
+  .pcard.floating { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) { .lay, .lin, .pcard.on { transition: none; animation: none; } }
+  
