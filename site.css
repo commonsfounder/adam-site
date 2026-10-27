@@ -191,7 +191,7 @@ footer a:hover { color: var(--bg); }
 .tag.on { opacity: 1; }
 .tag .td { width: 6px; height: 6px; border-radius: 50%; background: var(--ink); flex-shrink: 0; }
 .tag .tl { display: block; width: var(--w, 40px); height: 1px; background: var(--ink); opacity: 0.35; flex-shrink: 0; }
-.tag .tt { display: block; padding: 0 10px; white-space: nowrap; }
+.tag .tt { display: block; padding: 0 10px; max-width: 170px; }
 .tag .tt b { display: block; font-size: 14px; line-height: 18px; font-weight: 600; }
 .tag .tt span { display: block; font-size: 13px; line-height: 18px; color: var(--mut); }
 @media (min-width: 861px) { .tag { display: flex; } }
