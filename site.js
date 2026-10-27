@@ -68,6 +68,16 @@
       { t: 'It opens. Every layer counts.', b: 'Mic array, compute, driver, sensing. Nothing that watches.' },
       { t: 'Nothing that watches.', b: 'Presence, sound, air and light at room level. Never a recording of your life.' }
     ];
+    var plan = document.querySelector('.plan');
+    var dev = document.getElementById('device');
+    var fit = function () {
+      if (window.innerWidth >= 861) {
+        var sc = Math.max(0.55, Math.min(1.1, (window.innerHeight - 130) / 640));
+        dev.style.transform = 'scale(' + sc.toFixed(3) + ')';
+      } else { dev.style.transform = ''; }
+    };
+    fit();
+    window.addEventListener('resize', fit);
     var stage = -1, ticking = false;
     var render = function (p) {
       layers.forEach(function (l) {
@@ -80,6 +90,7 @@
       var s = p < 0.3 ? 0 : (p < 0.62 ? 1 : 2);
       if (s !== stage) { stage = s; capTitle.textContent = stages[s].t; capBody.textContent = stages[s].b; }
       prog.style.transform = 'scaleX(' + p.toFixed(3) + ')';
+      if (plan) plan.style.opacity = (1 - 0.65 * p).toFixed(2);
     };
     var update = function () {
       ticking = false;
