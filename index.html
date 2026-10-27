@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap">
-  <link rel="stylesheet" href="site.css?v=6">
+  <link rel="stylesheet" href="site.css?v=8">
   <script>document.documentElement.className = 'js';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. There are no cameras in the speaker or the plugs, and no wearables to charge."}},
@@ -66,15 +66,6 @@
   <main id="main">
     <section class="explode-wrap" id="anatomy">
       <div class="explode-sticky">
-        <svg class="plan" viewBox="0 0 800 600" aria-hidden="true" focusable="false">
-          <rect class="wall" x="60" y="60" width="680" height="480" rx="16"/>
-          <path class="wall" d="M230 60V150M230 200V300M230 340V400M230 450V540M60 300H110M160 300H230M230 180H380M440 180H740"/>
-          <path class="wall" d="M400 330L140 180M400 330L140 420" stroke-dasharray="4 8"/>
-          <text x="84" y="92">Nursery</text><text x="84" y="332">Bed</text><text x="254" y="92">Kitchen</text><text x="254" y="212">Living</text>
-          <circle class="ring" cx="140" cy="180" r="10"/><circle class="ring d2" cx="140" cy="180" r="10"/><circle class="node" cx="140" cy="180" r="5"/>
-          <circle class="ring d2" cx="140" cy="420" r="10"/><circle class="ring d3" cx="140" cy="420" r="10"/><circle class="node" cx="140" cy="420" r="5"/>
-          <circle class="ring speaker" cx="400" cy="330" r="14"/><circle class="ring speaker d2" cx="400" cy="330" r="14"/><circle class="node speaker" cx="400" cy="330" r="7"/>
-        </svg>
         <div class="wrap stage">
           <div class="caption">
             <p class="label reveal">A working prototype in a real home</p>
@@ -233,6 +224,8 @@
     </div>
   </footer>
 
-  <script src="site.js?v=6"></script>
+  <script src="site.js?v=8"></script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+  <script type="module" src="adam-device.js?v=8"></script>
 </body>
 </html>

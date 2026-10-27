@@ -71,6 +71,7 @@
     var plan = document.querySelector('.plan');
     var dev = document.getElementById('device');
     var fit = function () {
+      if (dev.classList.contains('gl')) { dev.style.transform = ''; return; }
       if (window.innerWidth >= 861) {
         var sc = Math.max(0.55, Math.min(1.1, (window.innerHeight - 130) / 640));
         dev.style.transform = 'scale(' + sc.toFixed(3) + ')';
@@ -90,7 +91,7 @@
       var s = p < 0.3 ? 0 : (p < 0.62 ? 1 : 2);
       if (s !== stage) { stage = s; capTitle.textContent = stages[s].t; capBody.textContent = stages[s].b; }
       prog.style.transform = 'scaleX(' + p.toFixed(3) + ')';
-      if (plan) plan.style.opacity = (1 - 0.65 * p).toFixed(2);
+      if (window.AdamDevice) window.AdamDevice.setProgress(reduce ? 0 : p);
     };
     var update = function () {
       ticking = false;
