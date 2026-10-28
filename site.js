@@ -87,3 +87,18 @@
   }
   copyBtns.forEach(function (b) { b.addEventListener('click', function () { copy(b.getAttribute('data-copy')); }); });
 })();
+
+(function () {
+  var s = document.getElementById('intro'); if (!s) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var busy = false;
+  function play() {
+    if (busy) return; busy = true;
+    s.classList.remove('go'); s.classList.add('pre'); void s.offsetWidth;
+    setTimeout(function () { s.classList.add('go'); }, 500);
+    setTimeout(function () { busy = false; }, 2600);
+  }
+  s.classList.add('pre');
+  ((document.fonts && document.fonts.ready) || Promise.resolve()).then(play);
+  s.addEventListener('click', play);
+})();
