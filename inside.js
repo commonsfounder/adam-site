@@ -67,7 +67,7 @@
     }
 
     function build() {
-      stopWeave(); stopGame(); stopRick();
+      stopWeave(); stopGame(); stopRick(); stopLava();
       stage.innerHTML = ''; plist.innerHTML = ''; mcard.innerHTML = ''; nodes = []; cur = -1;
       stage.classList.remove('focus', 'zoomed', 'playing'); rickBox = null;
       var parts = SETS[set], B = L[set];
@@ -102,7 +102,7 @@
         var f = MACROS[set][p.k]; if (!f) return;
         var m = el('div', 'macro' + (p.k === 'processor' && set === 'speaker' ? '' : ' soft')); var mi = el('img'); mi.src = 'inside/macro_' + f + '.webp'; mi.alt = p.name + ', close up'; m.appendChild(mi);
         if (set === 'speaker' && p.k === 'processor') { p._screen = el('canvas', 'screen'); m.appendChild(p._screen); }
-        if (set === 'speaker' && p.k === 'panel') { p._bar = makeControls(); m.appendChild(p._bar); }
+        if (set === 'speaker' && p.k === 'panel') { p._bar = makeControls(); m.appendChild(p._bar._lavaEl); m.appendChild(p._bar); }
         stage.appendChild(m); p._macro = m;
       });
     }
@@ -131,22 +131,26 @@
       fr.src = RICK;
       rickBox.appendChild(fr); stage.appendChild(rickBox); stage.classList.add('playing'); paused = false;
     }
+    var lavaRaf = 0;
     function makeControls() {
-      var bar = el('div', 'touchbar'); tb = bar;
+      var top = el('div', 'toplayer'); tb = top;
+      var lv = el('div', 'lavalayer'); var cv = el('canvas', 'lava'); cv.width = 200; cv.height = 200; lv.appendChild(cv); top._lava = cv; top._lavaEl = lv;
       var icons = {
         minus: '<svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg>',
         plus: '<svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg>',
         play: '<svg viewBox="0 0 24 24" class="i-play"><path d="M8 5.5v13l11-6.5z"/></svg><svg viewBox="0 0 24 24" class="i-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>'
       };
-      var mute = el('button', 'tb tb-mute'); mute.type = 'button'; mute.setAttribute('aria-label', 'Mute');
-      mute.innerHTML = '<span class="knob"></span><span class="tb-lab">Mute</span>';
-      var dn = el('button', 'tb', icons.minus); dn.type = 'button'; dn.setAttribute('aria-label', 'Volume down');
-      var pl = el('button', 'tb tb-play', icons.play); pl.type = 'button'; pl.setAttribute('aria-label', 'Play or pause');
-      var up = el('button', 'tb', icons.plus); up.type = 'button'; up.setAttribute('aria-label', 'Volume up');
-      var pips = el('div', 'pips'); for (var i = 0; i < 10; i++) pips.appendChild(el('span', 'pip'));
-      [mute, dn, pl, up].forEach(function (b) { bar.appendChild(b); }); bar.appendChild(pips);
-      function swallow(e) { e.stopPropagation(); }
-      bar.addEventListener('click', swallow);
+      function btn(cls, label, html, x, y) {
+        var b = el('button', 'pbtn ' + cls, html); b.type = 'button'; b.setAttribute('aria-label', label);
+        b.style.left = x + 'px'; b.style.top = y + 'px'; top.appendChild(b); return b;
+      }
+      var dn = btn('', 'Volume down', icons.minus, 100, 200);
+      var pl = btn('big', 'Play or pause', icons.play, 200, 200);
+      var up = btn('', 'Volume up', icons.plus, 300, 200);
+      var mute = el('button', 'pswitch'); mute.type = 'button'; mute.setAttribute('aria-label', 'Mute'); mute.innerHTML = '<span class="pknob"></span>';
+      mute.style.left = '200px'; mute.style.top = '292px'; top.appendChild(mute);
+      var pips = el('div', 'pips'); for (var i = 0; i < 10; i++) pips.appendChild(el('span', 'pip')); top.appendChild(pips);
+      top.addEventListener('click', function (e) { e.stopPropagation(); });
       mute.addEventListener('click', function () { muted = !muted; yt(muted ? 'mute' : 'unMute'); syncBar(); });
       dn.addEventListener('click', function () { vol = Math.max(0, vol - 1); if (vol === 0) { muted = true; yt('mute'); } else { yt('setVolume', [vol * 10]); } syncBar(); });
       up.addEventListener('click', function () { vol = Math.min(10, vol + 1); if (muted) { muted = false; yt('unMute'); } yt('setVolume', [vol * 10]); syncBar(); });
@@ -157,15 +161,42 @@
         syncBar();
       });
       syncBar();
-      return bar;
+      return top;
     }
     function fitBar(macro, bar) {
-      var W = 460, H = 96, mw = macro.offsetWidth, mh = macro.offsetHeight;
-      var TL = [0.075, 0.31], TR = [0.725, 0.17], BR = [0.965, 0.655], BL = [0.265, 0.86];
-      function P(u, v) { return [((1 - v) * ((1 - u) * TL[0] + u * TR[0]) + v * ((1 - u) * BL[0] + u * BR[0])) * mw, ((1 - v) * ((1 - u) * TL[1] + u * TR[1]) + v * ((1 - u) * BL[1] + u * BR[1])) * mh]; }
+      var W = 400, H = 400, mw = macro.offsetWidth, mh = macro.offsetHeight;
+      var Q = window.ADAM_PANEL, cx = 0, cy = 0, k = 0.955;
+      Q.forEach(function (p) { cx += p[0] / 4; cy += p[1] / 4; });
+      var q = Q.map(function (p) { return [(cx + (p[0] - cx) * k) * mw, (cy + (p[1] - cy) * k) * mh]; });
       bar.style.width = W + 'px'; bar.style.height = H + 'px';
-      bar.style.transform = homography(W, H, [P(0.2, 0.45), P(0.8, 0.45), P(0.8, 0.61), P(0.2, 0.61)]);
+      bar.style.transform = homography(W, H, q);
+      bar._lavaEl.style.width = W + 'px'; bar._lavaEl.style.height = H + 'px'; bar._lavaEl.style.transform = bar.style.transform;
     }
+    function startLava(cv) {
+      var ctx = cv.getContext('2d'), W = cv.width, H = cv.height, t0 = performance.now();
+      var B = [
+        { r: 0.30, sx: 0.31, sy: 0.23, px: 0.0, py: 1.0, c: '255, 190, 110' },
+        { r: 0.27, sx: 0.23, sy: 0.37, px: 2.1, py: 0.3, c: '255, 60, 100' },
+        { r: 0.33, sx: 0.17, sy: 0.29, px: 4.0, py: 2.4, c: '255, 150, 70' },
+        { r: 0.24, sx: 0.41, sy: 0.19, px: 1.2, py: 3.3, c: '255, 70, 140' },
+        { r: 0.28, sx: 0.27, sy: 0.33, px: 5.1, py: 0.7, c: '255, 200, 120' }
+      ];
+      function frame(now) {
+        var t = (now - t0) / 1000;
+        var g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#ff7a3a'); g.addColorStop(1, '#ff3d6e');
+        ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+        ctx.globalCompositeOperation = 'lighter';
+        B.forEach(function (b) {
+          var x = (0.5 + 0.34 * Math.sin(t * b.sx + b.px)) * W, y = (0.5 + 0.34 * Math.sin(t * b.sy + b.py)) * H, r = b.r * W * (1 + 0.12 * Math.sin(t * 0.9 + b.px));
+          var rg = ctx.createRadialGradient(x, y, 0, x, y, r);
+          rg.addColorStop(0, 'rgba(' + b.c + ', 0.85)'); rg.addColorStop(1, 'rgba(' + b.c + ', 0)');
+          ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+        });
+        lavaRaf = requestAnimationFrame(frame);
+      }
+      stopLava(); lavaRaf = requestAnimationFrame(frame);
+    }
+    function stopLava() { if (lavaRaf) cancelAnimationFrame(lavaRaf); lavaRaf = 0; }
 
     function startWeave(cv) {
       var ctx = cv.getContext('2d'), W = cv.width, H = cv.height, S = 14;
@@ -278,7 +309,7 @@
       node.card.classList.add('on'); node.mc.classList.add('on');
       clamp(node.card);
       stopWeave(); stopGame(); clearTimeout(zoomTimer);
-      if (p.k !== 'panel') stopRick();
+      if (p.k !== 'panel') { stopRick(); stopLava(); }
       stage.classList.remove('zoomed');
       parts.forEach(function (q) { if (q._macro) q._macro.classList.remove('on'); });
       parts.forEach(function (q, k) { place(null, q, L[set][q.k], nodes[k].card); });
@@ -289,13 +320,13 @@
         zoomTimer = setTimeout(function () {
           stage.classList.add('zoomed'); p._macro.classList.add('on');
           if (isDesktop()) { var cs = node.card.style; cs.left = 'auto'; cs.bottom = 'auto'; cs.right = '0'; cs.top = '50%'; cs.transform = 'translateY(-50%)'; }
-          if (p._bar) fitBar(p._macro, p._bar);
+          if (p._bar) { fitBar(p._macro, p._bar); startLava(p._bar._lava); }
           if (set === 'speaker' && p.k === 'processor') startDieGame(p._macro, p._screen);
         }, 450);
       }
     }
     function close() {
-      cur = -1; clearTimeout(zoomTimer); stage.classList.remove('focus', 'zoomed'); stopWeave(); stopGame(); stopRick();
+      cur = -1; clearTimeout(zoomTimer); stage.classList.remove('focus', 'zoomed'); stopWeave(); stopGame(); stopRick(); stopLava();
       SETS[set].forEach(function (q) { if (q._macro) q._macro.classList.remove('on'); });
       SETS[set].forEach(function (q, k) { q._lay.classList.remove('sel'); q._lin.classList.remove('sel'); nodes[k].card.classList.remove('on'); nodes[k].mc.classList.remove('on'); nodes[k].tag.style.visibility = ''; });
     }
