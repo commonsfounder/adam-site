@@ -515,3 +515,6 @@ footer a:hover { color: var(--bg); }
 .logo { gap: 12px; font-size: 24px; letter-spacing: -0.04em; }
 .logo .mark { width: 24px; height: 32px; }
 .logo .mark { width: 24px; height: 32px; }
+
+.logo { display: inline-block; font-size: 24px; letter-spacing: -0.04em; }
+.logo .mark { display: inline-block; width: 0.17em; height: 0.72em; margin: 0 0.05em 0 0.068em; vertical-align: baseline; overflow: visible; }
