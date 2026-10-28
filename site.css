@@ -561,22 +561,9 @@ footer a:hover { color: var(--bg); }
 .intro-word .mark { display: inline-block; width: 0.17em; height: 0.72em; margin: 0 0.05em 0 0.068em; vertical-align: baseline; overflow: visible; }
 .intro-word .mark circle, .intro-word .mark rect { transform-box: fill-box; }
 .intro { cursor: pointer; }
+.intro-word { position: relative; }
 .intro-word .mark circle, .intro-word .mark rect { transform-origin: 50% 100%; }
 .intro-word .rest { display: inline-block; }
-.intro.pre .mark circle { opacity: 0; transform: translateY(-2000%); }
-.intro.pre .rest { opacity: 0; }
-.intro.go .mark circle { animation: iDot 1.7s cubic-bezier(.3, .6, .4, 1) both; opacity: 1; }
-.intro.go .mark rect { animation: iStem 1.7s cubic-bezier(.3, .6, .4, 1) both; }
-.intro.go .rest { animation: iRest 800ms var(--ease) 1.45s both; }
-@keyframes iDot {
-  0% { transform: translateY(-2000%) scale(0.85, 1.25); }
-  34% { transform: translateY(0) scale(1, 1); }
-  42% { transform: translateY(0) scale(1.28, 0.7); }
-  58% { transform: translateY(-420%) scale(0.92, 1.1); }
-  74% { transform: translateY(0) scale(1.12, 0.86); }
-  88% { transform: translateY(-60%) scale(1, 1); }
-  100% { transform: translateY(0) scale(1, 1); }
-}
-@keyframes iStem { 0%, 33% { transform: scale(1, 1); } 42% { transform: scale(1.08, 0.95); } 56% { transform: scale(1, 1); } 74% { transform: scale(1.04, 0.98); } 100% { transform: scale(1, 1); } }
-@keyframes iRest { from { opacity: 0; transform: translateX(-0.12em); } to { opacity: 1; transform: none; } }
+.intro-word .decoy { position: absolute; left: 0; top: 0; opacity: 0; transform-origin: 50% 100%; pointer-events: none; }
+.intro.live .decoy { opacity: 1; }
 
