@@ -57,6 +57,21 @@
       if (side === 'b') { t.style.left = pct(cx); t.style.top = pct(y1 + g); t.style.transform = 'translateX(-50%)'; }
     }
 
+    function insideUrl(name) { return window.AdamColour ? window.AdamColour.insideUrl(name) : 'inside/' + name; }
+    function recolour() {
+      SETS[set].forEach(function (p) {
+        if (p._lay) p._lay.src = insideUrl(set + '_' + p.k + '.webp');
+        if (p._lin) p._lin.src = insideUrl(set + '_' + p.k + '_line.webp');
+        var f = MACROS[set][p.k];
+        if (p._macro && f) { var mi = p._macro.querySelector('img'); if (mi) mi.src = insideUrl('macro_' + f + '.webp'); }
+        if (p._bar && p._bar._lavaWrap) {
+          var u = 'url(' + insideUrl('macro_panel_mask.webp') + ')';
+          p._bar._lavaWrap.style.webkitMaskImage = u; p._bar._lavaWrap.style.maskImage = u;
+        }
+      });
+    }
+    window.addEventListener('adam-colour-change', recolour);
+
     function clamp(card) {
       if (!isDesktop()) return;
       var sr = stage.getBoundingClientRect(), r = card.getBoundingClientRect();
@@ -73,8 +88,8 @@
       var parts = SETS[set], B = L[set];
       parts.forEach(function (p, i) {
         var bb = B[p.k];
-        var lay = el('img', 'lay'); lay.src = 'inside/' + set + '_' + p.k + '.webp'; lay.alt = '';
-        var lin = el('img', 'lin'); lin.src = 'inside/' + set + '_' + p.k + '_line.webp'; lin.alt = '';
+        var lay = el('img', 'lay'); lay.src = insideUrl(set + '_' + p.k + '.webp'); lay.alt = '';
+        var lin = el('img', 'lin'); lin.src = insideUrl(set + '_' + p.k + '_line.webp'); lin.alt = '';
         lay.style.transformOrigin = lin.style.transformOrigin = pct((bb[0] + bb[2]) / 2) + ' ' + pct((bb[1] + bb[3]) / 2);
         stage.appendChild(lay); stage.appendChild(lin);
         p._lay = lay; p._lin = lin;
@@ -100,7 +115,7 @@
       });
       parts.forEach(function (p) {
         var f = MACROS[set][p.k]; if (!f) return;
-        var m = el('div', 'macro' + (p.k === 'processor' && set === 'speaker' ? '' : ' soft')); var mi = el('img'); mi.src = 'inside/macro_' + f + '.webp'; mi.alt = p.name + ', close up'; m.appendChild(mi);
+        var m = el('div', 'macro' + (p.k === 'processor' && set === 'speaker' ? '' : ' soft')); var mi = el('img'); mi.src = insideUrl('macro_' + f + '.webp'); mi.alt = p.name + ', close up'; m.appendChild(mi);
         if (set === 'speaker' && p.k === 'processor') { p._screen = el('canvas', 'screen'); m.appendChild(p._screen); }
         if (set === 'speaker' && p.k === 'panel') { p._bar = makeControls(); m.appendChild(p._bar._lavaWrap); m.appendChild(p._bar); }
         stage.appendChild(m); p._macro = m;
@@ -256,9 +271,11 @@
       cv.onpointermove = pos; cv.onpointerdown = pos;
       cv.onpointerleave = function () { tx = ty = -999; };
       function rr(x, y, w, h, r) { if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); } else { ctx.fillRect(x, y, w, h); } }
+      var PALS = { sandstone: ['#463f35', [201, 189, 163], [160, 148, 124]], black: ['#2e2b27', [96, 90, 82], [62, 58, 53]], white: ['#d8d0bd', [238, 232, 218], [210, 201, 183]] };
       function frame() {
         mx += (tx - mx) * 0.2; my += (ty - my) * 0.2;
-        ctx.fillStyle = '#463f35'; ctx.fillRect(0, 0, W, H);
+        var pal = PALS[window.AdamColour ? window.AdamColour.name() : 'sandstone'] || PALS.sandstone;
+        ctx.fillStyle = pal[0]; ctx.fillRect(0, 0, W, H);
         for (var j = -1; j <= Math.ceil(H / S); j++) {
           for (var i = -1; i <= Math.ceil(W / S); i++) {
             var cx = i * S + S / 2, cy = j * S + S / 2, dx = cx - mx, dy = cy - my, d = Math.sqrt(dx * dx + dy * dy);
@@ -266,7 +283,7 @@
             var ox = d > 0.5 ? dx / d * f * 16 : 0, oy = d > 0.5 ? dy / d * f * 16 : 0;
             var over = ((i + j) & 1) === 0;
             var lift = 1 + f * 0.35;
-            var base = over ? [201, 189, 163] : [160, 148, 124];
+            var base = over ? pal[1] : pal[2];
             var add = f * 55;
             ctx.fillStyle = 'rgb(' + Math.min(255, base[0] + add | 0) + ',' + Math.min(255, base[1] + add | 0) + ',' + Math.min(255, base[2] + add | 0) + ')';
             var x = cx + ox, y = cy + oy;

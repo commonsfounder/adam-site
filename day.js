@@ -10,12 +10,14 @@
   ];
   var WIDE = { x: 0.5, y: 0.5, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
+  function dayUrl(name) { return (window.AdamColour ? window.AdamColour.dayUrl(name) : 'day/' + name) + '?v=2'; }
   var cam = document.createElement('div'); cam.className = 'day-cam'; stage.appendChild(cam);
   var imgs = S.map(function (s, i) {
-    var im = document.createElement('img'); im.src = 'day/' + s.img + '.webp?v=2'; im.className = 'day-img'; im.decoding = 'async';
+    var im = document.createElement('img'); im.src = dayUrl(s.img + '.webp'); im.className = 'day-img'; im.decoding = 'async';
     im.alt = i === 0 ? 'A three-dimensional view of a home with Adam in it' : ''; if (i) im.setAttribute('aria-hidden', 'true');
     cam.appendChild(im); return im;
   });
+  window.addEventListener('adam-colour-change', function () { imgs.forEach(function (im, k) { im.src = dayUrl(S[k].img + '.webp'); }); });
   ['speaker', 'plugA', 'plugB'].forEach(function (k) {
     var m = document.createElement('i'); m.className = 'day-mark'; m.setAttribute('aria-hidden', 'true');
     m.style.left = (P[k][0] * 100) + '%'; m.style.top = (P[k][1] * 100) + '%'; cam.appendChild(m);

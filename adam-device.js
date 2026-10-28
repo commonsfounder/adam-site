@@ -20,7 +20,7 @@
   var px = 0, py = 0, tx = 0, ty = 0;
   var rect = { x: 0, y: 0, w: 1, h: 1 };
 
-  function url(i) { return 'frames/f' + (i < 10 ? '0' + i : i) + '.webp?v=' + VER; }
+  function url(i) { var name = 'f' + (i < 10 ? '0' + i : i) + '.webp'; return (window.AdamColour ? window.AdamColour.framesUrl(name) : 'frames/' + name) + '?v=' + VER; }
   function ready(img) { return img && img.complete && img.naturalWidth; }
 
   function size() {
@@ -141,5 +141,6 @@
     img.src = url(i);
     frames[i] = img;
   }
+  window.addEventListener('adam-colour-change', function () { for (var k = 0; k < COUNT; k++) load(k, false); });
   load(0, true);
 })();
