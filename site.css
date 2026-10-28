@@ -511,3 +511,6 @@ footer a:hover { color: var(--bg); }
 .dayside .frame-head { margin-bottom: 0; padding-top: 4px; }
 .logo { font-size: 24px; }
 .logo .mark { width: 36px; height: 36px; }
+
+.logo { gap: 12px; font-size: 24px; letter-spacing: -0.04em; }
+.logo .mark { width: 26px; height: 34px; }
