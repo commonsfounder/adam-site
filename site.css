@@ -567,3 +567,5 @@ footer a:hover { color: var(--bg); }
 .intro-word .decoy { position: absolute; left: 0; top: 0; opacity: 0; transform-origin: 50% 100%; pointer-events: none; }
 .intro.live .decoy { opacity: 1; }
 
+.intro-word .mark { transform-origin: 50% 100%; }
+.intro.pre .mark { visibility: hidden; }

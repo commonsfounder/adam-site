@@ -93,12 +93,13 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var p = s.querySelector('.intro-word'), mark = s.querySelector('.mark'), dot = mark.querySelector('circle'), decoy = s.querySelector('.decoy');
   var T = 3400, busy = false;
+  s.classList.add('live', 'pre');
   function play() {
     if (busy || !mark.animate) return; busy = true;
     var fs = parseFloat(getComputedStyle(p).fontSize), r = mark.getBoundingClientRect(), D = r.right + 60, H = fs * 0.5;
     s.classList.add('live');
     [mark, dot, decoy].forEach(function (e) { e.getAnimations().forEach(function (a) { a.cancel(); }); });
-    function k(o, x, y, sx, sy, ease) { return { offset: o, transform: 'translate(' + (-D * x).toFixed(1) + 'px,' + (-H * y).toFixed(1) + 'px) scale(' + sx + ',' + sy + ')', easing: ease || 'ease-in-out' }; }
+    function k(o, x, y, sx, sy, ease) { return { offset: o, transform: 'translate(' + (-D * x).toFixed(1) + 'px,' + (H * y).toFixed(1) + 'px) scale(' + sx + ',' + sy + ')', easing: ease || 'ease-in-out' }; }
     var up = 'cubic-bezier(.2,.7,.3,1)', down = 'cubic-bezier(.7,0,.9,.4)';
     mark.animate([
       k(0, 1, 0, 1, 1), k(0.04, 0.88, 0, 1.15, 0.85, up), k(0.12, 0.74, -0.8, 0.9, 1.12, down), k(0.2, 0.6, 0, 1.2, 0.8),
@@ -109,6 +110,7 @@
     function d(o, x, y) { return { offset: o, transform: 'translate(' + x + '%,' + y + '%)', easing: 'ease-in-out' }; }
     dot.animate([d(0, 0, 0), d(0.5, 0, 0), d(0.54, 30, 0), d(0.6, 30, 0), d(0.64, 0, 0), d(0.8, 0, 0), d(0.84, 0, 0), d(0.88, 0, -140), d(0.92, 0, 0), d(0.95, -35, 0), d(0.98, 35, 0), d(1, 0, 0)], { duration: T, delay: 500, fill: 'both' });
     decoy.animate([{ transform: 'scaleY(1)', opacity: 1 }, { transform: 'scaleY(0.07)', opacity: 1, offset: 0.75 }, { transform: 'scaleY(0.07)', opacity: 0 }], { duration: 260, delay: 500 + T * 0.8, fill: 'both' });
+    s.classList.remove('pre');
     setTimeout(function () { busy = false; }, T + 700);
   }
   ((document.fonts && document.fonts.ready) || Promise.resolve()).then(function () { setTimeout(play, 100); });
