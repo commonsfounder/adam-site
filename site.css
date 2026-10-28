@@ -486,3 +486,13 @@ footer a:hover { color: var(--bg); }
 .fam-sentence .k.lit { padding: 0.5em 0.62em !important; margin: 0 0.06em !important; }
 .fam-sentence .fin { margin-top: 0 !important; }
 @media (max-width: 720px) { .fam-sentence .k.lit { padding: 0.5em 0.5em !important; } }
+.hero-in { padding: 72px 0 var(--sp-600); }
+.hero-in-head { max-width: 760px; margin-bottom: var(--sp-400); }
+.hero-in-head h1 { font-size: clamp(44px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.045em; }
+.hero-in-head .sub { margin-top: var(--sp-200); max-width: 520px; }
+.hero-in .gstage { max-width: calc((100svh - 120px) * 4 / 3); }
+.hero-in { padding: 28px 0 var(--sp-500); }
+.hero-in-head { max-width: none; display: grid; grid-template-columns: 1fr; gap: var(--sp-100); margin-bottom: var(--sp-200); }
+.hero-in-head h1 { font-size: clamp(36px, 5vw, 64px); }
+.hero-in-head .sub { margin: 0; font-size: 17px; line-height: 26px; }
+@media (min-width: 861px) { .hero-in-head { grid-template-columns: 1.2fr 1fr; align-items: end; gap: var(--sp-600); } .hero-in .gstage { max-width: calc((100svh - 230px) * 4 / 3); } .hero-in .seg { margin-bottom: var(--sp-100); } }

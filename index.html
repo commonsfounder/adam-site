@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=52">
+  <link rel="stylesheet" href="site.css?v=54">
   <script>document.documentElement.className = 'js';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. There are no cameras in the speaker or the plugs, and no wearables to charge."}},
@@ -49,22 +49,19 @@
       </div>
     </section>
 
-    <section class="explode-wrap" id="anatomy">
-      <div class="explode-sticky">
-        <div class="wrap stage">
-          <div class="caption">
-            <h1>A home that<br>looks after itself.</h1>
-            <p class="sub">Adam knows which rooms are in use and what your household needs, and takes care of it. One speaker, two plugs, no cameras.</p>
-          </div>
-          <ol class="parts" id="parts" aria-label="What is inside">
-              <li data-from="0.18" data-tip="Satin translucent polymer insert with a diffused light field for listening, thinking and speaking."><b>Top panel</b><span>Frosted polymer with room-wide microphones</span></li>
-              <li data-from="0.34" data-tip="Runs Adam and keeps what it learns about your home on the device."><b>Compute board</b><span>On-device processing and memory</span></li>
-              <li data-from="0.5" data-tip="Premium acoustic fabric, matte, wrapped around the whole body."><b>Fabric shell</b><span>Tightly woven acoustic fabric</span></li>
-              <li data-from="0.66" data-tip="Plays Adam&rsquo;s voice."><b>Speaker driver</b><span>Adam&rsquo;s voice, tuned for rooms</span></li>
-              <li data-from="0.82" data-tip="Inset from the body so it looks lifted. The power port, mic switch and reset pin are on the rear panel."><b>Base</b><span>Matte anodised aluminium, 2 cm</span></li>
-            </ol>
-          <div class="device-col" id="device" role="img" aria-label="The Adam speaker, assembled and opened to show its top panel, compute board, fabric shell, speaker driver and base"></div>
+    <section class="hero-in" id="anatomy">
+      <div class="wrap">
+        <div class="hero-in-head">
+          <h1>A home that<br>looks after itself.</h1>
+          <p class="sub">Adam knows which rooms are in use and what your household needs, and takes care of it. One speaker, two plugs, no cameras.</p>
         </div>
+        <div class="seg" id="seg">
+          <button type="button" data-set="speaker" aria-pressed="true">Speaker</button>
+          <button type="button" data-set="plug" aria-pressed="false">Plug</button>
+        </div>
+        <div class="gstage" id="stage"></div>
+        <ul class="plist" id="plist"></ul>
+        <div class="mcard" id="mcard"></div>
       </div>
     </section>
 
@@ -209,7 +206,8 @@
   </footer>
 
   <script src="site.js?v=14"></script>
-  <script src="adam-device.js?v=15"></script>
+  <script src="inside/data.js?v=1"></script>
+  <script src="inside.js?v=3"></script>
   <script src="family.js?v=22"></script>
   <script src="day.js?v=5"></script>
   <script src="motion.js?v=1"></script>
