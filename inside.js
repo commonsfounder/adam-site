@@ -102,7 +102,7 @@
         var f = MACROS[set][p.k]; if (!f) return;
         var m = el('div', 'macro' + (p.k === 'processor' && set === 'speaker' ? '' : ' soft')); var mi = el('img'); mi.src = 'inside/macro_' + f + '.webp'; mi.alt = p.name + ', close up'; m.appendChild(mi);
         if (set === 'speaker' && p.k === 'processor') { p._screen = el('canvas', 'screen'); m.appendChild(p._screen); }
-        if (set === 'speaker' && p.k === 'panel') { p._bar = makeControls(); m.appendChild(p._bar._lavaEl); m.appendChild(p._bar); }
+        if (set === 'speaker' && p.k === 'panel') { p._bar = makeControls(); m.appendChild(p._bar._lavaWrap); m.appendChild(p._bar); }
         stage.appendChild(m); p._macro = m;
       });
     }
@@ -159,9 +159,9 @@
     var lavaTarget = PAL.idle, lavaCur = JSON.parse(JSON.stringify(PAL.idle));
     function makeControls() {
       var top = el('div', 'toplayer'); tb = top;
-      var lv = el('div', 'lavalayer'); var cv = el('canvas', 'lava'); cv.width = 200; cv.height = 200; lv.appendChild(cv); top._lava = cv; top._lavaEl = lv;
+      var lm = el('div', 'lavamask'); var lv = el('div', 'lavalayer'); lm.appendChild(lv); var cv = el('canvas', 'lava'); cv.width = 200; cv.height = 200; lv.appendChild(cv); top._lava = cv; top._lavaEl = lv; top._lavaWrap = lm;
       var NSV = 'http://www.w3.org/2000/svg';
-      top.insertAdjacentHTML('beforeend', '<svg class="vring" viewBox="0 0 400 400" aria-hidden="true"><rect class="vring-t" x="11" y="11" width="378" height="378" rx="100" pathLength="100"/><rect class="vring-v" x="11" y="11" width="378" height="378" rx="100" pathLength="100"/></svg>');
+      top.insertAdjacentHTML('beforeend', '<svg class="vring" viewBox="0 0 400 400" aria-hidden="true"><rect class="vring-t" x="27" y="27" width="346" height="346" rx="92" pathLength="100"/><rect class="vring-v" x="27" y="27" width="346" height="346" rx="92" pathLength="100"/></svg>');
       var icons = {
         minus: '<svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg>',
         plus: '<svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg>',
@@ -192,7 +192,7 @@
     }
     function fitBar(macro, bar) {
       var W = 400, H = 400, mw = macro.offsetWidth, mh = macro.offsetHeight;
-      var Q = window.ADAM_PANEL, cx = 0, cy = 0, k = 0.955;
+      var Q = window.ADAM_PANEL, cx = 0, cy = 0, k = 1.08;
       Q.forEach(function (p) { cx += p[0] / 4; cy += p[1] / 4; });
       var q = Q.map(function (p) { return [(cx + (p[0] - cx) * k) * mw, (cy + (p[1] - cy) * k) * mh]; });
       bar.style.width = W + 'px'; bar.style.height = H + 'px';

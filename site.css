@@ -523,8 +523,9 @@ footer a:hover { color: var(--bg); }
 .fam-sentence .w:not(.k) { transition: none; }
 .fam-sentence .k { vertical-align: baseline !important; }
 
-.macro .toplayer, .macro .lavalayer { position: absolute; left: 0; top: 0; transform-origin: 0 0; border-radius: 105px; }
-.macro .lavalayer { overflow: hidden; mix-blend-mode: overlay; pointer-events: none; }
+.macro .toplayer, .macro .lavalayer { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.macro .lavamask { position: absolute; inset: 0; mix-blend-mode: overlay; pointer-events: none; -webkit-mask-image: url(inside/macro_panel_mask.webp); mask-image: url(inside/macro_panel_mask.webp); -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+.macro .lavalayer { overflow: hidden; }
 .lavalayer .lava { position: absolute; inset: 0; width: 100%; height: 100%; filter: blur(10px); transform: scale(1.1); }
 .toplayer { cursor: pointer; }
 .toplayer .vring { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
