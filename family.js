@@ -58,7 +58,7 @@
     if (k === 2) return 0.93;
     return i === firstKey + 2 ? 0.86 : 0.89;
   });
-  var STEP = 120, target = 0, timer = null;
+  var STEP = 230, target = 0, timer = null;
   function render() {
     words.forEach(function (w, i) { w.classList.toggle('show', i < shown); });
     keyEls.forEach(function (el, i) { el.classList.toggle('lit', words.indexOf(el) < shown); });
