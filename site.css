@@ -549,3 +549,9 @@ footer a:hover { color: var(--bg); }
 .nowplaying { position: fixed; left: -9999px; top: 0; width: 200px; height: 113px; overflow: hidden; pointer-events: none; }
 .nowplaying iframe { display: block; width: 200px; height: 113px; border: 0; }
 .macro.soft img { -webkit-mask-image: radial-gradient(ellipse 56% 56% at 50% 50%, #000 66%, transparent 100%); mask-image: radial-gradient(ellipse 56% 56% at 50% 50%, #000 66%, transparent 100%); }
+
+.beliefs { padding-top: var(--sp-500); }
+.belief { margin: 0; padding: var(--sp-300) 0; border-top: 1px solid var(--line); font-size: clamp(30px, 5.2vw, 72px); line-height: 1.08; letter-spacing: -0.04em; font-weight: 500; max-width: 18em; }
+.belief:last-child { border-bottom: 1px solid var(--line); }
+.whoweare .who-grid { display: grid; gap: var(--sp-200); max-width: 900px; }
+.whoweare h2 { font-size: clamp(30px, 4.6vw, 60px); line-height: 1.08; letter-spacing: -0.04em; }
