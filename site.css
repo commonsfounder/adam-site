@@ -531,7 +531,7 @@ footer a:hover { color: var(--bg); }
 .toplayer .vring { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .toplayer .vring rect { fill: none; stroke-width: 7; stroke-linecap: round; }
 .toplayer .vring-t { stroke: rgba(255, 255, 255, 0.28); }
-.toplayer .vring-v { stroke: #fff; stroke-dasharray: 60 100; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9)); transition: stroke-dasharray 250ms var(--ease); }
+.toplayer .vring-v { stroke: #fff; stroke-dasharray: 0 100; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9)); transition: stroke-dasharray 900ms linear; }
 .toplayer .glyph { position: absolute; width: 72px; height: 72px; margin: -36px 0 0 -36px; border: 0; padding: 0; background: transparent; color: #fff; display: grid; place-items: center; cursor: pointer; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) drop-shadow(0 1px 1px rgba(80, 20, 10, 0.4)); transition: transform 180ms var(--ease), opacity 250ms var(--ease); -webkit-tap-highlight-color: transparent; }
 .toplayer .glyph:hover { transform: scale(1.12); }
 .toplayer .glyph:active { transform: scale(0.9); }

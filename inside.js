@@ -115,16 +115,35 @@
     }
     function stopRick() {
       if (rickBox) { rickBox.remove(); rickBox = null; }
-      stage.classList.remove('playing'); paused = false; clearTimeout(wakeTimer); wakeState = ''; syncBar();
+      stage.classList.remove('playing'); paused = false; clearTimeout(wakeTimer); wakeState = ''; prog.t = 0; prog.d = 0; showProgress(); syncBar();
     }
     function syncBar() {
       if (!tb) return;
       tb.classList.toggle('is-playing', !!rickBox && !paused);
       tb.classList.toggle('is-muted', muted);
-      var ring = tb.querySelector('.vring-v'); if (ring) ring.style.strokeDasharray = (vol * 10) + ' 100';
       setLight();
     }
-    var wakeState = '', wakeTimer = 0;
+    var wakeState = '', wakeTimer = 0, volFlash = 0, prog = { t: 0, d: 0 };
+    function flashVol() {
+      if (!tb) return; var cap = tb.querySelector('.cap');
+      cap.textContent = 'Volume ' + vol; clearTimeout(volFlash);
+      volFlash = setTimeout(function () { volFlash = 0; setLight(); }, 1100);
+    }
+    function showProgress() {
+      if (!tb) return; var ring = tb.querySelector('.vring-v');
+      var f = prog.d > 0 ? Math.min(1, prog.t / prog.d) : 0;
+      if (ring) ring.style.strokeDasharray = (f * 100).toFixed(2) + ' 100';
+    }
+    window.addEventListener('message', function (e) {
+      if (!rickBox) return;
+      var fr = rickBox.querySelector('iframe'); if (!fr || e.source !== fr.contentWindow) return;
+      var d; try { d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch (x) { return; }
+      if (!d || d.event !== 'infoDelivery' || !d.info) return;
+      if (typeof d.info.currentTime === 'number') prog.t = d.info.currentTime;
+      if (typeof d.info.duration === 'number' && d.info.duration > 0) prog.d = d.info.duration;
+      if (d.info.playerState === 0) { paused = true; prog.t = 0; syncBar(); }
+      showProgress();
+    });
     function lightState() {
       if (muted) return 'off';
       if (wakeState) return wakeState;
@@ -133,7 +152,7 @@
     function setLight() {
       var st = lightState(); lavaTarget = PAL[st];
       if (!tb) return;
-      var cap = tb.querySelector('.cap');
+      var cap = tb.querySelector('.cap'); if (volFlash) return;
       cap.textContent = { off: 'Microphones off', listening: 'Listening', thinking: 'Thinking', speaking: 'Playing', idle: '' }[st];
     }
     function wake() {
@@ -144,7 +163,7 @@
     function startRick() {
       rickBox = el('div', 'nowplaying');
       var fr = el('iframe'); fr.title = 'Now playing'; fr.allow = 'autoplay; encrypted-media'; fr.setAttribute('allowfullscreen', '');
-      fr.addEventListener('load', function () { yt('setVolume', [vol * 10]); if (muted) yt('mute'); });
+      fr.addEventListener('load', function () { if (fr.contentWindow) fr.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*'); yt('setVolume', [vol * 10]); });
       fr.src = RICK;
       rickBox.appendChild(fr); stage.appendChild(rickBox); stage.classList.add('playing'); paused = false;
     }
@@ -179,8 +198,8 @@
       var cap = el('div', 'cap'); top.appendChild(cap);
       top.addEventListener('click', function (e) { if (e.target === top || e.target.closest('.vring')) wake(); e.stopPropagation(); });
       mic.addEventListener('click', function () { muted = !muted; if (muted) { clearTimeout(wakeTimer); wakeState = ''; } syncBar(); });
-      dn.addEventListener('click', function () { vol = Math.max(0, vol - 1); yt('setVolume', [vol * 10]); syncBar(); });
-      up.addEventListener('click', function () { vol = Math.min(10, vol + 1); yt('setVolume', [vol * 10]); syncBar(); });
+      dn.addEventListener('click', function () { vol = Math.max(0, vol - 1); yt('setVolume', [vol * 10]); syncBar(); flashVol(); });
+      up.addEventListener('click', function () { vol = Math.min(10, vol + 1); yt('setVolume', [vol * 10]); syncBar(); flashVol(); });
       pl.addEventListener('click', function () {
         if (!rickBox) { startRick(); }
         else if (paused) { paused = false; yt('playVideo'); }
