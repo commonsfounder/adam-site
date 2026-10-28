@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=17">
+  <link rel="stylesheet" href="site.css?v=52">
   <script>document.documentElement.className = 'js';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. There are no cameras in the speaker or the plugs, and no wearables to charge."}},
@@ -32,150 +32,133 @@
     {"@type":"Question","name":"What comes in the box?","acceptedAnswer":{"@type":"Answer","text":"One speaker, 21 cm tall and 14 cm square, and two plugs."}},
     {"@type":"Question","name":"How does Adam know which room someone is in?","acceptedAnswer":{"@type":"Answer","text":"The speaker and plugs sense sound, air, light and presence at room level, and WiFi fills the gaps between rooms. It never tracks exact positions."}},
     {"@type":"Question","name":"Can I keep using the assistant I already have?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your agent can run on Adam hardware while you keep using it the way you do today. Bringing your own models is our direction."}},
-    {"@type":"Question","name":"Is Adam available to buy?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Adam is in development, with a working prototype in a real home. We are looking for pilot households."}}
+    {"@type":"Question","name":"Is Adam available to buy?","acceptedAnswer":{"@type":"Answer","text":"Not yet. Adam is in development and not on sale. Email us and we will let you know when it is ready."}}
   ]}</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <nav class="nav" aria-label="Main">
-    <a class="brand" href="index.html">Adam</a>
-    <div class="nav-links">
-      <a href="#does">What it does</a>
-      <a href="#inside">Inside</a>
-      <a href="#privacy">Privacy</a>
-      <a href="#box">In the box</a>
-      <a href="#specs">Specs</a>
-      <a href="#faq">FAQ</a>
-    </div>
-    <a class="btn sm nav-cta" href="households.html">Join the pilot</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
-  </nav>
-  <div class="menu" id="menu">
-    <ul>
-      <li><a href="#does">What it does</a></li>
-      <li><a href="#inside">Inside</a></li>
-      <li><a href="#privacy">Privacy</a></li>
-      <li><a href="#box">In the box</a></li>
-      <li><a href="#specs">Specs</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a class="btn" href="households.html">Join the pilot</a></li>
-    </ul>
-  </div>
-
   <main id="main">
+    <section class="family" id="family">
+      <div class="fam-track" id="famTrack">
+        <div class="fam-sticky">
+          <div class="fam-wrap">
+            <p class="fam-sentence" id="famSentence"><span class="w">AI</span> <span class="w">is</span> <span class="w">changing</span> <span class="w">the</span> <span class="w">world,</span> <span class="w">but</span> <span class="w">it</span> <span class="w">still</span> <span class="w">lives</span> <span class="w">behind</span> <span class="w">a</span> <span class="w">screen.</span> <span class="w">To</span> <span class="w">harness</span> <span class="w">what</span> <span class="w">it</span> <span class="w">can</span> <span class="w">do,</span> <span class="w">we</span> <span class="w">need</span> <span class="w">a</span> <span class="w">new</span> <span class="w">family</span> <span class="w">of</span> <span class="w">devices,</span> <span class="w">built</span> <span class="w">to</span> <span class="w">redefine</span> <span class="w">how</span> <span class="w">we</span> <span class="fin"><span class="w k" data-k="0">play,</span> <span class="w k" data-k="1">create,</span> <span class="w">and</span> <span class="w">stay</span> <span class="w k" data-k="2">connected.</span></span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="explode-wrap" id="anatomy">
       <div class="explode-sticky">
         <div class="wrap stage">
           <div class="caption">
             <h1>A home that<br>looks after itself.</h1>
             <p class="sub">Adam knows which rooms are in use and what your household needs, and takes care of it. One speaker, two plugs, no cameras.</p>
-            <div class="row"><a class="btn" href="households.html">Join the pilot</a></div>
-            <ol class="parts" id="parts" aria-label="What is inside">
+          </div>
+          <ol class="parts" id="parts" aria-label="What is inside">
               <li data-from="0.18" data-tip="Satin translucent polymer insert with a diffused light field for listening, thinking and speaking."><b>Top panel</b><span>Frosted polymer with room-wide microphones</span></li>
               <li data-from="0.34" data-tip="Runs Adam and keeps what it learns about your home on the device."><b>Compute board</b><span>On-device processing and memory</span></li>
               <li data-from="0.5" data-tip="Premium acoustic fabric, matte, wrapped around the whole body."><b>Fabric shell</b><span>Tightly woven acoustic fabric</span></li>
               <li data-from="0.66" data-tip="Plays Adam&rsquo;s voice."><b>Speaker driver</b><span>Adam&rsquo;s voice, tuned for rooms</span></li>
               <li data-from="0.82" data-tip="Inset from the body so it looks lifted. The power port, mic switch and reset pin are on the rear panel."><b>Base</b><span>Matte anodised aluminium, 2 cm</span></li>
             </ol>
-          </div>
           <div class="device-col" id="device" role="img" aria-label="The Adam speaker, assembled and opened to show its top panel, compute board, fabric shell, speaker driver and base"></div>
         </div>
       </div>
     </section>
 
-    <section class="block" id="inside">
-      <div class="wrap">
-        <div class="head reveal">
-          <h2>Inside Adam.</h2>
-        </div>
-        <div class="seg" id="seg">
-          <button type="button" data-set="speaker" aria-pressed="true">Speaker</button>
-          <button type="button" data-set="plug" aria-pressed="false">Plug</button>
-        </div>
-        <div class="gstage" id="stage"></div>
-        <ul class="plist" id="plist"></ul>
-        <div class="mcard" id="mcard"></div>
-      </div>
-    </section>
 
-    <section class="block" id="does">
-      <div class="wrap">
-        <div class="head reveal">
-          <h2>It notices,<br>so you don&rsquo;t have to.</h2>
-          <p class="sub">Adam listens for sound, air, light and presence in each room, and acts on what it finds. You only hear about what matters.</p>
-        </div>
-        <ul class="examples reveal">
-          <li><p>Tells crying from fussing, and only calls you for the real thing.</p></li>
-          <li><p>Lets you know when a toddler is out of bed after lights out.</p></li>
-          <li><p>Remembers whose turn it is for the bins and when the parcel is due.</p></li>
-          <li><p>Turns the heating down in empty rooms and warms the flat before you get back.</p></li>
-          <li><p>Alerts family or a carer after a heavy fall or a night of distress.</p></li>
-        </ul>
-      </div>
-    </section>
 
-    <section class="block alt" id="privacy">
-      <div class="wrap">
-        <div class="head reveal">
-          <h2>No cameras.<br>No audio in the cloud.</h2>
+    <section class="block problem card-sec dark" id="problem">
+      <div class="wrap split2 center">
+        <div class="reveal">
+          <h2>Your calendar is organised.<br>Your home isn&rsquo;t.</h2>
         </div>
-        <div class="trio reveal">
-          <div><h3>No cameras</h3><p>None in the speaker or the plugs, and no wearables to charge.</p></div>
-          <div><h3>Rooms, not people</h3><p>Adam knows a room is in use. It doesn&rsquo;t track who is standing where.</p></div>
-          <div><h3>Kept at home</h3><p>Raw audio and video never go to a third-party cloud. What Adam learns about your household stays on the device.</p></div>
+        <div class="reveal">
+          <p class="lede">Homes run on coordination: who is home, whether the baby is crying, what is arriving, whose turn it is. It all lives in people&rsquo;s heads and group chats.</p>
+          <ul class="twolist">
+            <li><b>Cameras are the wrong answer.</b><span>Watching a home with cameras and cloud video turns it into a surveillance site. Many families will not accept that.</span></li>
+            <li><b>Chatbots can&rsquo;t see the house.</b><span>They wait for a typed question and know nothing about the room you are in, so they can&rsquo;t step in at the right moment.</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <section class="block" id="box">
-      <div class="wrap">
-        <div class="head reveal">
-          <h2>One speaker.<br>Two plugs.</h2>
-          <p class="sub">The speaker covers the room you use most. The plugs cover the rooms it can&rsquo;t reach.</p>
+    <section class="dayside" id="day" aria-label="A day at home">
+      <div class="day-track" id="dayTrack">
+        <div class="day-sticky">
+          <div class="day-top"><h2 id="dayHead">Crying, or fussing?</h2><span class="day-time" id="dayTime">3:12 am</span></div>
+          <div class="day-stage" id="dayStage"></div>
         </div>
-        <div class="shot reveal"><img src="frames/box.webp?v=14" width="1600" height="992" alt="The Adam speaker with its two plugs" loading="lazy"></div>
-        <div class="pair reveal">
-          <div class="item"><h3>21 &times; 14 &times; 14 cm</h3><p>Listens across the room, and it&rsquo;s where Adam talks.</p></div>
-          <div class="item"><h3>For the other rooms</h3><p>Put one in a bedroom and one in the hall or kitchen. They sense presence, sound, air and light.</p></div>
-        </div>
-        <ol class="steps reveal" aria-label="Setup">
-          <li><span class="n">1</span><span>Put the speaker in your main room.</span></li>
-          <li><span class="n">2</span><span>Plug the two plugs into other rooms.</span></li>
-          <li><span class="n">3</span><span>Adam learns your home and gets to work.</span></li>
-        </ol>
       </div>
     </section>
 
-    <section class="block" id="specs">
+    <section class="marq" aria-hidden="true"><div class="marq-track" id="marq"><div class="marq-set"><span>Hears</span><i></i><span>Knows</span><i></i><span>Notices</span><i></i><span>Asks first</span><i></i><span>Acts</span><i></i><span>No cameras</span><i></i></div><div class="marq-set"><span>Hears</span><i></i><span>Knows</span><i></i><span>Notices</span><i></i><span>Asks first</span><i></i><span>Acts</span><i></i><span>No cameras</span><i></i></div></div></section>
+
+    <section class="block card-sec" id="first" style="background:var(--alt)">
       <div class="wrap">
         <div class="head reveal">
-          <h2>Specs.</h2>
+          <h2>Adam is the first.</h2>
+          <p class="sub">A home computer that looks after your home when you can&rsquo;t. One speaker, two plugs and a phone app.</p>
         </div>
-        <dl class="specs reveal">
-          <div><dt>Size</dt><dd>21 &times; 14 &times; 14 cm</dd></div>
-          <div><dt>Body</dt><dd>Woven acoustic fabric over a hollow shell</dd></div>
-          <div><dt>Base</dt><dd>Matte anodised aluminium<span class="hint">2 cm, inset from the body</span></dd></div>
-          <div><dt>Top</dt><dd>Frosted polymer panel<span class="hint">With a diffused light field and microphones</span></dd></div>
-          <div><dt>Processor</dt><dd>Quad-core Arm Cortex-A55 with a neural engine</dd></div>
-          <div><dt>Memory</dt><dd>2 GB LPDDR4 and 16 GB eMMC storage</dd></div>
-          <div><dt>Microphones</dt><dd>4 digital MEMS microphones</dd></div>
-          <div><dt>Speaker</dt><dd>3 inch full-range driver with a Class-D amplifier</dd></div>
-          <div><dt>Sensing</dt><dd>Sound, air, light and room-level presence, with 24 GHz radar</dd></div>
-          <div><dt>Sound recognition</dt><dd>15 household sounds<span class="hint">Including smoke and CO alarm patterns, glass breaking, knocks, doorbells and a baby crying</span></dd></div>
-          <div><dt>Radio</dt><dd>Wi-Fi 6, Bluetooth 5 and Thread</dd></div>
-          <div><dt>Cameras</dt><dd>None</dd></div>
-          <div><dt>Microphone</dt><dd>Physical mute switch on the rear panel</dd></div>
-          <div><dt>Audio and video</dt><dd>Raw audio and video never go to a third-party cloud</dd></div>
-          <div><dt>Memory</dt><dd>Kept on the device</dd></div>
-          <div><dt>In the box</dt><dd>One speaker, two plugs</dd></div>
-          <div><dt>Plugs</dt><dd>Wi-Fi 6, Bluetooth 5 and Thread, with radar, microphone, temperature and light sensing</dd></div>
-          <div><dt>Status</dt><dd>Working prototype<span class="hint">Processor, memory and sensor specs are design targets</span></dd></div>
-        </dl>
-        <h3 class="works-h reveal">Works with</h3>
-        <ul class="works reveal">
-          <li>Gmail</li><li>Google Calendar</li><li>Telegram</li><li>iPhone app</li>
-        </ul>
+        <div class="bento reveal">
+          <article class="tile t-a">
+            <img data-par="40" src="frames/box.webp?v=14" width="1600" height="992" alt="The Adam speaker with its two plugs" loading="lazy">
+            <div class="tt"><h3>One speaker. Two plugs.</h3><p>The speaker lives in the room you use most and is where Adam talks. The plugs cover bedroom, hallway and kitchen.</p></div>
+          </article>
+          <article class="tile t-b">
+            <div class="ui alerts">
+              <div class="note"><i class="dot a"></i><span><b>Baby crying</b><em>Nursery &middot; now</em></span></div>
+              <div class="note"><i class="dot r"></i><span><b>Smoke alarm</b><em>Kitchen &middot; now</em></span></div>
+            </div>
+            <div class="tt"><h3>Hears what matters.</h3><p>Crying, glass, knocks, doorbells and smoke or CO alarms, on your phone while you are out.</p></div>
+          </article>
+          <article class="tile t-c">
+            <div class="ui chips"><span>Kitchen</span><span>Nursery</span><span>Living room</span><span>Bedroom</span></div>
+            <div class="tt"><h3>Knows who is home.</h3><p>Room-level, never exact tracking. Heating and lights follow people, not a timer.</p></div>
+          </article>
+          <article class="tile t-d">
+            <div class="ui chores">
+              <div class="row"><i class="tick"></i><span>Bins<em>Your turn tonight</em></span></div>
+              <div class="row"><i class="tick off"></i><span>Parcel<em>Due today</em></span></div>
+            </div>
+            <div class="tt"><h3>Keeps the house moving.</h3><p>Deliveries, shopping and chores are tracked, and the right person gets the nudge.</p></div>
+          </article>
+          <article class="tile t-e">
+            <div class="big">0</div>
+            <div class="tt"><h3>Cameras.</h3><p>None in the speaker or the plugs. Raw audio never goes to a third-party cloud.</p></div>
+          </article>
+          <article class="tile t-g">
+            <div class="ui chips"><span>Claude</span><span>ChatGPT</span><span>Adam&rsquo;s own</span></div>
+            <div class="tt"><h3>Your AI, at home.</h3><p>Use the assistant you already pay for. Adam gives it a presence in your home, with the same safety rules.</p></div>
+          </article>
+          <article class="tile t-f">
+            <div class="ui approve">
+              <div class="ask"><b>Book a table for four</b><em>Friday, 7:30 pm &middot; up to &pound;120</em></div>
+              <div class="acts"><span class="ok">Approve</span><span class="ed">Edit</span></div>
+            </div>
+            <div class="tt"><h3>It asks first.</h3><p>Sending, paying and booking wait for your approval. Hard spending limits sit outside the AI&rsquo;s control, and a task is done only once the result is read back from the real page.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="strip" aria-label="At a glance">
+      <div class="wrap statrow reveal">
+        <div><b>0</b><span>cameras</span></div>
+        <div><b>2</b><span>plugs in the box</span></div>
+        <div><b>15</b><span>household sounds recognised</span></div>
+        <div><b>21 &times; 14 &times; 14</b><span>cm speaker</span></div>
+      </div>
+    </section>
+
+    <section class="block story" id="next">
+      <div class="wrap">
+        <div class="story-head reveal">
+          <h2>The rest of<br>the family.</h2>
+          <p class="lede">Play, create and staying connected each need their own kind of device. We are working on them, and we will show them when they are real.</p>
+        </div>
       </div>
     </section>
 
@@ -203,7 +186,7 @@
           </div>
           <div class="acc-item">
             <h3><button type="button" class="acc-q" id="aq4" aria-expanded="false" aria-controls="ap4"><span>Can I buy it?</span><span class="pm" aria-hidden="true"></span></button></h3>
-            <div class="acc-p" id="ap4" role="region" aria-labelledby="aq4"><div><p>Not yet. Adam is in development, with a working prototype in a real home. We are looking for pilot households.</p></div></div>
+            <div class="acc-p" id="ap4" role="region" aria-labelledby="aq4"><div><p>Not yet. Adam is in development and not on sale. Email us and we will let you know when it is ready.</p></div></div>
           </div>
         </div>
       </div>
@@ -211,10 +194,9 @@
 
     <section class="closing" id="who">
       <div class="wrap reveal">
-        <h2>Try Adam<br>in your home.</h2>
-        <p class="sub">Adam isn&rsquo;t for sale yet. We&rsquo;re looking for households to pilot it, especially ones fed up with today&rsquo;s smart home.</p>
-        <div class="row"><a class="btn" href="households.html">Join the pilot</a></div>
-        <p class="fine">Or email the founder: <a class="mono" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam%20pilot%3A%20my%20household">chizigamonyewuchi@gmail.com</a></p>
+        <h2>Adam isn&rsquo;t<br>on sale yet.</h2>
+        <p class="sub">Questions, or want to hear when it&rsquo;s ready? Email us.</p>
+        <p class="fine"><a class="mono" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam">chizigamonyewuchi@gmail.com</a></p>
       </div>
     </section>
   </main>
@@ -222,13 +204,14 @@
   <footer>
     <div class="wrap">
       <span>&copy; 2026 Intuitive</span>
-      <span class="foot-links"><a href="households.html">Pilot</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
+      <span class="foot-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
     </div>
   </footer>
 
   <script src="site.js?v=14"></script>
   <script src="adam-device.js?v=15"></script>
-  <script src="inside/data.js?v=1"></script>
-  <script src="inside.js?v=2"></script>
+  <script src="family.js?v=22"></script>
+  <script src="day.js?v=5"></script>
+  <script src="motion.js?v=1"></script>
 </body>
 </html>
