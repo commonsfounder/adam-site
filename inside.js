@@ -11,7 +11,7 @@
         { k: 'radar', name: 'Presence radar', side: 'b', rows: ['24 GHz radar', 'Senses people without a camera'] },
         { k: 'board', name: 'Circuit board', side: 'l', rows: ['Temperature, humidity and light sensors', 'Carries the chips and power'] },
         { k: 'driver', name: 'Speaker driver', side: 'l', rows: ['3 inch full-range', 'Class-D amplifier', 'Adam’s voice'] },
-        { k: 'base', name: 'Base', side: 'r', rows: ['Matte anodised aluminium, 2 cm', 'Power, mute switch and reset on the rear'] }
+        { k: 'base', name: 'Base', side: 'r', rows: ['2 cm base in wood or metal, by finish', 'Power, mute switch and reset on the rear'] }
       ],
       plug: [
         { k: 'housing', name: 'Front cover', side: 'r', rows: ['Radar window, status light and vents', 'One microphone pinhole'] },
@@ -57,7 +57,7 @@
       if (side === 'b') { t.style.left = pct(cx); t.style.top = pct(y1 + g); t.style.transform = 'translateX(-50%)'; }
     }
 
-    function insideUrl(name) { return window.AdamColour ? window.AdamColour.insideUrl(name) : 'inside/' + name; }
+    function insideUrl(name) { return (window.AdamColour ? window.AdamColour.insideUrl(name) : 'inside/' + name) + '?v=3'; }
     function recolour() {
       SETS[set].forEach(function (p) {
         if (p._lay) p._lay.src = insideUrl(set + '_' + p.k + '.webp');
@@ -271,7 +271,7 @@
       cv.onpointermove = pos; cv.onpointerdown = pos;
       cv.onpointerleave = function () { tx = ty = -999; };
       function rr(x, y, w, h, r) { if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); } else { ctx.fillRect(x, y, w, h); } }
-      var PALS = { sandstone: ['#463f35', [201, 189, 163], [160, 148, 124]], black: ['#2e2b27', [96, 90, 82], [62, 58, 53]], white: ['#d8d0bd', [238, 232, 218], [210, 201, 183]] };
+      var PALS = { sandstone: ['#463f35', [188, 163, 122], [148, 124, 90]], black: ['#2e2b27', [96, 90, 82], [62, 58, 53]], white: ['#d8d0bd', [242, 238, 228], [216, 208, 192]] };
       function frame() {
         mx += (tx - mx) * 0.2; my += (ty - my) * 0.2;
         var pal = PALS[window.AdamColour ? window.AdamColour.name() : 'sandstone'] || PALS.sandstone;

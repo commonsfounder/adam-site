@@ -10,7 +10,7 @@
   ];
   var WIDE = { x: 0.5, y: 0.5, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
-  function dayUrl(name) { return (window.AdamColour ? window.AdamColour.dayUrl(name) : 'day/' + name) + '?v=2'; }
+  function dayUrl(name) { return (window.AdamColour ? window.AdamColour.dayUrl(name) : 'day/' + name) + '?v=3'; }
   var cam = document.createElement('div'); cam.className = 'day-cam'; stage.appendChild(cam);
   var imgs = S.map(function (s, i) {
     var im = document.createElement('img'); im.src = dayUrl(s.img + '.webp'); im.className = 'day-img'; im.decoding = 'async';
