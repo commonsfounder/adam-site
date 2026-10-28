@@ -92,6 +92,18 @@
   var s = document.getElementById('intro'); if (!s) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var p = s.querySelector('.intro-word'), mark = s.querySelector('.mark'), dot = mark.querySelector('.head'), decoy = s.querySelector('.decoy');
+  var INK = '#201E1B', RECT = '<rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/>';
+  var FACES = [
+    { dot: '#d4501f', back: '<g fill="none" stroke="#201E1B" stroke-width="12" stroke-linecap="round"><path d="M85 4C80-22 62-30 50-26"/><path d="M85 4C92-26 110-34 124-28"/><path d="M85 4C85-20 86-32 84-44"/></g>', front: '', glasses: '' },
+    { dot: '#c98a00', back: '', front: '<path d="M12 56A73 62 0 0 1 158 56Z" fill="#8a3b1c"/><rect x="6" y="46" width="158" height="26" rx="13" fill="#6e2e15"/><circle cx="85" cy="-14" r="17" fill="#f4e3c1"/>', glasses: '' },
+    { dot: '#b83a66', back: '', front: '<g fill="#ffd3df"><path d="M122 8L88-14V30Z"/><path d="M122 8L156-14V30Z"/><circle cx="122" cy="8" r="13" fill="#e8708f"/></g>', glasses: '' },
+    { dot: '#2fa6b8', back: '<path d="M85 2V-40" stroke="#201E1B" stroke-width="9" stroke-linecap="round"/><circle cx="85" cy="-48" r="14" fill="#201E1B"/>', front: '', glasses: '<circle cx="55" cy="74" r="30" fill="none" stroke="#201E1B" stroke-width="9"/><circle cx="115" cy="74" r="30" fill="none" stroke="#201E1B" stroke-width="9"/><path d="M84 72h2" stroke="#201E1B" stroke-width="9" stroke-linecap="round"/>' }
+  ];
+  function face(k) {
+    var f = FACES[k];
+    return '<g class="head">' + f.back + '<circle cx="85" cy="75" r="75" fill="' + f.dot + '"/><circle class="e" cx="55" cy="74" r="20" fill="#fff"/><circle class="e" cx="115" cy="74" r="20" fill="#fff"/><g class="eyes-g"><circle class="e" cx="60" cy="76" r="9" fill="' + INK + '"/><circle class="e" cx="120" cy="76" r="9" fill="' + INK + '"/></g>' + f.glasses + f.front + '</g>' + RECT;
+  }
+  mark.innerHTML = face(0); dot = mark.querySelector('.head');
   var T = 4200, busy = false;
   s.classList.add('live', 'pre');
   var letters = [], pt = null, alive = [], blinkT = 0;
@@ -102,7 +114,7 @@
       var sp = document.createElement('span'); sp.className = 'ch' + (c === 'i' ? ' is-i' : ''); sp.textContent = c; sp.dataset.c = c; rest.appendChild(sp); letters.push(sp);
     });
   })();
-  var MINI = '<svg class="mini" viewBox="0 0 170 720" aria-hidden="true"><g class="head"><circle cx="85" cy="75" r="75" fill="#D4501F"/><g class="eyes-g"><circle class="e" cx="57" cy="72" r="12" fill="#201E1B"/><circle class="e" cx="113" cy="72" r="12" fill="#201E1B"/></g></g><rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/></svg>';
+  var MINI_OLD = '<svg class="mini" viewBox="0 0 170 720" aria-hidden="true"><g class="head"><circle cx="85" cy="75" r="75" fill="#D4501F"/><g class="eyes-g"><circle class="e" cx="57" cy="72" r="12" fill="#201E1B"/><circle class="e" cx="113" cy="72" r="12" fill="#201E1B"/></g></g><rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/></svg>';
   var EYES = '<span class="eyes"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span>';
   function look() {
     var fs = parseFloat(getComputedStyle(p).fontSize), tx, ty;
@@ -121,7 +133,7 @@
   function infect() {
     letters.forEach(function (l, n) {
       setTimeout(function () {
-        if (l.dataset.c === 'i') { l.innerHTML = MINI; l.classList.add('born'); }
+        if (l.dataset.c === 'i') { var kk = Math.min(3, 1 + letters.slice(0, n).filter(function (x) { return x.dataset.c === 'i'; }).length); l.innerHTML = '<svg class="mini" viewBox="0 0 170 720" aria-hidden="true">' + face(kk) + '</svg>'; l.classList.add('born'); }
         lookHeads();
       }, n * 110);
     });

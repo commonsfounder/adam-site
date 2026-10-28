@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=86">
+  <link rel="stylesheet" href="site.css?v=87">
   <script>document.documentElement.className = 'js';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. There are no cameras in the speaker or the plugs, and no wearables to charge."}},
@@ -61,9 +61,17 @@
           <h2>Adam is the first.</h2>
           <p class="sub">A home computer that looks after your home when you can&rsquo;t. One speaker, two plugs and a phone app.</p>
         </div>
+        <div class="colours reveal" id="colourPicker">
+          <span class="colours-label">Finish <strong id="colourName">Sandstone</strong></span>
+          <div class="swatches" role="radiogroup" aria-label="Finish">
+            <button type="button" class="swatch" data-colour="sandstone" role="radio" aria-checked="true"><span class="vh">Sandstone</span></button>
+            <button type="button" class="swatch" data-colour="black" role="radio" aria-checked="false" tabindex="-1"><span class="vh">Black</span></button>
+            <button type="button" class="swatch" data-colour="white" role="radio" aria-checked="false" tabindex="-1"><span class="vh">White</span></button>
+          </div>
+        </div>
         <div class="bento reveal">
           <article class="tile t-a">
-            <img data-par="40" src="frames/box.webp?v=14" width="1600" height="992" alt="The Adam speaker with its two plugs" loading="lazy">
+            <img data-par="40" data-box src="frames/box.webp?v=14" width="1600" height="992" alt="The Adam speaker with its two plugs" loading="lazy">
             <div class="tt"><h3>One speaker. Two plugs.</h3><p>The speaker lives in the room you use most and is where Adam talks. The plugs cover bedroom, hallway and kitchen.</p></div>
           </article>
           <article class="tile t-b">
@@ -203,11 +211,12 @@
     </div>
   </footer>
 
-  <script src="site.js?v=21"></script>
+  <script src="site.js?v=23"></script>
+  <script src="colorways.js?v=1"></script>
   <script src="inside/data.js?v=2"></script>
-  <script src="inside.js?v=13"></script>
+  <script src="inside.js?v=14"></script>
   <script src="family.js?v=26"></script>
-  <script src="day.js?v=6"></script>
+  <script src="day.js?v=7"></script>
   <script src="motion.js?v=1"></script>
 </body>
 </html>
