@@ -122,7 +122,6 @@
     letters.forEach(function (l, n) {
       setTimeout(function () {
         if (l.dataset.c === 'i') { l.innerHTML = MINI; l.classList.add('born'); }
-        else { l.insertAdjacentHTML('beforeend', EYES); l.classList.add('alive'); alive.push(l); }
         look();
       }, n * 110);
     });
