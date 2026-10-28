@@ -33,7 +33,7 @@
   var rings = keyEls.map(function (el, i) {
     var ring = document.createElement('span'); ring.className = 'kring'; ring.setAttribute('aria-hidden', 'true');
     var P = PICK[i], idx = 0;
-    ['top', 'bot'].forEach(function (pos, r) {
+    ['up', 'dn'].forEach(function (pos, r) {
       var rowEl = document.createElement('span'); rowEl.className = 'kr ' + pos;
       for (var n = 0; n < P.rows[r]; n++) { rowEl.appendChild(mk(P.list[idx], idx * 45, i * 50 + idx)); idx++; }
       ring.appendChild(rowEl);
