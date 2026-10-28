@@ -503,3 +503,11 @@ footer a:hover { color: var(--bg); }
 .top-link { font-size: 15px; line-height: 24px; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--line); transition: text-decoration-color 300ms var(--ease); }
 .top-link:hover { text-decoration-color: var(--ink); }
 .hero-in { padding-top: 32px; }
+
+.frame-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-200); padding: 0 0 14px; margin-bottom: var(--sp-500); border-bottom: 1px solid currentColor; font-size: 15px; line-height: 22px; letter-spacing: -0.005em; opacity: 0.9; }
+.frame-head span:last-child { font-variant-numeric: tabular-nums; }
+.card-sec.dark .frame-head { border-color: rgba(244, 242, 237, 0.35); }
+.card-sec:not(.dark) .frame-head, #faq .frame-head, #next .frame-head { border-color: var(--line); }
+.dayside .frame-head { margin-bottom: 0; padding-top: 4px; }
+.logo { font-size: 24px; }
+.logo .mark { width: 36px; height: 36px; }
