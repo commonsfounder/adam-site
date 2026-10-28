@@ -92,19 +92,58 @@
   var s = document.getElementById('intro'); if (!s) return;
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var p = s.querySelector('.intro-word'), mark = s.querySelector('.mark'), dot = mark.querySelector('circle'), decoy = s.querySelector('.decoy');
-  var T = 3400, busy = false;
+  var T = 4200, busy = false;
   s.classList.add('live', 'pre');
+  var letters = [], pt = null, alive = [], blinkT = 0;
+  (function wrap() {
+    var rest = s.querySelector('.rest'), txt = rest.textContent; rest.textContent = ''; rest.setAttribute('aria-hidden', 'true'); p.setAttribute('aria-label', 'intuitive devices');
+    txt.split('').forEach(function (c) {
+      if (c === ' ') { rest.appendChild(document.createTextNode(' ')); return; }
+      var sp = document.createElement('span'); sp.className = 'ch' + (c === 'i' ? ' is-i' : ''); sp.textContent = c; sp.dataset.c = c; rest.appendChild(sp); letters.push(sp);
+    });
+  })();
+  var MINI = '<svg class="mini" viewBox="0 0 170 720" aria-hidden="true"><circle cx="85" cy="75" r="75" fill="#D4501F"/><rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/></svg>';
+  var EYES = '<span class="eyes"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></span>';
+  function look() {
+    var fs = parseFloat(getComputedStyle(p).fontSize), tx, ty;
+    if (pt) { tx = pt.x; ty = pt.y; } else { var m = mark.getBoundingClientRect(); tx = m.left + m.width / 2; ty = m.top; }
+    alive.forEach(function (l) {
+      l.querySelectorAll('.eye').forEach(function (e) {
+        var r = e.getBoundingClientRect(), dx = tx - (r.left + r.width / 2), dy = ty - (r.top + r.height / 2), d = Math.sqrt(dx * dx + dy * dy) || 1, k = Math.min(1, d / (fs * 0.6)) * fs * 0.03;
+        e.firstChild.style.transform = 'translate(' + (dx / d * k).toFixed(2) + 'px,' + (dy / d * k).toFixed(2) + 'px)';
+      });
+    });
+  }
+  function reset() {
+    clearInterval(blinkT); alive = [];
+    letters.forEach(function (l) { l.className = 'ch' + (l.dataset.c === 'i' ? ' is-i' : ''); l.textContent = l.dataset.c; });
+  }
+  function infect() {
+    letters.forEach(function (l, n) {
+      setTimeout(function () {
+        if (l.dataset.c === 'i') { l.innerHTML = MINI; l.classList.add('born'); }
+        else { l.insertAdjacentHTML('beforeend', EYES); l.classList.add('alive'); alive.push(l); }
+        look();
+      }, n * 110);
+    });
+    blinkT = setInterval(function () {
+      if (!alive.length) return; var l = alive[Math.floor(Math.random() * alive.length)];
+      l.classList.add('blink'); setTimeout(function () { l.classList.remove('blink'); }, 150);
+    }, 700);
+  }
+  window.addEventListener('pointermove', function (e) { pt = { x: e.clientX, y: e.clientY }; if (alive.length) look(); }, { passive: true });
   function play() {
-    if (busy || !mark.animate) return; busy = true;
-    var fs = parseFloat(getComputedStyle(p).fontSize), r = mark.getBoundingClientRect(), D = r.right + 60, H = fs * 0.5;
+    if (busy || !mark.animate) return; busy = true; reset();
+    setTimeout(infect, 500 + T * 0.85);
+    var fs = parseFloat(getComputedStyle(p).fontSize), r = mark.getBoundingClientRect(), D = r.right + 60, H = fs * 0.6;
     s.classList.add('live');
     [mark, dot, decoy].forEach(function (e) { e.getAnimations().forEach(function (a) { a.cancel(); }); });
     function k(o, x, y, sx, sy, ease) { return { offset: o, transform: 'translate(' + (-D * x).toFixed(1) + 'px,' + (H * y).toFixed(1) + 'px) scale(' + sx + ',' + sy + ')', easing: ease || 'ease-in-out' }; }
-    var up = 'cubic-bezier(.2,.7,.3,1)', down = 'cubic-bezier(.7,0,.9,.4)';
+    var up = 'cubic-bezier(.25,.6,.35,1)', down = 'cubic-bezier(.55,0,.85,.45)';
     mark.animate([
-      k(0, 1, 0, 1, 1), k(0.04, 0.88, 0, 1.15, 0.85, up), k(0.12, 0.74, -0.8, 0.9, 1.12, down), k(0.2, 0.6, 0, 1.2, 0.8),
-      k(0.24, 0.6, 0, 1, 1), k(0.28, 0.6, 0, 1.12, 0.88, up), k(0.36, 0.38, -1, 0.9, 1.12, down), k(0.44, 0.2, 0, 1.2, 0.8),
-      k(0.5, 0.2, 0, 1, 1), k(0.62, 0.2, 0, 1.25, 0.75, up), k(0.72, 0.08, -1.1, 0.92, 1.1, down), k(0.8, 0, 0, 1.4, 0.6),
+      k(0, 1, 0, 1, 1), k(0.04, 0.88, 0, 1.1, 0.9, up), k(0.12, 0.74, -0.8, 0.9, 1.12, down), k(0.2, 0.6, 0, 1.14, 0.86),
+      k(0.24, 0.6, 0, 1, 1), k(0.28, 0.6, 0, 1.08, 0.92, up), k(0.36, 0.38, -1, 0.9, 1.12, down), k(0.44, 0.2, 0, 1.14, 0.86),
+      k(0.5, 0.2, 0, 1, 1), k(0.62, 0.2, 0, 1.16, 0.84, up), k(0.72, 0.08, -1.1, 0.92, 1.1, down), k(0.8, 0, 0, 1.28, 0.72),
       k(0.86, 0, 0, 0.95, 1.1), k(0.92, 0, 0, 1.02, 0.98), k(1, 0, 0, 1, 1)
     ], { duration: T, delay: 500, fill: 'both' });
     function d(o, x, y) { return { offset: o, transform: 'translate(' + x + '%,' + y + '%)', easing: 'ease-in-out' }; }

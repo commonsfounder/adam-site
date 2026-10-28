@@ -569,3 +569,14 @@ footer a:hover { color: var(--bg); }
 
 .intro-word .mark { transform-origin: 50% 100%; }
 .intro.pre .mark { visibility: hidden; }
+
+.intro-word .ch { position: relative; display: inline-block; }
+.intro-word .eyes { position: absolute; left: 50%; bottom: 0.4em; transform: translateX(-50%); display: flex; gap: 0.03em; pointer-events: none; }
+.intro-word .eye { position: relative; width: 0.12em; height: 0.12em; border-radius: 50%; background: #fff; box-shadow: 0 0 0 0.012em #201E1B; display: grid; place-items: center; transform: scale(0); transition: transform 420ms cubic-bezier(.3, 1.7, .5, 1), height 110ms; }
+.intro-word .alive .eye { transform: scale(1); }
+.intro-word .alive.blink .eye { height: 0.014em; }
+.intro-word .pupil { width: 0.054em; height: 0.054em; border-radius: 50%; background: #201E1B; }
+.intro-word .mini { display: inline-block; width: 0.17em; height: 0.72em; margin: 0 0.05em 0 0.068em; vertical-align: baseline; overflow: visible; transform-origin: 50% 100%; }
+.intro-word .born .mini { animation: iBorn 520ms cubic-bezier(.3, 1.4, .5, 1) both; }
+@keyframes iBorn { 0% { transform: scale(0.3, 1.5); } 55% { transform: scale(1.2, 0.8); } 100% { transform: none; } }
+.intro-word .mark { will-change: transform; }
