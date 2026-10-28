@@ -4,7 +4,7 @@
       speaker: [
         { k: 'panel', name: 'Top panel', side: 'r', rows: ['Frosted satin polymer', '4 digital MEMS microphones', 'The light shows listening, thinking and speaking'] },
         { k: 'shell', name: 'Fabric shell', side: 'b', cardSide: 'r', weave: true, rows: ['Tightly woven acoustic fabric', 'Hollow shell', 'Lets sound out and hides the electronics'] },
-        { k: 'processor', name: 'Processor', side: 't', zoom: true, rows: ['Quad-core Arm Cortex-A55', 'On-chip neural engine', 'Runs Adam and what it learns about your home'] },
+        { k: 'processor', name: 'Processor', side: 't', rows: ['Quad-core Arm Cortex-A55', 'On-chip neural engine', 'Runs Adam and what it learns about your home'] },
         { k: 'memory', name: 'Memory', side: 't', rows: ['2 GB LPDDR4', 'Holds your household’s memory on the device'] },
         { k: 'storage', name: 'Storage', side: 'l', rows: ['16 GB eMMC'] },
         { k: 'radio', name: 'Radio', side: 'r', rows: ['Wi-Fi 6, Bluetooth 5, Thread', 'Listens for smoke and CO alarms while the processor sleeps'] },
@@ -20,9 +20,14 @@
         { k: 'pins', name: 'Back shell and pins', side: 'l', rows: ['UK three-pin', 'Fits a standard wall socket'] }
       ]
     };
-    var set = 'speaker', cur = -1, weaveRaf = 0;
+    var MACROS = {
+      speaker: { panel: 'panel', shell: 'shell', processor: 'processor', memory: 'memory', storage: 'board', radio: 'radio', radar: 'radar', board: 'board', driver: 'driver', base: 'base' },
+      plug: { housing: 'plug_housing', board: 'plug_board', module: 'plug_module', pins: 'plug_pins' }
+    };
+    var RICK = 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&playsinline=1&rel=0&enablejsapi=1';
+    var set = 'speaker', cur = -1, weaveRaf = 0, rickBox = null;
     var stage = document.getElementById('stage'), plist = document.getElementById('plist'), mcard = document.getElementById('mcard');
-    var nodes = [], macro = null, screen = null, zoomTimer = 0;
+    var nodes = [], zoomTimer = 0;
 
     function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; return e; }
     function pct(v) { return (v * 100).toFixed(3) + '%'; }
@@ -62,9 +67,9 @@
     }
 
     function build() {
-      stopWeave(); stopGame();
+      stopWeave(); stopGame(); stopRick();
       stage.innerHTML = ''; plist.innerHTML = ''; mcard.innerHTML = ''; nodes = []; cur = -1;
-      stage.classList.remove('focus', 'zoomed'); macro = null; screen = null;
+      stage.classList.remove('focus', 'zoomed', 'playing'); rickBox = null;
       var parts = SETS[set], B = L[set];
       parts.forEach(function (p, i) {
         var bb = B[p.k];
@@ -93,10 +98,73 @@
         var li = el('li'); var lb = el('button'); lb.type = 'button'; lb.textContent = p.name; lb.addEventListener('click', function () { open(i); }); li.appendChild(lb); plist.appendChild(li);
         nodes.push({ tag: tag, card: card, mc: mc });
       });
-      if (set === 'speaker') {
-        macro = el('div', 'macro'); var mi = el('img'); mi.src = 'inside/macro_processor.webp'; mi.alt = 'The processor, close up'; macro.appendChild(mi);
-        screen = el('canvas', 'screen'); macro.appendChild(screen); stage.appendChild(macro);
-      }
+      parts.forEach(function (p) {
+        var f = MACROS[set][p.k]; if (!f) return;
+        var m = el('div', 'macro' + (p.k === 'processor' && set === 'speaker' ? '' : ' soft')); var mi = el('img'); mi.src = 'inside/macro_' + f + '.webp'; mi.alt = p.name + ', close up'; m.appendChild(mi);
+        if (set === 'speaker' && p.k === 'processor') { p._screen = el('canvas', 'screen'); m.appendChild(p._screen); }
+        if (set === 'speaker' && p.k === 'panel') { p._bar = makeControls(); m.appendChild(p._bar); }
+        stage.appendChild(m); p._macro = m;
+      });
+    }
+
+    var vol = 6, muted = false, paused = false, tb = null;
+    function yt(func, args) {
+      if (!rickBox) return;
+      var fr = rickBox.querySelector('iframe');
+      if (fr && fr.contentWindow) fr.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: args || '' }), '*');
+    }
+    function stopRick() {
+      if (rickBox) { rickBox.remove(); rickBox = null; }
+      stage.classList.remove('playing'); paused = false; syncBar();
+    }
+    function syncBar() {
+      if (!tb) return;
+      tb.classList.toggle('is-playing', !!rickBox && !paused);
+      tb.classList.toggle('is-muted', muted);
+      var pips = tb.querySelectorAll('.pip');
+      for (var i = 0; i < pips.length; i++) pips[i].classList.toggle('on', !muted && i < vol);
+    }
+    function startRick() {
+      rickBox = el('div', 'nowplaying');
+      var fr = el('iframe'); fr.title = 'Now playing'; fr.allow = 'autoplay; encrypted-media'; fr.setAttribute('allowfullscreen', '');
+      fr.addEventListener('load', function () { yt('setVolume', [vol * 10]); if (muted) yt('mute'); });
+      fr.src = RICK;
+      rickBox.appendChild(fr); stage.appendChild(rickBox); stage.classList.add('playing'); paused = false;
+    }
+    function makeControls() {
+      var bar = el('div', 'touchbar'); tb = bar;
+      var icons = {
+        minus: '<svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg>',
+        plus: '<svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg>',
+        play: '<svg viewBox="0 0 24 24" class="i-play"><path d="M8 5.5v13l11-6.5z"/></svg><svg viewBox="0 0 24 24" class="i-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>'
+      };
+      var mute = el('button', 'tb tb-mute'); mute.type = 'button'; mute.setAttribute('aria-label', 'Mute');
+      mute.innerHTML = '<span class="knob"></span><span class="tb-lab">Mute</span>';
+      var dn = el('button', 'tb', icons.minus); dn.type = 'button'; dn.setAttribute('aria-label', 'Volume down');
+      var pl = el('button', 'tb tb-play', icons.play); pl.type = 'button'; pl.setAttribute('aria-label', 'Play or pause');
+      var up = el('button', 'tb', icons.plus); up.type = 'button'; up.setAttribute('aria-label', 'Volume up');
+      var pips = el('div', 'pips'); for (var i = 0; i < 10; i++) pips.appendChild(el('span', 'pip'));
+      [mute, dn, pl, up].forEach(function (b) { bar.appendChild(b); }); bar.appendChild(pips);
+      function swallow(e) { e.stopPropagation(); }
+      bar.addEventListener('click', swallow);
+      mute.addEventListener('click', function () { muted = !muted; yt(muted ? 'mute' : 'unMute'); syncBar(); });
+      dn.addEventListener('click', function () { vol = Math.max(0, vol - 1); if (vol === 0) { muted = true; yt('mute'); } else { yt('setVolume', [vol * 10]); } syncBar(); });
+      up.addEventListener('click', function () { vol = Math.min(10, vol + 1); if (muted) { muted = false; yt('unMute'); } yt('setVolume', [vol * 10]); syncBar(); });
+      pl.addEventListener('click', function () {
+        if (!rickBox) { startRick(); }
+        else if (paused) { paused = false; yt('playVideo'); stage.classList.add('playing'); }
+        else { paused = true; yt('pauseVideo'); stage.classList.remove('playing'); }
+        syncBar();
+      });
+      syncBar();
+      return bar;
+    }
+    function fitBar(macro, bar) {
+      var W = 460, H = 96, mw = macro.offsetWidth, mh = macro.offsetHeight;
+      var TL = [0.075, 0.31], TR = [0.725, 0.17], BR = [0.965, 0.655], BL = [0.265, 0.86];
+      function P(u, v) { return [((1 - v) * ((1 - u) * TL[0] + u * TR[0]) + v * ((1 - u) * BL[0] + u * BR[0])) * mw, ((1 - v) * ((1 - u) * TL[1] + u * TR[1]) + v * ((1 - u) * BL[1] + u * BR[1])) * mh]; }
+      bar.style.width = W + 'px'; bar.style.height = H + 'px';
+      bar.style.transform = homography(W, H, [P(0.2, 0.45), P(0.8, 0.45), P(0.8, 0.61), P(0.2, 0.61)]);
     }
 
     function startWeave(cv) {
@@ -210,21 +278,25 @@
       node.card.classList.add('on'); node.mc.classList.add('on');
       clamp(node.card);
       stopWeave(); stopGame(); clearTimeout(zoomTimer);
+      if (p.k !== 'panel') stopRick();
       stage.classList.remove('zoomed');
+      parts.forEach(function (q) { if (q._macro) q._macro.classList.remove('on'); });
       parts.forEach(function (q, k) { place(null, q, L[set][q.k], nodes[k].card); });
       node.card.style.marginLeft = '';
       var cv = isDesktop() ? node.card.weaveCanvas : node.mc.weaveCanvas;
       if (cv) startWeave(cv);
-      if (p.zoom && macro) {
+      if (p._macro) {
         zoomTimer = setTimeout(function () {
-          stage.classList.add('zoomed');
+          stage.classList.add('zoomed'); p._macro.classList.add('on');
           if (isDesktop()) { var cs = node.card.style; cs.left = 'auto'; cs.bottom = 'auto'; cs.right = '0'; cs.top = '50%'; cs.transform = 'translateY(-50%)'; }
-          startDieGame(macro, screen);
+          if (p._bar) fitBar(p._macro, p._bar);
+          if (set === 'speaker' && p.k === 'processor') startDieGame(p._macro, p._screen);
         }, 450);
       }
     }
     function close() {
-      cur = -1; clearTimeout(zoomTimer); stage.classList.remove('focus', 'zoomed'); stopWeave(); stopGame();
+      cur = -1; clearTimeout(zoomTimer); stage.classList.remove('focus', 'zoomed'); stopWeave(); stopGame(); stopRick();
+      SETS[set].forEach(function (q) { if (q._macro) q._macro.classList.remove('on'); });
       SETS[set].forEach(function (q, k) { q._lay.classList.remove('sel'); q._lin.classList.remove('sel'); nodes[k].card.classList.remove('on'); nodes[k].mc.classList.remove('on'); nodes[k].tag.style.visibility = ''; });
     }
 
@@ -250,7 +322,7 @@
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') open(cur + 1);
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') open(cur - 1);
     });
-    window.addEventListener('resize', function () { if (screen && screen.fitFn && stage.classList.contains('zoomed')) screen.fitFn(); if (cur >= 0 && !(SETS[set][cur] && SETS[set][cur].zoom)) open(cur); });
+    window.addEventListener('resize', function () { var cp = SETS[set][cur]; if (cp && cp._bar && stage.classList.contains('zoomed')) fitBar(cp._macro, cp._bar); if (cp && cp._screen && cp._screen.fitFn && stage.classList.contains('zoomed')) cp._screen.fitFn(); if (cur >= 0 && !(cp && cp._macro)) open(cur); });
     var ready = false;
     function load() { if (ready) return; ready = true; build(); }
     if ('IntersectionObserver' in window) {
