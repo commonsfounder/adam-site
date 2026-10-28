@@ -521,3 +521,4 @@ footer a:hover { color: var(--bg); }
 .fam-sentence .k.lit { padding: 0.62em 0.85em !important; }
 @media (max-width: 720px) { .fam-sentence .k.lit { padding: 0.62em 0.8em !important; } }
 .fam-sentence .w:not(.k) { transition: none; }
+.fam-sentence .k { vertical-align: baseline !important; }
