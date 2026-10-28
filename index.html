@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=88">
+  <link rel="stylesheet" href="site.css?v=90">
   <script>document.documentElement.className = 'js';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. There are no cameras in the speaker or the plugs, and no wearables to charge."}},
@@ -37,13 +37,9 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="top"><a class="logo" href="index.html" aria-label="Intuitive Devices"><span><svg class="mark" viewBox="0 0 170 720" aria-hidden="true"><circle cx="85" cy="75" r="75" fill="#D4501F"/><rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/></svg>ntuitive devices</span></a><a class="top-link" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam">Contact</a></header>
+  <header class="top"><a class="logo" href="index.html" aria-label="Intuitive Devices"><span><svg class="mark" viewBox="0 0 170 720" aria-hidden="true"><circle cx="85" cy="75" r="75" fill="#D4501F"/><rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/></svg>ntuitive devices</span></a><nav class="top-nav" aria-label="Sections"><a href="#family">What we believe</a><a href="#first">What we make</a><a href="#day">A day at home</a><a href="#people">Who we are</a></nav><a class="top-link" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam">Contact</a></header>
 
   <main id="main">
-    <section class="intro" id="intro" aria-label="Intuitive Devices">
-      <p class="intro-word"><span class="decoy" aria-hidden="true">i</span><span class="iw"><svg class="mark" viewBox="0 0 170 720" aria-hidden="true"><g class="head"><circle cx="85" cy="75" r="75" fill="#D4501F"/><g class="eyes-g"><circle class="e" cx="57" cy="72" r="12" fill="#201E1B"/><circle class="e" cx="113" cy="72" r="12" fill="#201E1B"/></g></g><rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/></svg><span class="rest">ntuitive devices</span></span></p>
-    </section>
-
     <section class="family" id="family">
       <div class="wrap"><div class="frame-head"><span>What we believe</span><span>01</span></div></div>
       <div class="fam-track" id="famTrack">
@@ -53,110 +49,78 @@
           </div>
         </div>
       </div>
+      <div class="wrap beliefs-prose reveal">
+        <p>Homes run on coordination. Who is home, whether the baby is crying, what is arriving and whose turn it is to deal with it — today all of that lives in people&rsquo;s heads and group chats, and it falls apart the moment everyone is busy with something else. We are building the device that carries that load instead, quietly, in the background of the house.</p>
+        <p>The obvious way to do that would be cameras, and we think cameras are the wrong answer. A home that is watched by cameras and cloud video stops feeling like a home, and many families will never accept it. The other obvious way is a chatbot, and that does not work either: it waits behind a screen for a typed question, knows nothing about the room you are standing in, and so it can never step in at the moment it would actually help. Adam senses sound, presence, air and light at room level, with no cameras anywhere, and what it learns about your household stays in your home.</p>
+        <p>This is also where we part company with the speakers most homes already have. The big platforms sell you their assistant and only their assistant, and the open alternative asks you to build and maintain the system yourself. We are making something different: a device that works out of the box, gives whichever AI you already use a presence in your home, and never acts on your behalf without asking first — sending, paying and booking wait for your approval, with hard limits that sit outside the AI&rsquo;s control. A home should look after itself, and it should do so without watching you, locking you in, or spending your money behind your back.</p>
+      </div>
     </section>
 
     <section class="block card-sec" id="first" style="background:var(--alt)">
       <div class="wrap"><div class="frame-head"><span>What we make</span><span>02</span></div>
         <div class="head reveal">
-          <h2>Adam is the first.</h2>
-          <p class="sub">A home computer that looks after your home when you can&rsquo;t. One speaker, two plugs and a phone app.</p>
+          <h1>Codename Adam.</h1>
+          <p class="sub">Our first product is a home computer: one speaker, two plugs and a phone app, with no cameras anywhere.</p>
         </div>
-        <div class="colours reveal" id="colourPicker">
-          <span class="colours-label">Finish <strong id="colourName">Sandstone</strong></span>
-          <div class="swatches" role="radiogroup" aria-label="Finish">
-            <button type="button" class="swatch" data-colour="sandstone" role="radio" aria-checked="true"><span class="vh">Sandstone</span></button>
-            <button type="button" class="swatch" data-colour="black" role="radio" aria-checked="false" tabindex="-1"><span class="vh">Black</span></button>
-            <button type="button" class="swatch" data-colour="white" role="radio" aria-checked="false" tabindex="-1"><span class="vh">White</span></button>
+        <div class="make-rows reveal">
+          <div><h3>The speaker</h3><p>Far-field microphones hear across the room, and you can interrupt at any time. It is where Adam talks.</p></div>
+          <div><h3>Two plugs</h3><p>They cover the rooms the speaker cannot, sensing sound, presence, air and light in each one.</p></div>
+          <div><h3>The phone app</h3><p>Setup, approvals, history and a live view of what Adam knows about your home. Built and running today.</p></div>
+        </div>
+        <div class="product-hero reveal" id="productHero">
+          <div class="hero-bar">
+            <div class="colours" id="colourPicker">
+              <span class="colours-label">Finish <strong id="colourName">Sandstone</strong></span>
+              <div class="swatches" role="radiogroup" aria-label="Finish">
+                <button type="button" class="swatch" data-colour="sandstone" role="radio" aria-checked="true"><span class="vh">Sandstone</span></button>
+                <button type="button" class="swatch" data-colour="black" role="radio" aria-checked="false" tabindex="-1"><span class="vh">Black</span></button>
+                <button type="button" class="swatch" data-colour="white" role="radio" aria-checked="false" tabindex="-1"><span class="vh">White</span></button>
+              </div>
+            </div>
+            <div class="seg" id="seg">
+              <button type="button" data-set="speaker" aria-pressed="true">Speaker</button>
+              <button type="button" data-set="plug" aria-pressed="false">Plug</button>
+            </div>
+            <button type="button" class="explode-btn" id="explodeBtn" aria-expanded="false">Pull it apart</button>
           </div>
+          <div class="hero-view">
+            <img class="hero-assembled" data-box src="frames/box.webp?v=15" width="1600" height="992" alt="The Adam speaker with its two plugs" loading="lazy">
+            <div class="gstage" id="stage"></div>
+          </div>
+          <ul class="plist" id="plist"></ul>
+          <div class="mcard" id="mcard"></div>
         </div>
-        <div class="bento reveal">
-          <article class="tile t-a">
-            <img data-par="40" data-box src="frames/box.webp?v=15" width="1600" height="992" alt="The Adam speaker with its two plugs" loading="lazy">
-            <div class="tt"><h3>One speaker. Two plugs.</h3><p>The speaker lives in the room you use most and is where Adam talks. The plugs cover bedroom, hallway and kitchen.</p></div>
-          </article>
-          <article class="tile t-b">
-            <div class="ui alerts">
-              <div class="note"><i class="dot a"></i><span><b>Baby crying</b><em>Nursery &middot; now</em></span></div>
-              <div class="note"><i class="dot r"></i><span><b>Smoke alarm</b><em>Kitchen &middot; now</em></span></div>
-            </div>
-            <div class="tt"><h3>Hears what matters.</h3><p>Crying, glass, knocks, doorbells and smoke or CO alarms, on your phone while you are out.</p></div>
-          </article>
-          <article class="tile t-c">
-            <div class="ui chips"><span>Kitchen</span><span>Nursery</span><span>Living room</span><span>Bedroom</span></div>
-            <div class="tt"><h3>Knows who is home.</h3><p>Room-level, never exact tracking. Heating and lights follow people, not a timer.</p></div>
-          </article>
-          <article class="tile t-d">
-            <div class="ui chores">
-              <div class="row"><i class="tick"></i><span>Bins<em>Your turn tonight</em></span></div>
-              <div class="row"><i class="tick off"></i><span>Parcel<em>Due today</em></span></div>
-            </div>
-            <div class="tt"><h3>Keeps the house moving.</h3><p>Deliveries, shopping and chores are tracked, and the right person gets the nudge.</p></div>
-          </article>
-          <article class="tile t-e">
-            <div class="big">0</div>
-            <div class="tt"><h3>Cameras.</h3><p>None in the speaker or the plugs. Raw audio never goes to a third-party cloud.</p></div>
-          </article>
-          <article class="tile t-g">
-            <div class="ui chips"><span>Claude</span><span>ChatGPT</span><span>Adam&rsquo;s own</span></div>
-            <div class="tt"><h3>Your AI, at home.</h3><p>Use the assistant you already pay for. Adam gives it a presence in your home, with the same safety rules.</p></div>
-          </article>
-          <article class="tile t-f">
-            <div class="ui approve">
-              <div class="ask"><b>Book a table for four</b><em>Friday, 7:30 pm &middot; up to &pound;120</em></div>
-              <div class="acts"><span class="ok">Approve</span><span class="ed">Edit</span></div>
-            </div>
-            <div class="tt"><h3>It asks first.</h3><p>Sending, paying and booking wait for your approval. Hard spending limits sit outside the AI&rsquo;s control, and a task is done only once the result is read back from the real page.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="strip" aria-label="At a glance">
-      <div class="wrap statrow reveal">
-        <div><b>0</b><span>cameras</span></div>
-        <div><b>2</b><span>plugs in the box</span></div>
-        <div><b>15</b><span>household sounds recognised</span></div>
-        <div><b>21 &times; 14 &times; 14</b><span>cm speaker</span></div>
-      </div>
-    </section>
-
-    <section class="block story" id="next">
-      <div class="wrap"><div class="frame-head"><span>The rest of the family</span><span>02</span></div>
-        <div class="story-head reveal">
-          <h2>The rest of<br>the family.</h2>
-          <p class="lede">Play, create and staying connected each need their own kind of device. We are working on them, and we will show them when they are real.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="hero-in" id="anatomy">
-      <div class="wrap">
-        <div class="frame-head"><span>How it works</span><span>03</span></div>
-        <div class="hero-in-head">
-          <h1>A home that<br>looks after itself.</h1>
-          <p class="sub">Adam knows which rooms are in use and what your household needs, and takes care of it. One speaker, two plugs, no cameras.</p>
-        </div>
-        <div class="seg" id="seg">
-          <button type="button" data-set="speaker" aria-pressed="true">Speaker</button>
-          <button type="button" data-set="plug" aria-pressed="false">Plug</button>
-        </div>
-        <div class="gstage" id="stage"></div>
-        <ul class="plist" id="plist"></ul>
-        <div class="mcard" id="mcard"></div>
       </div>
     </section>
 
     <section class="dayside" id="day" aria-label="A day at home">
       <div class="day-track" id="dayTrack">
         <div class="day-sticky"><div class="frame-head"><span>A day at home</span><span>03</span></div>
-          <div class="day-top"><h2 id="dayHead">Crying, or fussing?</h2><span class="day-time" id="dayTime">3:12 am</span></div>
+          <div class="day-top"><h2 id="dayHead">Is the baby crying?</h2><span class="day-time" id="dayTime">3:12 am</span></div>
           <div class="day-stage" id="dayStage"></div>
         </div>
       </div>
     </section>
 
+    <section class="block whoweare" id="people">
+      <div class="wrap">
+        <div class="frame-head"><span>Who we are</span><span>04</span></div>
+        <div class="who-grid reveal">
+          <h2>A small team building a new family of devices for the home.</h2>
+          <p class="lede">Adam is the first. I&rsquo;m Chizi, the founder of Intuitive Devices, and you can write to me directly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" id="who">
+      <div class="wrap reveal">
+        <h2>Adam isn&rsquo;t<br>on sale yet.</h2>
+        <p class="sub">Questions, or want to hear when it&rsquo;s ready? Email us.</p>
+        <p class="fine"><a class="mono" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam">chizigamonyewuchi@gmail.com</a></p>
+      </div>
+    </section>
     <section class="block alt" id="faq">
-      <div class="wrap"><div class="frame-head"><span>Questions</span><span>03</span></div>
+      <div class="wrap"><div class="frame-head"><span>Questions</span><span>05</span></div>
         <div class="head reveal">
           <h2>Common questions.</h2>
         </div>
@@ -185,23 +149,6 @@
       </div>
     </section>
 
-    <section class="block whoweare" id="people">
-      <div class="wrap">
-        <div class="frame-head"><span>Who we are</span><span>04</span></div>
-        <div class="who-grid reveal">
-          <h2>A small team building a new family of devices for the home.</h2>
-          <p class="lede">Adam is the first. I&rsquo;m Chizi, the founder of Intuitive Devices, and you can write to me directly.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="closing" id="who">
-      <div class="wrap reveal">
-        <h2>Adam isn&rsquo;t<br>on sale yet.</h2>
-        <p class="sub">Questions, or want to hear when it&rsquo;s ready? Email us.</p>
-        <p class="fine"><a class="mono" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam">chizigamonyewuchi@gmail.com</a></p>
-      </div>
-    </section>
   </main>
 
   <footer>
@@ -211,12 +158,12 @@
     </div>
   </footer>
 
-  <script src="site.js?v=24"></script>
+  <script src="site.js?v=25"></script>
   <script src="colorways.js?v=2"></script>
   <script src="inside/data.js?v=2"></script>
-  <script src="inside.js?v=16"></script>
+  <script src="inside.js?v=17"></script>
   <script src="family.js?v=26"></script>
-  <script src="day.js?v=8"></script>
+  <script src="day.js?v=9"></script>
   <script src="motion.js?v=1"></script>
 </body>
 </html>

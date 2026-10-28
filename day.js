@@ -3,10 +3,10 @@
   if (!track) return;
   var P = { speaker: [0.4809, 0.5157], plugA: [0.4663, 0.429], plugB: [0.7633, 0.5659], bedroom: [0.3893, 0.2879], nursery: [0.5318, 0.3501], kitchen: [0.705, 0.4412], hallway: [0.5262, 0.5101], living: [0.3049, 0.5692] };
   var S = [
-    { img: 'night', time: '3:12 am', head: 'Crying, or fussing?', bg: '#131316', dark: true, at: 'nursery', z: 2.7, card: ['Nursery', 'Fussing. Settling on her own.'] },
-    { img: 'morning', time: '6:48 am', head: 'It knows who is home.', bg: '#e3d9cc', dark: false, at: 'bedroom', z: 2.5, card: ['Rooms in use', '1 of 5. Heating at 19°.'] },
-    { img: 'day', time: '2:15 pm', head: 'Warm when you are back.', bg: '#ebe8e1', dark: false, at: 'kitchen', z: 2.6, card: ['Heating on', 'Kitchen at 21° before you arrive.'] },
-    { img: 'evening', time: '7:30 pm', head: 'Nobody plays bad cop.', bg: '#2e2a26', dark: true, at: 'hallway', z: 2.8, card: ['Tonight', 'Bins out, it is Sam’s turn. Parcel at the door.'] }
+    { img: 'night', time: '3:12 am', head: 'Is the baby crying?', bg: '#131316', dark: true, at: 'nursery', z: 2.7, card: ['Nursery', 'Heard from the cot, so you can check before you get up.'] },
+    { img: 'morning', time: '6:48 am', head: 'Who is home?', bg: '#e3d9cc', dark: false, at: 'bedroom', z: 2.5, card: ['Bedroom', 'The house knows which rooms are in use, and leaves the rest alone.'] },
+    { img: 'day', time: '2:15 pm', head: 'An empty house, looked after.', bg: '#ebe8e1', dark: false, at: 'kitchen', z: 2.6, card: ['Kitchen', 'No one is home. Adam keeps listening.'] },
+    { img: 'evening', time: '7:30 pm', head: 'Who is dealing with it?', bg: '#2e2a26', dark: true, at: 'hallway', z: 2.8, card: ['Hallway', 'Deliveries and chores go to the right person, not the loudest.'] }
   ];
   var WIDE = { x: 0.5, y: 0.5, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
@@ -18,10 +18,6 @@
     cam.appendChild(im); return im;
   });
   window.addEventListener('adam-colour-change', function () { imgs.forEach(function (im, k) { im.src = dayUrl(S[k].img + '.webp'); }); });
-  ['speaker', 'plugA', 'plugB'].forEach(function (k) {
-    var m = document.createElement('i'); m.className = 'day-mark'; m.setAttribute('aria-hidden', 'true');
-    m.style.left = (P[k][0] * 100) + '%'; m.style.top = (P[k][1] * 100) + '%'; cam.appendChild(m);
-  });
   var ring = document.createElement('i'); ring.className = 'day-ring'; ring.setAttribute('aria-hidden', 'true'); cam.appendChild(ring);
   var card = document.createElement('div'); card.className = 'day-card'; card.setAttribute('aria-live', 'polite'); card.innerHTML = '<b></b><span></span>'; cam.appendChild(card);
   var time = document.getElementById('dayTime'), head = document.getElementById('dayHead');

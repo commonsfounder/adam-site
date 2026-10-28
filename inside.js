@@ -102,7 +102,7 @@
         hit.addEventListener('mouseenter', function () { p._lay.classList.add('hov'); });
         hit.addEventListener('mouseleave', function () { p._lay.classList.remove('hov'); });
         stage.appendChild(hit);
-        var tag = el('div', 'ptag'); var tb = el('span', 'ptagb'); tb.textContent = p.name; tag.appendChild(tb);
+        var tag = el('div', 'ptag'); var tb = el('span', 'ptagb'); tb.textContent = (i + 1 < 10 ? '0' : '') + (i + 1) + ' ' + p.name; tag.appendChild(tb);
         tb.addEventListener('click', function () { open(i); });
         place(tag, p, bb);
         stage.appendChild(tag);
@@ -110,7 +110,7 @@
         place(null, p, bb, card);
         stage.appendChild(card);
         var mc = makeCard(p); mcard.appendChild(mc);
-        var li = el('li'); var lb = el('button'); lb.type = 'button'; lb.textContent = p.name; lb.addEventListener('click', function () { open(i); }); li.appendChild(lb); plist.appendChild(li);
+        var li = el('li'); var lb = el('button'); lb.type = 'button'; lb.textContent = (i + 1 < 10 ? '0' : '') + (i + 1) + ' ' + p.name; lb.addEventListener('click', function () { open(i); }); li.appendChild(lb); plist.appendChild(li);
         nodes.push({ tag: tag, card: card, mc: mc });
       });
       parts.forEach(function (p) {
@@ -422,6 +422,15 @@
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') open(cur - 1);
     });
     window.addEventListener('resize', function () { var cp = SETS[set][cur]; if (cp && cp._bar && stage.classList.contains('zoomed')) fitBar(cp._macro, cp._bar); if (cp && cp._screen && cp._screen.fitFn && stage.classList.contains('zoomed')) cp._screen.fitFn(); if (cur >= 0 && !(cp && cp._macro)) open(cur); });
+    var heroEl = document.getElementById('productHero'), explodeBtn = document.getElementById('explodeBtn');
+    if (heroEl && explodeBtn) {
+      explodeBtn.addEventListener('click', function () {
+        var openNow = heroEl.classList.toggle('open');
+        explodeBtn.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+        explodeBtn.textContent = openNow ? 'Put it back together' : 'Pull it apart';
+        if (openNow) load(); else close();
+      });
+    }
     var ready = false;
     function load() { if (ready) return; ready = true; build(); }
     if ('IntersectionObserver' in window) {
