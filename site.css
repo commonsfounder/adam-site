@@ -526,21 +526,25 @@ footer a:hover { color: var(--bg); }
 .macro .toplayer, .macro .lavalayer { position: absolute; left: 0; top: 0; transform-origin: 0 0; border-radius: 105px; }
 .macro .lavalayer { overflow: hidden; mix-blend-mode: overlay; pointer-events: none; }
 .lavalayer .lava { position: absolute; inset: 0; width: 100%; height: 100%; filter: blur(10px); transform: scale(1.1); }
-.toplayer .pbtn { position: absolute; width: 62px; height: 62px; margin: -31px 0 0 -31px; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer; padding: 0; color: #2a221b; background: radial-gradient(circle at 50% 30%, #fffdf8 0%, #f1e8da 70%, #e0d4c2 100%); box-shadow: 0 7px 9px rgba(70, 30, 10, 0.45), 0 2px 2px rgba(70, 30, 10, 0.5), inset 0 -4px 6px rgba(90, 60, 30, 0.2), inset 0 2px 3px #fff; transition: transform 140ms var(--ease), box-shadow 140ms var(--ease); mix-blend-mode: normal; }
-.toplayer .pbtn.big { width: 92px; height: 92px; margin: -46px 0 0 -46px; }
-.toplayer .pbtn:hover { transform: translateY(-1px); }
-.toplayer .pbtn:active { transform: translateY(4px); box-shadow: 0 2px 3px rgba(70, 30, 10, 0.45), inset 0 -2px 4px rgba(90, 60, 30, 0.2), inset 0 2px 3px #fff; }
-.toplayer .pbtn svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
-.toplayer .pbtn.big svg { width: 38px; height: 38px; fill: currentColor; stroke: none; }
-.toplayer .pbtn .i-pause { display: none; }
-.toplayer.is-playing .pbtn .i-pause { display: block; }
-.toplayer.is-playing .pbtn .i-play { display: none; }
-.toplayer .pswitch { position: absolute; width: 84px; height: 30px; margin: -15px 0 0 -42px; border: 0; padding: 0; border-radius: 15px; cursor: pointer; background: #3a2e26; box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.6), 0 2px 2px rgba(255, 255, 255, 0.5); mix-blend-mode: normal; }
-.toplayer .pknob { position: absolute; left: 3px; top: 3px; width: 38px; height: 24px; border-radius: 12px; background: radial-gradient(circle at 50% 30%, #fffdf8, #e6dccb); box-shadow: 0 3px 4px rgba(0, 0, 0, 0.45), inset 0 -2px 3px rgba(90, 60, 30, 0.2); transition: transform 220ms var(--ease); }
-.toplayer.is-muted .pknob { transform: translateX(40px); }
-.toplayer .pips { position: absolute; left: 50%; top: 118px; transform: translateX(-50%); display: flex; gap: 5px; }
-.toplayer .pip { width: 12px; height: 3px; border-radius: 2px; background: rgba(60, 30, 10, 0.25); }
-.toplayer .pip.on { background: rgba(255, 255, 255, 0.95); }
-.nowplaying { position: absolute; left: 12px; bottom: 12px; z-index: 6; width: 200px; background: var(--ink); border-radius: 12px; overflow: hidden; }
+.toplayer { cursor: pointer; }
+.toplayer .vring { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.toplayer .vring rect { fill: none; stroke-width: 7; stroke-linecap: round; }
+.toplayer .vring-t { stroke: rgba(255, 255, 255, 0.28); }
+.toplayer .vring-v { stroke: #fff; stroke-dasharray: 60 100; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9)); transition: stroke-dasharray 250ms var(--ease); }
+.toplayer .glyph { position: absolute; width: 72px; height: 72px; margin: -36px 0 0 -36px; border: 0; padding: 0; background: transparent; color: #fff; display: grid; place-items: center; cursor: pointer; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.95)) drop-shadow(0 1px 1px rgba(80, 20, 10, 0.4)); transition: transform 180ms var(--ease), opacity 250ms var(--ease); -webkit-tap-highlight-color: transparent; }
+.toplayer .glyph:hover { transform: scale(1.12); }
+.toplayer .glyph:active { transform: scale(0.9); }
+.toplayer .glyph svg { width: 42px; height: 42px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.toplayer .glyph.big { width: 104px; height: 104px; margin: -52px 0 0 -52px; }
+.toplayer .glyph.big svg { width: 62px; height: 62px; fill: currentColor; stroke: none; }
+.toplayer .glyph .i-pause { display: none; }
+.toplayer.is-playing .glyph .i-pause { display: block; }
+.toplayer.is-playing .glyph .i-play { display: none; }
+.toplayer .glyph.mic svg { width: 34px; height: 34px; }
+.toplayer .glyph .slash { opacity: 0; }
+.toplayer.is-muted .glyph .slash { opacity: 1; }
+.toplayer.is-muted .glyph:not(.mic) { opacity: 0.45; }
+.toplayer .cap { position: absolute; left: 0; right: 0; top: 262px; text-align: center; font-size: 17px; line-height: 22px; font-weight: 500; letter-spacing: 0.02em; color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); pointer-events: none; }
+.nowplaying { position: fixed; left: -9999px; top: 0; width: 200px; height: 113px; overflow: hidden; pointer-events: none; }
 .nowplaying iframe { display: block; width: 200px; height: 113px; border: 0; }
 .macro.soft img { -webkit-mask-image: radial-gradient(ellipse 56% 56% at 50% 50%, #000 66%, transparent 100%); mask-image: radial-gradient(ellipse 56% 56% at 50% 50%, #000 66%, transparent 100%); }

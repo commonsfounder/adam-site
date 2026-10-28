@@ -115,14 +115,31 @@
     }
     function stopRick() {
       if (rickBox) { rickBox.remove(); rickBox = null; }
-      stage.classList.remove('playing'); paused = false; syncBar();
+      stage.classList.remove('playing'); paused = false; clearTimeout(wakeTimer); wakeState = ''; syncBar();
     }
     function syncBar() {
       if (!tb) return;
       tb.classList.toggle('is-playing', !!rickBox && !paused);
       tb.classList.toggle('is-muted', muted);
-      var pips = tb.querySelectorAll('.pip');
-      for (var i = 0; i < pips.length; i++) pips[i].classList.toggle('on', !muted && i < vol);
+      var ring = tb.querySelector('.vring-v'); if (ring) ring.style.strokeDasharray = (vol * 10) + ' 100';
+      setLight();
+    }
+    var wakeState = '', wakeTimer = 0;
+    function lightState() {
+      if (muted) return 'off';
+      if (wakeState) return wakeState;
+      return (rickBox && !paused) ? 'speaking' : 'idle';
+    }
+    function setLight() {
+      var st = lightState(); lavaTarget = PAL[st];
+      if (!tb) return;
+      var cap = tb.querySelector('.cap');
+      cap.textContent = { off: 'Microphones off', listening: 'Listening', thinking: 'Thinking', speaking: 'Playing', idle: '' }[st];
+    }
+    function wake() {
+      if (muted || wakeState) return;
+      wakeState = 'listening'; setLight();
+      wakeTimer = setTimeout(function () { wakeState = 'thinking'; setLight(); wakeTimer = setTimeout(function () { wakeState = ''; setLight(); }, 1900); }, 2300);
     }
     function startRick() {
       rickBox = el('div', 'nowplaying');
@@ -132,32 +149,42 @@
       rickBox.appendChild(fr); stage.appendChild(rickBox); stage.classList.add('playing'); paused = false;
     }
     var lavaRaf = 0;
+    var PAL = {
+      idle:      { a: [255, 122, 58], b: [255, 61, 110], blobs: [[255, 190, 110], [255, 60, 100], [255, 150, 70], [255, 70, 140], [255, 200, 120]], speed: 1 },
+      speaking:  { a: [255, 98, 40], b: [255, 40, 90], blobs: [[255, 210, 90], [255, 50, 80], [255, 130, 40], [255, 60, 120], [255, 190, 80]], speed: 2.2 },
+      listening: { a: [40, 190, 210], b: [60, 130, 255], blobs: [[150, 240, 255], [60, 160, 255], [90, 220, 230], [110, 150, 255], [170, 235, 255]], speed: 0.8 },
+      thinking:  { a: [150, 90, 240], b: [220, 70, 200], blobs: [[200, 160, 255], [240, 90, 210], [160, 110, 255], [255, 120, 200], [190, 140, 255]], speed: 2.6 },
+      off:       { a: [96, 78, 76], b: [70, 60, 66], blobs: [[110, 90, 88], [84, 70, 74], [100, 84, 82], [80, 66, 70], [104, 88, 86]], speed: 0.25 }
+    };
+    var lavaTarget = PAL.idle, lavaCur = JSON.parse(JSON.stringify(PAL.idle));
     function makeControls() {
       var top = el('div', 'toplayer'); tb = top;
       var lv = el('div', 'lavalayer'); var cv = el('canvas', 'lava'); cv.width = 200; cv.height = 200; lv.appendChild(cv); top._lava = cv; top._lavaEl = lv;
+      var NSV = 'http://www.w3.org/2000/svg';
+      top.insertAdjacentHTML('beforeend', '<svg class="vring" viewBox="0 0 400 400" aria-hidden="true"><rect class="vring-t" x="11" y="11" width="378" height="378" rx="100" pathLength="100"/><rect class="vring-v" x="11" y="11" width="378" height="378" rx="100" pathLength="100"/></svg>');
       var icons = {
         minus: '<svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg>',
         plus: '<svg viewBox="0 0 24 24"><path d="M6 12h12M12 6v12"/></svg>',
-        play: '<svg viewBox="0 0 24 24" class="i-play"><path d="M8 5.5v13l11-6.5z"/></svg><svg viewBox="0 0 24 24" class="i-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>'
+        play: '<svg viewBox="0 0 24 24" class="i-play"><path d="M8 5.5v13l11-6.5z"/></svg><svg viewBox="0 0 24 24" class="i-pause"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>',
+        mic: '<svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM6 11a6 6 0 0 0 12 0M12 17v4"/><path class="slash" d="M4 4l16 16"/></svg>'
       };
-      function btn(cls, label, html, x, y) {
-        var b = el('button', 'pbtn ' + cls, html); b.type = 'button'; b.setAttribute('aria-label', label);
+      function glyph(cls, label, html, x, y) {
+        var b = el('button', 'glyph ' + cls, html); b.type = 'button'; b.setAttribute('aria-label', label);
         b.style.left = x + 'px'; b.style.top = y + 'px'; top.appendChild(b); return b;
       }
-      var dn = btn('', 'Volume down', icons.minus, 100, 200);
-      var pl = btn('big', 'Play or pause', icons.play, 200, 200);
-      var up = btn('', 'Volume up', icons.plus, 300, 200);
-      var mute = el('button', 'pswitch'); mute.type = 'button'; mute.setAttribute('aria-label', 'Mute'); mute.innerHTML = '<span class="pknob"></span>';
-      mute.style.left = '200px'; mute.style.top = '292px'; top.appendChild(mute);
-      var pips = el('div', 'pips'); for (var i = 0; i < 10; i++) pips.appendChild(el('span', 'pip')); top.appendChild(pips);
-      top.addEventListener('click', function (e) { e.stopPropagation(); });
-      mute.addEventListener('click', function () { muted = !muted; yt(muted ? 'mute' : 'unMute'); syncBar(); });
-      dn.addEventListener('click', function () { vol = Math.max(0, vol - 1); if (vol === 0) { muted = true; yt('mute'); } else { yt('setVolume', [vol * 10]); } syncBar(); });
-      up.addEventListener('click', function () { vol = Math.min(10, vol + 1); if (muted) { muted = false; yt('unMute'); } yt('setVolume', [vol * 10]); syncBar(); });
+      var dn = glyph('', 'Volume down', icons.minus, 96, 200);
+      var pl = glyph('big', 'Play or pause', icons.play, 200, 200);
+      var up = glyph('', 'Volume up', icons.plus, 304, 200);
+      var mic = glyph('mic', 'Microphones on or off', icons.mic, 200, 316);
+      var cap = el('div', 'cap'); top.appendChild(cap);
+      top.addEventListener('click', function (e) { if (e.target === top || e.target.closest('.vring')) wake(); e.stopPropagation(); });
+      mic.addEventListener('click', function () { muted = !muted; if (muted) { clearTimeout(wakeTimer); wakeState = ''; } syncBar(); });
+      dn.addEventListener('click', function () { vol = Math.max(0, vol - 1); yt('setVolume', [vol * 10]); syncBar(); });
+      up.addEventListener('click', function () { vol = Math.min(10, vol + 1); yt('setVolume', [vol * 10]); syncBar(); });
       pl.addEventListener('click', function () {
         if (!rickBox) { startRick(); }
-        else if (paused) { paused = false; yt('playVideo'); stage.classList.add('playing'); }
-        else { paused = true; yt('pauseVideo'); stage.classList.remove('playing'); }
+        else if (paused) { paused = false; yt('playVideo'); }
+        else { paused = true; yt('pauseVideo'); }
         syncBar();
       });
       syncBar();
@@ -172,24 +199,29 @@
       bar.style.transform = homography(W, H, q);
       bar._lavaEl.style.width = W + 'px'; bar._lavaEl.style.height = H + 'px'; bar._lavaEl.style.transform = bar.style.transform;
     }
+    function lerp3(c, t, k) { for (var i = 0; i < 3; i++) c[i] += (t[i] - c[i]) * k; }
+    function rgb(c) { return Math.round(c[0]) + ', ' + Math.round(c[1]) + ', ' + Math.round(c[2]); }
     function startLava(cv) {
-      var ctx = cv.getContext('2d'), W = cv.width, H = cv.height, t0 = performance.now();
+      var ctx = cv.getContext('2d'), W = cv.width, H = cv.height, t = 0, last = performance.now();
       var B = [
-        { r: 0.30, sx: 0.31, sy: 0.23, px: 0.0, py: 1.0, c: '255, 190, 110' },
-        { r: 0.27, sx: 0.23, sy: 0.37, px: 2.1, py: 0.3, c: '255, 60, 100' },
-        { r: 0.33, sx: 0.17, sy: 0.29, px: 4.0, py: 2.4, c: '255, 150, 70' },
-        { r: 0.24, sx: 0.41, sy: 0.19, px: 1.2, py: 3.3, c: '255, 70, 140' },
-        { r: 0.28, sx: 0.27, sy: 0.33, px: 5.1, py: 0.7, c: '255, 200, 120' }
+        { r: 0.30, sx: 0.31, sy: 0.23, px: 0.0, py: 1.0 }, { r: 0.27, sx: 0.23, sy: 0.37, px: 2.1, py: 0.3 },
+        { r: 0.33, sx: 0.17, sy: 0.29, px: 4.0, py: 2.4 }, { r: 0.24, sx: 0.41, sy: 0.19, px: 1.2, py: 3.3 },
+        { r: 0.28, sx: 0.27, sy: 0.33, px: 5.1, py: 0.7 }
       ];
+      lavaCur = JSON.parse(JSON.stringify(lavaTarget)); lavaCur.speed = lavaTarget.speed;
       function frame(now) {
-        var t = (now - t0) / 1000;
-        var g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#ff7a3a'); g.addColorStop(1, '#ff3d6e');
+        var dt = Math.min(0.05, (now - last) / 1000); last = now;
+        lerp3(lavaCur.a, lavaTarget.a, 0.06); lerp3(lavaCur.b, lavaTarget.b, 0.06);
+        lavaCur.blobs.forEach(function (c, i) { lerp3(c, lavaTarget.blobs[i], 0.06); });
+        lavaCur.speed += (lavaTarget.speed - lavaCur.speed) * 0.05;
+        t += dt * lavaCur.speed;
+        var g = ctx.createLinearGradient(0, 0, W, H); g.addColorStop(0, 'rgb(' + rgb(lavaCur.a) + ')'); g.addColorStop(1, 'rgb(' + rgb(lavaCur.b) + ')');
         ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
         ctx.globalCompositeOperation = 'lighter';
-        B.forEach(function (b) {
+        B.forEach(function (b, i) {
           var x = (0.5 + 0.34 * Math.sin(t * b.sx + b.px)) * W, y = (0.5 + 0.34 * Math.sin(t * b.sy + b.py)) * H, r = b.r * W * (1 + 0.12 * Math.sin(t * 0.9 + b.px));
-          var rg = ctx.createRadialGradient(x, y, 0, x, y, r);
-          rg.addColorStop(0, 'rgba(' + b.c + ', 0.85)'); rg.addColorStop(1, 'rgba(' + b.c + ', 0)');
+          var rg = ctx.createRadialGradient(x, y, 0, x, y, r), c = rgb(lavaCur.blobs[i]);
+          rg.addColorStop(0, 'rgba(' + c + ', 0.85)'); rg.addColorStop(1, 'rgba(' + c + ', 0)');
           ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
         });
         lavaRaf = requestAnimationFrame(frame);
