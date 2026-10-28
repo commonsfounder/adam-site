@@ -279,7 +279,7 @@ footer a:hover { color: var(--bg); }
 @media (prefers-reduced-motion: reduce) { .lay, .lin, .pcard.on { transition: none; animation: none; } }
   
 
-.fam-track { position: relative; height: 1000vh; }
+.fam-track { position: relative; height: 700vh; }
 .fam-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 0 var(--pad); }
 .fam-wrap { position: relative; width: 100%; max-width: 1100px; }
 .fam-sentence { margin: 0; font-size: clamp(30px, 4.6vw, 66px); line-height: 1.2; letter-spacing: -0.04em; font-weight: 500; text-align: center; text-wrap: balance; }
