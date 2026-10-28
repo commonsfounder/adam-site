@@ -44,7 +44,7 @@
     });
     el.appendChild(ring); return ring;
   });
-  var shown = 0, ticking = false;
+  var ticking = false;
   function build() {}
   function ring_state() {
     keyEls.forEach(function (el, i) { rings[i].classList.toggle('on', el.classList.contains('lit')); });
@@ -58,24 +58,18 @@
     if (k === 2) return 0.93;
     return i === firstKey + 2 ? 0.86 : 0.89;
   });
-  var STEP = 230, target = 0, timer = null;
-  function render() {
-    words.forEach(function (w, i) { w.classList.toggle('show', i < shown); });
-    keyEls.forEach(function (el, i) { el.classList.toggle('lit', words.indexOf(el) < shown); });
+  var FADE = 0.035;
+  function render(p) {
+    words.forEach(function (w, i) {
+      if (keyEls.indexOf(w) >= 0) return;
+      var o = Math.min(1, Math.max(0, (p - (T[i] - FADE)) / FADE));
+      w.style.color = o >= 1 ? '' : o <= 0 ? '' : 'color-mix(in srgb, var(--ink) ' + (o * 100).toFixed(0) + '%, #b7b3aa)';
+      w.classList.toggle('show', o >= 1);
+    });
+    keyEls.forEach(function (el, i) { el.classList.toggle('lit', p >= T[words.indexOf(el)]); });
     ring_state();
   }
-  function advance() {
-    if (shown === target) { timer = null; return; }
-    shown += shown < target ? 1 : -1;
-    render();
-    timer = setTimeout(advance, shown < target ? STEP : 30);
-  }
-  function apply(p) {
-    var count = 0;
-    T.forEach(function (t) { if (p >= t) count++; });
-    target = count;
-    if (!timer && shown !== target) advance();
-  }
+  function apply(p) { render(p); }
   function update() {
     ticking = false;
     var r = track.getBoundingClientRect(), total = r.height - window.innerHeight;
