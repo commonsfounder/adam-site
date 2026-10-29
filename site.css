@@ -844,3 +844,10 @@ footer a:hover { color: var(--bg); }
 #family .fam-track { height: 250vh; }
 #family .fam-sticky { padding-bottom: 14svh; }
 @media (max-width: 767px) { #family .fam-track { height: 225vh; } }
+
+/* product images sit inside "What we make", between its heading and the three rows */
+.product-wrap { margin: var(--sp-400, 40px) 0; }
+.product-wrap .product-hero { border: 0; padding-top: 8px; }
+.product-wrap .hero-view { max-width: 1100px; aspect-ratio: 1.9; }
+@media (max-width: 767px) { .product-wrap .hero-view { aspect-ratio: 1.25; } }
+#make .make-rows { margin-top: 0; }
