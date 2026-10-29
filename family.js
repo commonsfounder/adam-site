@@ -39,20 +39,27 @@
   }
   var rings = keyEls.map(function (el, i) {
     var ring = document.createElement('span'); ring.className = 'kring'; ring.setAttribute('aria-hidden', 'true');
+    if (i >= 3) {
     var P = PICK[i], idx = 0;
-    ['up', 'dn'].forEach(function (pos, r) {
-      var rowEl = document.createElement('span'); rowEl.className = 'kr ' + pos;
-      for (var n = 0; n < P.rows[r]; n++) { rowEl.appendChild(mk(P.list[idx], idx * 45, i * 50 + idx, KEYS[i].slack ? SLACK[idx % 4] : null)); idx++; }
-      ring.appendChild(rowEl);
-    });
-    ['lt', 'rt'].forEach(function (side) {
-      var box = document.createElement('span'); box.className = 'kc ' + side;
-      box.appendChild(mk(P.list[idx], idx * 45, i * 50 + idx, KEYS[i].slack ? SLACK[idx % 4] : null)); idx++; ring.appendChild(box);
-    });
+      ['up', 'dn'].forEach(function (pos, r) {
+        var rowEl = document.createElement('span'); rowEl.className = 'kr ' + pos;
+        for (var n = 0; n < P.rows[r]; n++) { rowEl.appendChild(mk(P.list[idx], idx * 45, i * 50 + idx, KEYS[i].slack ? SLACK[idx % 4] : null)); idx++; }
+        ring.appendChild(rowEl);
+      });
+      ['lt', 'rt'].forEach(function (side) {
+        var box = document.createElement('span'); box.className = 'kc ' + side;
+        box.appendChild(mk(P.list[idx], idx * 45, i * 50 + idx, KEYS[i].slack ? SLACK[idx % 4] : null)); idx++; ring.appendChild(box);
+      });
+    }
     el.appendChild(ring);
+    if (i === 0) {
+      var env = document.createElement('span'); env.className = 'kenv';
+      env.innerHTML = '<svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/></svg>';
+      ring.appendChild(env);
+    }
     if (KEYS[i].flight) {
-      var sv = document.createElementNS(NS, 'svg'); sv.setAttribute('class', 'kpath'); sv.setAttribute('viewBox', '0 0 100 24'); sv.setAttribute('preserveAspectRatio', 'none'); sv.setAttribute('aria-hidden', 'true');
-      var pa = document.createElementNS(NS, 'path'); pa.setAttribute('d', 'M2 20 C 28 0, 64 0, 98 14'); pa.setAttribute('pathLength', '100'); sv.appendChild(pa); ring.appendChild(sv);
+      var sv = document.createElementNS(NS, 'svg'); sv.setAttribute('class', 'kloop'); sv.setAttribute('viewBox', '0 0 200 40'); sv.setAttribute('preserveAspectRatio', 'none'); sv.setAttribute('aria-hidden', 'true');
+      var pa = document.createElementNS(NS, 'path'); pa.setAttribute('d', 'M2 32 C 36 30, 68 8, 92 15 C 114 21, 108 40, 94 33 C 80 26, 94 2, 122 7 C 152 12, 172 24, 198 9'); pa.setAttribute('pathLength', '100'); sv.appendChild(pa); ring.appendChild(sv);
     }
     return ring;
   });
@@ -61,6 +68,7 @@
   function ring_state() {
     keyEls.forEach(function (el, i) { rings[i].classList.toggle('on', el.classList.contains('lit')); });
   }
+  var beats = Array.prototype.slice.call(para.querySelectorAll('.beat'));
   var T = words.map(function (w, i) { return 0.04 + 0.9 * (i / Math.max(1, words.length - 1)); });
   var FADE = 0.035;
   function render(p) {
@@ -72,6 +80,11 @@
     });
     keyEls.forEach(function (el, i) { el.classList.toggle('lit', p >= T[words.indexOf(el)]); });
     ring_state();
+    beats.forEach(function (b, i) {
+      var first = words.indexOf(b.querySelector('.w')), next = beats[i + 1] ? words.indexOf(beats[i + 1].querySelector('.w')) : -1;
+      var t0 = i === 0 ? -1 : T[first] + 0.035, t1 = next < 0 ? 2 : T[next] + 0.035;
+      b.classList.toggle('on', p >= t0 && p < t1);
+    });
   }
   function apply(p) { render(p); }
   function update() {
