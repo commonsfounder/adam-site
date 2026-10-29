@@ -951,3 +951,12 @@ footer a:hover { color: var(--bg); }
 #family .fam-track { height: 360vh; }
 #family .fam-sticky { height: 100svh; top: 0; align-items: center; padding-bottom: 8svh; }
 .kloop { top: 62%; margin-top: 0; height: 1.25em; }
+#family .fam-track { height: 220vh; }
+@media (max-width: 767px) { #family .fam-track { height: 210vh; } }
+.ai-wheel { position: relative; width: min(300px, 70vw); aspect-ratio: 1; margin: 56px auto; }
+.ai-wheel ul { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 1px var(--line); animation: aiSpin 40s linear infinite; }
+.ai-wheel li { position: absolute; left: calc(50% + 50% * sin(var(--i) * 72deg)); top: calc(50% - 50% * cos(var(--i) * 72deg)); width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+.ai-wheel img { width: 56px; height: 56px; padding: 10px; border-radius: 16px; background: #fff; object-fit: contain; box-shadow: 0 0 0 1px var(--line); animation: aiSpin 40s linear infinite reverse; }
+.ai-wheel li:nth-child(1) img { background: #f3dccd; } .ai-wheel li:nth-child(2) img { background: #dcebe3; } .ai-wheel li:nth-child(3) img, .ai-wheel li:nth-child(5) img { padding: 0; } .ai-wheel li:nth-child(4) img { background: #f1ebde; padding: 6px; }
+@keyframes aiSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ai-wheel ul, .ai-wheel img { animation: none; } }
