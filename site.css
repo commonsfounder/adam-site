@@ -629,3 +629,78 @@ footer a:hover { color: var(--bg); }
 .swatch:active { transform: scale(0.94); }
 .swatch[aria-checked="true"] { box-shadow: 0 0 0 2px var(--alt), 0 0 0 4px var(--ink); }
 @media (prefers-reduced-motion: reduce) { .swatch { transition: none; } .swatch:hover { transform: none; } }
+
+#first { border-radius: 0; padding-top: clamp(36px, 6vw, 84px); }
+#first .head { text-align: left; max-width: 1120px; margin: 0 auto 20px; }
+#first .head h1 { max-width: 900px; margin: 0 0 20px; font-size: clamp(44px, 6.8vw, 88px); line-height: 1.02; letter-spacing: -0.04em; }
+#first .head .sub { max-width: 540px; color: #514d46; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.45; }
+#first .product-hero { border: 0; padding-top: 8px; }
+#first .hero-view { max-width: 1100px; aspect-ratio: 1.9; }
+#first .make-rows { margin-top: 36px; }
+#family .fam-track { height: 180vh; }
+#family .fam-sticky { height: 75svh; }
+#family .fam-sentence { font-size: clamp(28px, 3.6vw, 48px); }
+#family .beliefs-prose { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 3vw, 48px); }
+#family .beliefs-prose p { margin: 0; font-size: 16px; line-height: 1.6; }
+@media (max-width: 767px) {
+  #first .head h1 { font-size: clamp(40px, 10vw, 58px); }
+  #first .hero-view { aspect-ratio: 1.25; }
+  #family .beliefs-prose { grid-template-columns: 1fr; }
+  #family .fam-track { height: 160vh; }
+}
+@media (prefers-reduced-motion: reduce) { #family .fam-track { height: auto; } #family .fam-sticky { height: auto; } }
+@media (min-width: 900px) {
+  #first > .wrap { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); column-gap: 24px; align-items: center; }
+  #first .frame-head, #first .make-rows { grid-column: 1 / -1; }
+  #first .head { grid-column: 1; grid-row: 2; margin: 0; }
+  #first .head h1 { font-size: clamp(48px, 5.1vw, 76px); }
+  #first .product-hero { grid-column: 2; grid-row: 2; min-width: 0; }
+  #first .hero-view { aspect-ratio: 1.45; }
+}
+@media (min-width: 900px) {
+  #first > .wrap:has(.product-hero.open) .head { grid-column: 1 / -1; grid-row: 2; margin-bottom: 28px; }
+  #first > .wrap:has(.product-hero.open) .product-hero { grid-column: 1 / -1; grid-row: 3; }
+  #first > .wrap:has(.product-hero.open) .hero-view { aspect-ratio: 4 / 3; }
+}
+.js #first .head.reveal, .js #first .product-hero.reveal { opacity: 1; transform: none; }
+#first .head h1 { font-size: clamp(42px, 5vw, 72px); }
+@media (min-width: 900px) {
+  #first .make-rows { grid-row: 3; }
+  #first > .wrap:has(.product-hero.open) .make-rows { grid-row: 4; }
+}
+
+.hero-status { margin: 22px 0 0; color: #514d46; font-size: 14px; font-weight: 500; }
+
+.hero-open { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; }
+.product-hero.open .hero-open { visibility: hidden; pointer-events: none; }
+.nowplaying { position: fixed; left: auto; top: auto; right: 16px; bottom: 16px; width: min(320px, calc(100vw - 32px)); height: auto; aspect-ratio: 16 / 9; z-index: 30; pointer-events: auto; }
+.nowplaying iframe { width: 100%; height: 100%; }
+
+.inside-close { display: none; border: 0; background: transparent; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+.product-hero.open .inside-close { display: inline-block; }
+
+.day-track { height: 900vh; }
+.day-cam { transform-origin: 0 0; }
+.day-img { object-fit: fill; }
+.day-card { max-width: 290px; min-width: 220px; padding: 14px 16px; border-radius: 18px; background: rgba(255, 253, 249, 0.97); color: #201E1B; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(32, 30, 27, 0.08); }
+.day-card .dc-from { display: flex; align-items: center; gap: 7px; font-size: 12px; line-height: 16px; font-weight: 600; color: #6a655d; }
+.day-card .dc-from::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--acc); }
+.day-card .dc-msg { margin-top: 6px; font-size: 15px; line-height: 21px; font-weight: 500; letter-spacing: -0.01em; }
+.day-card .dc-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.day-card .dc-chips span { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(32, 30, 27, 0.2); font-size: 13px; line-height: 18px; color: #201E1B; transition: background-color 300ms var(--ease), color 300ms var(--ease), border-color 300ms var(--ease), transform 300ms var(--ease); }
+.day-card.answered .dc-chips span.pick { background: #201E1B; color: #fff; border-color: #201E1B; transform: scale(1.04); }
+.day-card .dc-done { max-height: 0; opacity: 0; overflow: hidden; font-size: 13px; line-height: 18px; color: #6a655d; transition: max-height 500ms var(--ease), opacity 500ms var(--ease), margin 500ms var(--ease); }
+.day-card.answered .dc-done { max-height: 40px; opacity: 1; margin-top: 10px; }
+.day-foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; padding: 0 var(--pad) 18px; display: grid; gap: 12px; pointer-events: none; }
+.day-narr { margin: 0; max-width: 520px; font-size: 17px; line-height: 25px; text-shadow: 0 1px 16px var(--dbg), 0 0 6px var(--dbg); }
+.day-narr.swap { animation: daySwap 700ms var(--ease); }
+.day-ticks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
+.day-ticks li { display: grid; gap: 6px; opacity: 0.4; transition: opacity 400ms var(--ease); }
+.day-ticks li span { height: 3px; border-radius: 2px; background: currentColor; opacity: 0.35; transition: opacity 400ms var(--ease), background-color 400ms var(--ease); }
+.day-ticks li b { font-size: 12px; line-height: 16px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.day-ticks li.past { opacity: 0.7; }
+.day-ticks li.on { opacity: 1; }
+.day-ticks li.on span, .day-ticks li.past span { opacity: 1; }
+.day-ticks li.on span { background: var(--acc); }
+.day-note { margin: 0; font-size: 12px; line-height: 16px; opacity: 0.6; }
+@media (max-width: 720px) { .day-ticks li b { display: none; } .day-narr { font-size: 15px; line-height: 22px; } .day-card { max-width: 240px; min-width: 190px; } .day-track { height: 800vh; } }

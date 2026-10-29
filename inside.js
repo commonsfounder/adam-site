@@ -405,7 +405,9 @@
         if (b.dataset.set === set) return;
         set = b.dataset.set;
         document.querySelectorAll('#seg button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-        var ready = false;
+        var insideClose = document.getElementById('insideClose');
+    if (insideClose && explodeBtn) insideClose.addEventListener('click', function () { explodeBtn.click(); explodeBtn.focus(); });
+    var ready = false;
     function load() { if (ready) return; ready = true; build(); }
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { load(); o.disconnect(); } }, { rootMargin: '800px 0px' }).observe(stage);
@@ -427,10 +429,12 @@
       explodeBtn.addEventListener('click', function () {
         var openNow = heroEl.classList.toggle('open');
         explodeBtn.setAttribute('aria-expanded', openNow ? 'true' : 'false');
-        explodeBtn.textContent = openNow ? 'Put it back together' : 'Pull it apart';
+        explodeBtn.setAttribute('aria-label', openNow ? 'Close inside view' : 'Explore inside Adam');
         if (openNow) load(); else close();
       });
     }
+    var insideClose = document.getElementById('insideClose');
+    if (insideClose && explodeBtn) insideClose.addEventListener('click', function () { explodeBtn.click(); explodeBtn.focus(); });
     var ready = false;
     function load() { if (ready) return; ready = true; build(); }
     if ('IntersectionObserver' in window) {
