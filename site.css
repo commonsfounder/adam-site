@@ -978,3 +978,17 @@ footer a:hover { color: var(--bg); }
 @media (max-width: 767px) { .assist .ai-wheel { justify-self: start; } }
 .ai-wheel li { margin-left: -6px; } .ai-wheel img { width: 64px; height: 64px; box-shadow: 0 0 0 3px var(--alt, #ebe8e1); }
 .ai-wheel:hover li { margin-left: 10px; }
+/* opener v2: handwritten, Apple-hello style */
+@font-face { font-family: "Script"; src: url(assets/fonts/script.woff2) format("woff2"); font-display: block; }
+.opener { flex-direction: column; gap: 28px; display: flex; align-items: center; justify-content: center; }
+.opener-wm { display: block; position: relative; font-family: "Script", cursive; font-weight: 400; font-size: clamp(84px, 17vw, 230px); letter-spacing: 0; line-height: 1.1; padding: 0 0.12em; }
+.op-script { display: inline-block; -webkit-mask-image: linear-gradient(90deg, #000 0, #000 55%, transparent 70%); mask-image: linear-gradient(90deg, #000 0, #000 55%, transparent 70%); -webkit-mask-size: 280% 100%; mask-size: 280% 100%; -webkit-mask-position: 100% 0; mask-position: 100% 0; animation: opWrite 2.8s 0.5s cubic-bezier(0.45, 0.1, 0.35, 1) forwards; }
+@keyframes opWrite { to { -webkit-mask-position: 0 0; mask-position: 0 0; } }
+.op-full, .op-mark, .op-l { display: none; }
+.opener-tag { margin: 0; max-width: 520px; padding: 0 var(--pad); text-align: center; font-size: clamp(17px, 1.9vw, 22px); line-height: 1.4; color: #514d46; opacity: 0; transform: translateY(10px); animation: opTag 0.8s 3.5s var(--ease) forwards; }
+@keyframes opTag { to { opacity: 1; transform: none; } }
+.opener-hint { animation-delay: 4.2s; }
+.top { animation: opTop 0.8s 3.7s var(--ease) both; }
+@keyframes opTop { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .op-script { animation: none; -webkit-mask-position: 0 0; mask-position: 0 0; } .opener-tag, .top { animation: none; opacity: 1; transform: none; } }
+.opener-wm { white-space: nowrap; font-size: clamp(64px, 15vw, 230px); }
