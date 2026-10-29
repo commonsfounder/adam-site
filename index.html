@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=142">
+  <link rel="stylesheet" href="site.css?v=143">
   <script>document.documentElement.className = 'js opgo';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. The speaker and plugs hear and sense the room. Nothing in them can see."}},
@@ -77,7 +77,7 @@
       <div class="fam-track" id="famTrack">
         <div class="fam-sticky">
           <div class="fam-wrap">
-            <p class="fam-sentence" id="famSentence"><span class="beat"><span class="w">Your</span> <span class="w">phone</span> <span class="w">can</span> <span class="w k" data-k="0">answer email</span> <span class="w">and</span> <span class="w k" data-k="2">book a flight.</span> <span class="w">It</span> <span class="w">can&rsquo;t</span> <span class="w">hear</span> <span class="w">the</span> <span class="w">baby</span> <span class="w">wake,</span> <span class="w">the</span> <span class="w">smoke</span> <span class="w">alarm</span> <span class="w">while</span> <span class="w">you&rsquo;re</span> <span class="w">out,</span> <span class="w">or</span> <span class="w">your</span> <span class="w">dad</span> <span class="w">fall</span> <span class="w">in</span> <span class="w">the</span> <span class="w">kitchen.</span></span> <span class="beat"><span class="fin"><span class="w">Adam</span> <span class="w">does.</span></span></span></p>
+            <p class="fam-sentence" id="famSentence"><span class="beat"><span class="w">Your</span> <span class="w">phone</span> <span class="w">can</span> <span class="w">answer</span> <span class="w">email</span> <span class="w">and</span> <span class="w">book</span> <span class="w">a</span> <span class="w">flight.</span> <span class="w">It</span> <span class="w">can&rsquo;t</span> <span class="w">hear</span> <span class="w">the</span> <span class="w">baby</span> <span class="w">wake,</span> <span class="w">the</span> <span class="w">smoke</span> <span class="w">alarm</span> <span class="w">while</span> <span class="w">you&rsquo;re</span> <span class="w">out,</span> <span class="w">or</span> <span class="w">your</span> <span class="w">dad</span> <span class="w">fall</span> <span class="w">in</span> <span class="w">the</span> <span class="w">kitchen.</span></span> <span class="beat"><span class="big"><span class="w">Adam</span> <span class="w">does.</span></span></span> <span class="beat"><span class="w">We</span> <span class="w">are</span> <span class="w">building</span> <span class="w">devices</span> <span class="w">that</span> <span class="w">redefine</span> <span class="w">how</span> <span class="w">we</span> <span class="fin"><span class="w k" data-k="3">play,</span> <span class="w k" data-k="4">create,</span> <span class="w">and</span> <span class="w">stay</span> <span class="w k" data-k="5">connected.</span></span></span></p>
           </div>
         </div>
       </div>
@@ -85,29 +85,36 @@
 
     <section class="block how" id="how">
       <div class="wrap">
-        <div class="head reveal"><h2>Adam reads the whole room.</h2></div>
-        <div class="steps reveal">
-          <div><b>01</b><h3>Sense</h3><p>Four microphones, a 24 GHz presence radar, and temperature, humidity and light sensors. A low-power radio keeps listening for smoke and CO alarms even while the processor sleeps.</p></div>
-          <div><b>02</b><h3>Combine</h3><p>A sound means little by itself. Adam weighs it against presence, the time of day, who is home, your routine and what it has learned about your household.</p></div>
-          <div><b>03</b><h3>Act</h3><p>Then it does the right thing for that moment, and asks first before it sends, books or pays.</p></div>
-        </div>
-        <div class="make-rows reveal">
-          <div><h3>A fall</h3><p>An impact sound, then no movement. Adam alerts your family, or the emergency services.</p></div>
-          <div><h3>A baby crying</h3><p>The sound of crying, movement in the room and who is home. Adam tells the right grown-up in the night.</p></div>
-          <div><h3>A break-in</h3><p>Glass breaking, then a window opening while nobody is home. Adam can act before you ask.</p></div>
+        <div class="head reveal"><h2>How Adam knows.</h2></div>
+        <div class="hw reveal" id="hw">
+          <div class="hw-tabs" role="tablist" aria-label="Examples">
+            <button type="button" role="tab" aria-selected="true" data-i="0">A baby crying</button>
+            <button type="button" role="tab" aria-selected="false" data-i="1">A fall</button>
+            <button type="button" role="tab" aria-selected="false" data-i="2">A break-in</button>
+          </div>
+          <div class="hw-flow" aria-live="polite">
+            <ol class="hw-in">
+              <li><span>Hears</span><b data-f="h"></b><small>Four microphones</small></li>
+              <li><span>Senses</span><b data-f="s"></b><small>Presence radar, air and light</small></li>
+              <li><span>Knows</span><b data-f="k"></b><small>Your household and routine</small></li>
+            </ol>
+            <svg class="hw-join" viewBox="0 0 100 300" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 50 C 55 50, 45 150, 100 150"/><path pathLength="1" d="M0 150 L 100 150"/><path pathLength="1" d="M0 250 C 55 250, 45 150, 100 150"/></svg>
+            <div class="hw-adam"><i></i>Adam</div>
+            <svg class="hw-out-line" viewBox="0 0 100 300" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 150 L 100 150"/></svg>
+            <div class="hw-out"><span>Does</span><b data-f="d"></b></div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="block hears" id="why">
       <div class="wrap">
-        <div class="head reveal"><h2>Built to feel natural, and to stay yours.</h2></div>
-        <div class="make-rows reveal">
-          <div><h3>It hears, it never sees</h3><p>Adam knows the house by sound, presence, air and light. Your home stays a private place.</p></div>
-          <div><h3>Your data is yours</h3><p>See it, export it and delete it whenever you like. It is used for you and nothing else.</p></div>
-          <div><h3>It joins up with what you have</h3><p>It works with the devices and smart home accessories already in your house.</p></div>
-          <div><h3>Subscription optional</h3><p>Use the assistant you already like on Adam&rsquo;s hardware.</p></div>
-        </div>
+        <ul class="vows reveal">
+          <li>It hears. It never sees.</li>
+          <li>Your data is yours to see, export and delete.</li>
+          <li>It asks before it books, sends or pays.</li>
+          <li>It works with the assistant and devices you already have.</li>
+        </ul>
         <div class="head reveal" style="margin-top:56px">
           <h2>Tested on everyday household sounds.</h2>
           <p class="sub">In noisy rooms, Adam&rsquo;s sound model catches more than Apple&rsquo;s own sound detection.</p>
@@ -202,8 +209,9 @@
   <script src="colorways.js?v=3"></script>
   <script src="inside/data.js?v=3"></script>
   <script src="inside.js?v=27"></script>
-  <script src="family.js?v=32"></script>
+  <script src="family.js?v=33"></script>
   <script src="day.js?v=18"></script>
   <script src="motion.js?v=1"></script>
+  <script src="how.js?v=1"></script>
 </body>
 </html>
