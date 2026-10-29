@@ -9,28 +9,28 @@
   var S = [
     { img: 's1', time: '3:12 am', head: 'June is crying.', bg: '#131316', dark: true, at: 'cot', z: 2.9,
       narr: 'A cry in the nursery. Adam tells the grown-ups and lets the house keep sleeping.',
-      from: 'Adam', to: 'Maya and Dan', msg: 'June is crying in the nursery.', chips: ['I’ve got her', 'Dan, your turn'], pick: 0, done: 'Maya has her. Dan sleeps on.' },
+      from: 'Adam', msg: 'June is crying in the nursery. Who is up?', chips: ['Maya', 'Dan'], pick: 0, done: 'Maya is up. Dan sleeps on.' },
     { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#e3d9cc', dark: false, at: 'table', z: 2.7,
       narr: 'Adam remembers what the family has told it, and says it at the moment it matters.',
-      from: 'Adam', to: 'Maya', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Tell Theo'], pick: 0, done: 'Theo has been told.' },
+      from: 'Adam', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Thanks'], pick: 0, done: 'Theo has it.' },
     { img: 's3', time: '8:10 am', head: 'Out the door.', bg: '#e6e1d8', dark: false, at: 'entry', z: 2.7,
       narr: 'The busiest minute of the day is when the small things slip. Adam keeps track of the ones that matter.',
-      from: 'Adam', to: 'Maya', msg: 'Gran has not taken her morning tablets.', chips: ['Remind her', 'I’ll call her'], pick: 0, done: 'Gran has been reminded.' },
+      from: 'Adam', msg: 'Gran has not taken her morning tablets.', chips: ['Remind her', 'Tell Maya'], pick: 0, done: 'Gran has been reminded.' },
     { img: 's4', time: '11:30 am', head: 'A knock at the door.', bg: '#ebe8e1', dark: false, at: 'door', z: 2.7,
-      narr: 'Nothing is watching the door, but Adam still hears the knock, and knows who is home.',
-      from: 'Adam', to: 'Maya', msg: 'Someone knocked at the front door. Gran is home.', chips: ['Tell Gran', 'Ignore'], pick: 0, done: 'Gran has been told.' },
+      narr: 'Nobody is home, and nothing is watching the door. Adam still hears it and tells you.',
+      from: 'Adam', msg: 'Someone knocked at the front door. Nobody is home.', chips: ['Tell Maya', 'Ignore'], pick: 0, done: 'Maya has been told.' },
     { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#ebe8e1', dark: false, at: 'hob', z: 3.0,
       narr: 'Adam’s radio keeps listening for smoke and CO alarms, even when the rest of it is asleep.',
-      from: 'Adam', to: 'Maya and Dan', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Gran', 'Call 999'], pick: 0, done: 'Calling Gran now.' },
+      from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.9,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there.',
-      from: 'Adam', to: 'Maya', msg: 'I heard a fall in the living room. Gran is not answering. Should I call 999?', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Dan has been told.' },
+      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering. Should I call 999?', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' },
     { img: 's7', time: '7:30 pm', head: 'Bath time.', bg: '#2e2a26', dark: true, at: 'hallway', z: 2.7,
       narr: 'Adam asks first, and does not do anything you have not approved.',
-      from: 'Adam', to: 'Dan', msg: 'June’s bath is due. Can you take it?', chips: ['Yes', 'Ask Maya'], pick: 0, done: 'Bath time is yours.' },
+      from: 'Adam', msg: 'June’s bath is due. Dan, can you take it?', chips: ['Yes', 'Ask Maya'], pick: 0, done: 'Dan has bath time.' },
     { img: 's8', time: '10:30 pm', head: 'Goodnight.', bg: '#131316', dark: true, at: 'bedroom', z: 2.7,
       narr: 'A quiet house, and tomorrow already in order.',
-      from: 'Adam', to: 'Maya and Dan', msg: 'June and Theo are asleep. Tomorrow: swimming at 4, and Dan has a late meeting.', chips: ['Goodnight'], pick: 0, done: 'Quiet mode on. Lights off.', after: 's8b' }
+      from: 'Adam', msg: 'June and Theo are asleep. Tomorrow: swimming at 4, and Dan has a late meeting.', chips: ['Goodnight'], pick: 0, done: 'Quiet mode on. Lights off.', after: 's8b' }
   ];
   var WIDE = { x: 0.5, y: 0.52, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
@@ -87,7 +87,7 @@
     time.textContent = s.time; head.textContent = s.head; narr.textContent = s.narr;
     [head, time, narr].forEach(function (n) { n.classList.remove('swap'); void n.offsetWidth; n.classList.add('swap'); });
     tickEls.forEach(function (li, k) { li.classList.toggle('on', k === i); li.classList.toggle('past', k < i); });
-    card.querySelector('.dc-from').textContent = s.from + ' to ' + s.to; card.querySelector('.dc-msg').textContent = s.msg;
+    card.querySelector('.dc-from').textContent = s.from; card.querySelector('.dc-msg').textContent = s.msg;
     var ch = card.querySelector('.dc-chips'); ch.innerHTML = '';
     s.chips.forEach(function (c, k) { var e = document.createElement('span'); e.textContent = c; if (k === s.pick) e.className = 'pick'; ch.appendChild(e); });
     card.querySelector('.dc-done').textContent = s.done;
