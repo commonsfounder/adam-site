@@ -987,3 +987,10 @@ footer a:hover { color: var(--bg); }
 @keyframes opTop { from { opacity: 0; } to { opacity: 1; } }
 .opener-hint { animation-delay: 3.2s; }
 @media (prefers-reduced-motion: reduce) { .op-l { animation: none; opacity: 1; transform: none; } .op-ring { display: none; } .top { animation: none; } }
+.op-ring { display: none; }
+.op-l { animation: opRip 0.95s cubic-bezier(0.2, 0.8, 0.25, 1) both; }
+@keyframes opRip { 0% { opacity: 0; transform: translateY(0.4em); } 45% { opacity: 1; transform: translateY(-0.16em); } 72% { transform: translateY(0.03em); } 100% { opacity: 1; transform: none; } }
+.js:not(.opgo) .op-s, .js:not(.opgo) .op-d, .js:not(.opgo) .op-l, .js:not(.opgo) .opener-hint, .js:not(.opgo) .top { animation-play-state: paused; }
+.op-d { animation-duration: 0.9s; animation-delay: 0.2s; }
+.op-d { animation-delay: 0.5s; }
+.top { animation-delay: 3.4s; } .opener-hint { animation-delay: 3.7s; }
