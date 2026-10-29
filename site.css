@@ -851,3 +851,13 @@ footer a:hover { color: var(--bg); }
 .product-wrap .hero-view { max-width: 1100px; aspect-ratio: 1.9; }
 @media (max-width: 767px) { .product-wrap .hero-view { aspect-ratio: 1.25; } }
 #make .make-rows { margin-top: 0; }
+
+/* the problem is plain, static prose; the scrolling sentence is the start of the solution */
+#family .problem-lede .lede { max-width: 900px; margin: 0; font-size: clamp(28px, 3.6vw, 48px); line-height: 1.12; letter-spacing: -0.03em; }
+#family .problem-lede { margin-bottom: var(--sp-500, 40px); }
+#family .beliefs-prose { padding-bottom: var(--sp-700, 72px); }
+#make .fam-track { height: 150vh; margin: 0 calc(var(--pad, 24px) * -1); }
+#make .fam-sticky { height: 70svh; padding-bottom: 0; }
+#make .fam-sentence { font-size: clamp(28px, 3.6vw, 48px); }
+@media (max-width: 767px) { #make .fam-track { height: 140vh; } }
+@media (prefers-reduced-motion: reduce) { #make .fam-track { height: auto; } #make .fam-sticky { height: auto; } }
