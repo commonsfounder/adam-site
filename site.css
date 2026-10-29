@@ -965,3 +965,16 @@ footer a:hover { color: var(--bg); }
 .assist { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--line); }
 .assist .head { max-width: 520px; } .assist .ai-wheel { margin: 0; }
 @media (max-width: 767px) { .assist { grid-template-columns: 1fr; gap: 32px; } .assist .ai-wheel { justify-self: center; } }
+.ai-wheel { width: auto; aspect-ratio: auto; margin: 0; }
+.ai-wheel ul { position: static; display: flex; border-radius: 0; box-shadow: none; animation: none; }
+.ai-wheel li { position: relative; left: auto !important; top: auto !important; margin: 0 0 0 -14px; transition: margin 300ms var(--ease); }
+.ai-wheel li:first-child { margin-left: 0; }
+.ai-wheel li:nth-child(n) { z-index: 1; }
+.ai-wheel img { width: 72px; height: 72px; border-radius: 50%; padding: 14px; animation: none; box-shadow: 0 0 0 3px var(--alt, #ebe8e1); }
+.ai-wheel li:nth-child(3) img, .ai-wheel li:nth-child(5) img { padding: 0; }
+.ai-wheel li:nth-child(4) img { padding: 10px; }
+.ai-wheel:hover li { margin-left: 8px; } .ai-wheel:hover li:first-child { margin-left: 0; }
+.assist .ai-wheel { justify-self: end; }
+@media (max-width: 767px) { .assist .ai-wheel { justify-self: start; } }
+.ai-wheel li { margin-left: -6px; } .ai-wheel img { width: 64px; height: 64px; box-shadow: 0 0 0 3px var(--alt, #ebe8e1); }
+.ai-wheel:hover li { margin-left: 10px; }
