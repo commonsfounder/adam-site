@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=143">
+  <link rel="stylesheet" href="site.css?v=144">
   <script>document.documentElement.className = 'js opgo';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. The speaker and plugs hear and sense the room. Nothing in them can see."}},
@@ -37,7 +37,7 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="top"><a class="logo" href="index.html" aria-label="Intuitive Devices"><span><svg class="mark" viewBox="0 0 170 720" aria-hidden="true"><circle cx="85" cy="75" r="75" fill="#D4501F"/><rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/></svg>ntuitive devices</span></a><nav class="top-nav" aria-label="Sections"><a href="#make">Adam</a><a href="#how">How it works</a><a href="#day">A day at home</a><a href="#faq">Questions</a><a href="#people">About</a></nav><a class="top-link" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam">Contact</a></header>
+  <header class="top"><a class="logo" href="index.html" aria-label="Intuitive Devices"><span><svg class="mark" viewBox="0 0 170 720" aria-hidden="true"><circle cx="85" cy="75" r="75" fill="#D4501F"/><rect x="0" y="180" width="170" height="540" rx="85" fill="#201E1B"/></svg>ntuitive devices</span></a><nav class="top-nav" aria-label="Sections"><a href="#make">Adam</a><a href="#day">A day at home</a><a href="#faq">Questions</a><a href="#people">About</a></nav><a class="top-link" href="mailto:chizigamonyewuchi@gmail.com?subject=Adam">Contact</a></header>
 
   <main id="main">
     <section class="block card-sec" id="make">
@@ -83,26 +83,13 @@
       </div>
     </section>
 
-    <section class="block how" id="how">
-      <div class="wrap">
-        <div class="head reveal"><h2>How Adam knows.</h2></div>
-        <div class="hw reveal" id="hw">
-          <div class="hw-tabs" role="tablist" aria-label="Examples">
-            <button type="button" role="tab" aria-selected="true" data-i="0">A baby crying</button>
-            <button type="button" role="tab" aria-selected="false" data-i="1">A fall</button>
-            <button type="button" role="tab" aria-selected="false" data-i="2">A break-in</button>
-          </div>
-          <div class="hw-flow" aria-live="polite">
-            <ol class="hw-in">
-              <li><span>Hears</span><b data-f="h"></b><small>Four microphones</small></li>
-              <li><span>Senses</span><b data-f="s"></b><small>Presence radar, air and light</small></li>
-              <li><span>Knows</span><b data-f="k"></b><small>Your household and routine</small></li>
-            </ol>
-            <svg class="hw-join" viewBox="0 0 100 300" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 50 C 55 50, 45 150, 100 150"/><path pathLength="1" d="M0 150 L 100 150"/><path pathLength="1" d="M0 250 C 55 250, 45 150, 100 150"/></svg>
-            <div class="hw-adam"><i></i>Adam</div>
-            <svg class="hw-out-line" viewBox="0 0 100 300" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 150 L 100 150"/></svg>
-            <div class="hw-out"><span>Does</span><b data-f="d"></b></div>
-          </div>
+
+    <section class="dayside" id="day" aria-label="A day at home">
+      <div class="day-track" id="dayTrack">
+        <div class="day-sticky">
+          <div class="day-top"><h2 id="dayHead">June is crying.</h2><span class="day-time" id="dayTime">3:12 am</span></div>
+          <div class="day-stage" id="dayStage"></div>
+          <div class="day-foot"><p class="day-narr" id="dayNarr"></p><ol class="day-ticks" id="dayTicks"></ol><p class="day-note">Swipe sideways through one day with Adam.</p></div>
         </div>
       </div>
     </section>
@@ -126,16 +113,6 @@
           <div class="bar-row"><b>Scream</b><div><p><span class="bar apple" style="--w:27%"></span><em>27%</em></p><p><span class="bar ours" style="--w:52%"></span><em>52%</em></p></div></div>
         </div>
         <p class="bars-note reveal">We tested 15 everyday household sounds from FSD50K, a public research collection, on clips the model never trained on. Homes are noisy and echoey, so we added noise, echo and very short clips, and held both systems to the same strict limit of 1 false alarm in 100. Averaged over those hard conditions, ours catches about a quarter more real events than Apple&rsquo;s, 54% against 43%.</p>
-      </div>
-    </section>
-
-    <section class="dayside" id="day" aria-label="A day at home">
-      <div class="day-track" id="dayTrack">
-        <div class="day-sticky">
-          <div class="day-top"><h2 id="dayHead">June is crying.</h2><span class="day-time" id="dayTime">3:12 am</span></div>
-          <div class="day-stage" id="dayStage"></div>
-          <div class="day-foot"><p class="day-narr" id="dayNarr"></p><ol class="day-ticks" id="dayTicks"></ol><p class="day-note">Swipe sideways through one day with Adam.</p></div>
-        </div>
       </div>
     </section>
 
@@ -212,6 +189,5 @@
   <script src="family.js?v=33"></script>
   <script src="day.js?v=18"></script>
   <script src="motion.js?v=1"></script>
-  <script src="how.js?v=1"></script>
 </body>
 </html>
