@@ -673,8 +673,6 @@ footer a:hover { color: var(--bg); }
 
 .hero-open { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; }
 .product-hero.open .hero-open { visibility: hidden; pointer-events: none; }
-.nowplaying { position: fixed; left: auto; top: auto; right: 16px; bottom: 16px; width: min(320px, calc(100vw - 32px)); height: auto; aspect-ratio: 16 / 9; z-index: 30; pointer-events: auto; }
-.nowplaying iframe { width: 100%; height: 100%; }
 
 .inside-close { display: none; border: 0; background: transparent; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
 .product-hero.open .inside-close { display: inline-block; }
