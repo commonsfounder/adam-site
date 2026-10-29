@@ -861,3 +861,10 @@ footer a:hover { color: var(--bg); }
 #make .fam-sentence { font-size: clamp(28px, 3.6vw, 48px); }
 @media (max-width: 767px) { #make .fam-track { height: 140vh; } }
 @media (prefers-reduced-motion: reduce) { #make .fam-track { height: auto; } #make .fam-sticky { height: auto; } }
+
+/* one scrolling passage opens the page; "What we make" is a plain section, not a card */
+#family .fam-track { height: 330vh; }
+#family .fam-sticky { height: 75svh; padding-bottom: 10svh; }
+@media (max-width: 767px) { #family .fam-track { height: 300vh; } }
+#make.card-sec { background: none; margin: 0; border-radius: 0; padding: var(--sp-600, 64px) 0 var(--sp-700, 72px); }
+#make .frame-head { border-color: var(--line); }
