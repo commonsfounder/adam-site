@@ -822,3 +822,9 @@ footer a:hover { color: var(--bg); }
 .gstage.focus .pline { opacity: 0.25; }
 .gstage.zoomed .pline { opacity: 0 !important; }
 @media (max-width: 860px) { .ptagb { padding: 3px 7px; font-size: 11px; line-height: 15px; } }
+
+/* the blueprint outline is a hover effect, not a click flash */
+.gstage.focus .lay { opacity: 0.55; }
+.gstage.focus .lay.sel { opacity: 1; }
+.gstage.focus .lin, .gstage.focus .lin.sel { opacity: 0; }
+.lin.hov, .gstage.focus .lin.hov, .gstage.focus .lin.sel.hov { opacity: 1; transform: scale(1.025); }
