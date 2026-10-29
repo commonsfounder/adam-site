@@ -24,7 +24,7 @@
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.9,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there.',
-      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Call 999', 'I’m on my way'], pick: 0, done: 'Calling 999. Maya and Dan have been alerted.' },
+      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering. Should I call 999?', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' },
     { img: 's7', time: '7:30 pm', head: 'Bath time.', bg: '#2e2a26', dark: true, at: 'hallway', z: 2.7,
       narr: 'Adam asks first, and does not do anything you have not approved.',
       from: 'Adam', msg: 'June’s bath is due. Dan, can you take it?', chips: ['Yes', 'Ask Maya'], pick: 0, done: 'Dan has bath time.' },
