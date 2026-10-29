@@ -20,7 +20,7 @@
   };
   var S = [
     { img: 's1', time: '3:12 am', head: 'June is crying.', bg: '#131316', dark: true, at: 'cot', z: 2.9,
-      narr: 'A cry in the nursery. Adam tells the grown-ups and lets the house keep sleeping.',
+      narr: 'A cry in the nursery. Adam wakes one parent and lets the rest of the house sleep.',
       from: 'Adam', msg: 'June is crying in the nursery.', chips: ['Maya', 'Dan'], pick: 0, done: 'Telling Maya. Dan sleeps on.' },
     { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#e3d9cc', dark: false, at: 'table', z: 2.7,
       narr: 'Adam remembers what the family has told it, and says it at the moment it matters.',
@@ -29,7 +29,7 @@
       narr: 'Nobody is home, and nothing is watching the door. Adam still hears it and tells you.',
       from: 'Adam', msg: 'Someone rang the doorbell. Nobody is home.', chips: ['Tell Maya', 'Ignore'], pick: 0, done: 'Telling Maya.' },
     { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#ebe8e1', dark: false, at: 'hob', z: 3.0,
-      narr: 'Adam’s radio keeps listening for smoke and CO alarms, even when the rest of it is asleep.',
+      narr: 'Adam always listens for smoke and CO alarms, day and night.',
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.9,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there.',

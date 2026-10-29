@@ -1004,3 +1004,4 @@ footer a:hover { color: var(--bg); }
 .vows { list-style: none; margin: 0 0 var(--sp-700, 72px); padding: 0; }
 .vows li { font-size: clamp(28px, 4vw, 54px); line-height: 1.12; letter-spacing: -0.035em; font-weight: 500; padding: 0.42em 0; border-bottom: 1px solid var(--line); }
 .vows li:first-child { border-top: 1px solid var(--line); }
+.colours-label strong { display: inline-block; min-width: 5.4em; }
