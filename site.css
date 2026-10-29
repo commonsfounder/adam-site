@@ -704,3 +704,16 @@ footer a:hover { color: var(--bg); }
 .day-ticks li.on span { background: var(--acc); }
 .day-note { margin: 0; font-size: 12px; line-height: 16px; opacity: 0.6; }
 @media (max-width: 720px) { .day-ticks li b { display: none; } .day-narr { font-size: 15px; line-height: 22px; } .day-card { max-width: 240px; min-width: 190px; } .day-track { height: 800vh; } }
+
+.day-stage > .day-card, .day-stage > .day-ring { position: absolute; left: 50%; top: 50%; }
+.day-stage > .day-ring { width: 120px; height: 120px; margin: -60px 0 0 -60px; border: 2px solid #fff; border-radius: 50%; opacity: 0; transform: none; }
+.day-stage > .day-ring.go { animation: dayPulse 2s var(--ease) infinite; }
+.day-stage > .day-card { transform: translate(34px, -50%); width: 290px; max-width: 290px; opacity: 0; pointer-events: none; transition: opacity 400ms var(--ease); }
+.day-stage > .day-card.show { opacity: 1; animation: cardRise 520ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes cardRise { from { opacity: 0; transform: translate(34px, calc(-50% + 14px)) scale(0.92); } to { opacity: 1; transform: translate(34px, -50%) scale(1); } }
+.day-foot { background: linear-gradient(to bottom, transparent, var(--dbg) 42%); padding-top: 56px; }
+@media (max-width: 720px) {
+  .day-stage > .day-card { width: min(300px, calc(100vw - 32px)); max-width: none; min-width: 0; transform: translate(-50%, 56px); }
+  .day-stage > .day-card.show { animation: cardRiseM 520ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+  @keyframes cardRiseM { from { opacity: 0; transform: translate(-50%, 70px) scale(0.92); } to { opacity: 1; transform: translate(-50%, 56px) scale(1); } }
+}

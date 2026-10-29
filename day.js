@@ -40,10 +40,10 @@
     im.alt = i === 0 ? 'A three-dimensional cutaway of a family home with Adam in it' : ''; if (i) im.setAttribute('aria-hidden', 'true');
     cam.appendChild(im); return im;
   });
-  var ring = document.createElement('i'); ring.className = 'day-ring'; ring.setAttribute('aria-hidden', 'true'); cam.appendChild(ring);
+  var ring = document.createElement('i'); ring.className = 'day-ring'; ring.setAttribute('aria-hidden', 'true'); stage.appendChild(ring);
   var card = document.createElement('div'); card.className = 'day-card'; card.setAttribute('aria-live', 'polite');
   card.innerHTML = '<div class="dc-from"></div><div class="dc-msg"></div><div class="dc-chips"></div><div class="dc-done"></div>';
-  cam.appendChild(card);
+  stage.appendChild(card);
   var time = document.getElementById('dayTime'), head = document.getElementById('dayHead'), narr = document.getElementById('dayNarr'), ticks = document.getElementById('dayTicks');
   var tickEls = S.map(function (s) { var li = document.createElement('li'); li.innerHTML = '<span></span><b>' + s.time + '</b>'; ticks.appendChild(li); return li; });
   var NS = S.length, shown = -1, tx = WIDE.x, ty = WIDE.y, tz = WIDE.z, cx = tx, cy = ty, cz = tz, spd = 0;
@@ -57,7 +57,7 @@
   layout(); window.addEventListener('resize', layout);
 
   function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-  function foc(i) { var p = P[S[i].at]; return { x: p[0], y: p[1], z: S[i].z }; }
+  function foc(i) { var p = P[S[i].at]; return { x: p[0], y: p[1], z: geo.W < 720 ? Math.max(1.3, S[i].z * 0.5) : S[i].z }; }
   function mix(a, b, t) { return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t, z: a.z + (b.z - a.z) * t }; }
 
   function target(p) {
@@ -81,7 +81,6 @@
     time.textContent = s.time; head.textContent = s.head; narr.textContent = s.narr;
     [head, time, narr].forEach(function (n) { n.classList.remove('swap'); void n.offsetWidth; n.classList.add('swap'); });
     tickEls.forEach(function (li, k) { li.classList.toggle('on', k === i); li.classList.toggle('past', k < i); });
-    var p = P[s.at]; ring.style.left = card.style.left = (p[0] * 100) + '%'; ring.style.top = card.style.top = (p[1] * 100) + '%';
     card.querySelector('.dc-from').textContent = s.from; card.querySelector('.dc-msg').textContent = s.msg;
     var ch = card.querySelector('.dc-chips'); ch.innerHTML = '';
     s.chips.forEach(function (c, k) { var e = document.createElement('span'); e.textContent = c; if (k === s.pick) e.className = 'pick'; ch.appendChild(e); });
