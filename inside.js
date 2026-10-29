@@ -57,7 +57,7 @@
       if (side === 'b') { t.style.left = pct(cx); t.style.top = pct(y1 + g); t.style.transform = 'translateX(-50%)'; }
     }
 
-    function insideUrl(name) { return (window.AdamColour ? window.AdamColour.insideUrl(name) : 'inside/' + name) + '?v=3'; }
+    function insideUrl(name) { return (window.AdamColour ? window.AdamColour.insideUrl(name) : 'inside/' + name) + '?v=4'; }
     function recolour() {
       SETS[set].forEach(function (p) {
         if (p._lay) p._lay.src = insideUrl(set + '_' + p.k + '.webp');
