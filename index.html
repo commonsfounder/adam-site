@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
-  <link rel="stylesheet" href="site.css?v=107">
+  <link rel="stylesheet" href="site.css?v=108">
   <script>document.documentElement.className = 'js';</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
     {"@type":"Question","name":"Does Adam have cameras?","acceptedAnswer":{"@type":"Answer","text":"No. There are no cameras in the speaker or the plugs, and no wearables to charge."}},
@@ -117,18 +117,40 @@
     </section>
 
 
+    <section class="block hears" id="hears">
+      <div class="wrap">
+        <div class="frame-head"><span>What it already does</span><span>04</span></div>
+        <div class="head reveal">
+          <h2>It already hears.</h2>
+          <p class="sub">An agent can only act on what it notices at home, and sound is where we started. In noisy rooms, our sound model catches more than Apple&rsquo;s own sound detection.</p>
+        </div>
+        <div class="bars reveal" role="img" aria-label="Detection rate at one false alarm in 100. Glass breaking: Apple 39 percent, ours 66 percent. Knock: Apple 40 percent, ours 71 percent. Scream: Apple 27 percent, ours 52 percent.">
+          <div class="bar-key"><span><i class="k apple"></i>Apple&rsquo;s built-in sound detection</span><span><i class="k ours"></i>Our model</span></div>
+          <div class="bar-row"><b>Glass breaking</b><div><p><span class="bar apple" style="--w:39%"></span><em>39%</em></p><p><span class="bar ours" style="--w:66%"></span><em>66%</em></p></div></div>
+          <div class="bar-row"><b>Knock</b><div><p><span class="bar apple" style="--w:40%"></span><em>40%</em></p><p><span class="bar ours" style="--w:71%"></span><em>71%</em></p></div></div>
+          <div class="bar-row"><b>Scream</b><div><p><span class="bar apple" style="--w:27%"></span><em>27%</em></p><p><span class="bar ours" style="--w:52%"></span><em>52%</em></p></div></div>
+        </div>
+        <p class="bars-note reveal">We tested 15 everyday household sounds from FSD50K, a public research collection, on clips the model never trained on. Homes are noisy and echoey, so we added noise, echo and very short clips, and held both systems to the same strict limit of 1 false alarm in 100. Averaged over those hard conditions, ours catches about a quarter more real events than Apple&rsquo;s, 54% against 43%. It has learned from public recordings only so far, and real homes are what will improve it.</p>
+      </div>
+    </section>
+
     <section class="block whoweare" id="people">
       <div class="wrap">
-        <div class="frame-head"><span>Who we are</span><span>04</span></div>
+        <div class="frame-head"><span>Who we are</span><span>05</span></div>
         <div class="who-grid reveal">
           <h2>We believe the home deserves a computer of its own.</h2>
           <p class="lede">Intuitive Devices is building Adam. I&rsquo;m Chizi, the founder, and you can write to me directly.</p>
+          <div class="founder">
+            <p>I&rsquo;m 19 and taught myself to code in March 2026. I built Commons, a community exchange platform launched at my sixth form, then Milgrain, and now Intuitive Devices: the agent, the app, the sound models, the sensor fusion and the early device firmware.</p>
+            <p>I have no degree and no engineering background, and I&rsquo;m the only person on the team. The first hire will be a hardware and firmware engineer, to take the speaker from prototype to evaluation units.</p>
+            <p>I deferred offers from Oxford and Durham to build this.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="block alt" id="faq">
-      <div class="wrap"><div class="frame-head"><span>Questions</span><span>05</span></div>
+      <div class="wrap"><div class="frame-head"><span>Questions</span><span>06</span></div>
         <div class="head reveal">
           <h2>Common questions.</h2>
         </div>
