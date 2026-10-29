@@ -822,3 +822,8 @@ footer a:hover { color: var(--bg); }
 .gstage.focus .pline { opacity: 0.25; }
 .gstage.zoomed .pline { opacity: 0 !important; }
 @media (max-width: 860px) { .ptagb { padding: 3px 7px; font-size: 11px; line-height: 15px; } }
+
+/* the blueprint outline shows on hover only; clicking a part no longer turns the others into blueprints */
+.gstage.focus .lay { opacity: 1; }
+.gstage.focus .lin, .gstage.focus .lin.sel { opacity: 0; }
+.lin.hov, .gstage.focus .lin.hov, .gstage.focus .lin.sel.hov { opacity: 1; }

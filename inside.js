@@ -120,8 +120,8 @@
         var hit = el('button', 'hit'); hit.type = 'button'; hit.setAttribute('aria-label', p.name);
         hit.style.left = pct(bb[0] - 0.012); hit.style.top = pct(bb[1] - 0.012); hit.style.width = pct(bb[2] - bb[0] + 0.024); hit.style.height = pct(bb[3] - bb[1] + 0.024);
         hit.addEventListener('click', function () { open(i); });
-        hit.addEventListener('mouseenter', function () { p._lay.classList.add('hov'); });
-        hit.addEventListener('mouseleave', function () { p._lay.classList.remove('hov'); });
+        hit.addEventListener('mouseenter', function () { p._lay.classList.add('hov'); p._lin.classList.add('hov'); });
+        hit.addEventListener('mouseleave', function () { p._lay.classList.remove('hov'); p._lin.classList.remove('hov'); });
         stage.appendChild(hit);
         var tag = el('div', 'ptag'); var tb = el('span', 'ptagb'); tb.textContent = (i + 1 < 10 ? '0' : '') + (i + 1) + ' ' + p.name; tag.appendChild(tb);
         tb.addEventListener('click', function () { open(i); });
