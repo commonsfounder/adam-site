@@ -34,7 +34,8 @@
   ];
   var WIDE = { x: 0.5, y: 0.52, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
-  var cam = document.createElement('div'); cam.className = 'day-cam day-strip'; stage.appendChild(cam);
+  var scroller = document.createElement('div'); scroller.className = 'day-scroller'; scroller.tabIndex = 0; scroller.setAttribute('role', 'group'); scroller.setAttribute('aria-label', 'A day at home. Swipe or scroll sideways.'); stage.appendChild(scroller);
+  var cam = document.createElement('div'); cam.className = 'day-cam day-strip'; scroller.appendChild(cam);
   var panels = S.map(function () { var d = document.createElement('div'); d.className = 'day-panel'; cam.appendChild(d); return d; });
   var imgs = S.map(function (s, i) {
     var im = document.createElement('img'); im.src = 'day/story/' + s.img + '.webp?v=2'; im.className = 'day-img'; im.decoding = 'async';
@@ -53,7 +54,7 @@
   stage.appendChild(card);
   var time = document.getElementById('dayTime'), head = document.getElementById('dayHead'), narr = document.getElementById('dayNarr'), ticks = document.getElementById('dayTicks');
   var tickEls = S.map(function (s) { var li = document.createElement('li'); li.innerHTML = '<span></span><b>' + s.time + '</b>'; ticks.appendChild(li); return li; });
-  var NS = S.length, shown = -1, cx = 0, spd = 0;
+  var NS = S.length, shown = -1;
   var geo = { w: 0, h: 0, iw: 0, ih: 0, l: 0, t: 0 };
 
   function place() {
@@ -71,7 +72,8 @@
     var W = stage.clientWidth, H = stage.clientHeight, k = Math.max(W / IMG.w, H / IMG.h);
     geo.W = W; geo.H = H; geo.iw = IMG.w * k; geo.ih = IMG.h * k;
     cam.style.width = W * NS + 'px'; cam.style.height = H + 'px';
-    panels.forEach(function (p, i) { p.style.left = i * W + 'px'; p.style.width = W + 'px'; p.style.height = H + 'px'; });
+    panels.forEach(function (p) { p.style.width = W + 'px'; p.style.height = H + 'px'; });
+    scroller.scrollLeft = shown > 0 ? shown * W : 0;
     place();
   }
   layout(); window.addEventListener('resize', layout);
@@ -79,13 +81,6 @@
   function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
   function foc(i) { var p = P[S[i].at]; return { x: p[0], y: p[1], z: geo.W < 720 ? Math.max(1.3, S[i].z * 0.5) : S[i].z }; }
   function mix(a, b, t) { return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t, z: a.z + (b.z - a.z) * t }; }
-
-  function target(p) {
-    var f = p * NS, i = Math.min(NS - 1, Math.floor(f)), t = f - i, pos = i, d = 0;
-    if (t < 0.25 && i > 0) pos = i - 1 + ease(t / 0.25);
-    else d = (t - 0.25) / 0.75;
-    return { i: i, t: t, pos: pos, d: Math.max(0, d) };
-  }
 
   function show(i) {
     if (i === shown) return; shown = i; var s = S[i];
@@ -101,22 +96,23 @@
     card.classList.remove('show', 'answered'); setAfter(false); void card.offsetWidth;
   }
 
+  function go(i) { i = Math.max(0, Math.min(NS - 1, i)); scroller.scrollTo({ left: i * geo.W, behavior: 'smooth' }); }
+  tickEls.forEach(function (li, k) { li.style.cursor = 'pointer'; li.addEventListener('click', function () { go(k); }); });
+  [['prev', -1, '\u2039', 'Previous scene'], ['next', 1, '\u203A', 'Next scene']].forEach(function (a) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'day-arrow ' + a[0]; b.textContent = a[2]; b.setAttribute('aria-label', a[3]);
+    b.addEventListener('click', function () { go(Math.round(scroller.scrollLeft / geo.W) + a[1]); }); stage.appendChild(b);
+  });
+  scroller.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(Math.round(scroller.scrollLeft / geo.W) + (e.key === 'ArrowRight' ? 1 : -1)); } });
+
   var timer = 0;
   function frame() {
-    var r = track.getBoundingClientRect(), total = r.height - innerHeight;
-    var p = total > 0 ? Math.min(0.9999, Math.max(0, -r.top / total)) : 0;
-    var T = target(p);
-    var op = cx; cx += (T.pos - cx) * 0.18;
-    var sp = Math.min(1, Math.abs(cx - op) * 6); spd += (sp - spd) * 0.25;
-    cam.style.transform = 'translate3d(' + (-cx * geo.W).toFixed(1) + 'px,0,0)';
-    cam.style.filter = spd > 0.05 ? 'blur(' + (spd * 1.6).toFixed(2) + 'px)' : 'none';
-    imgs.forEach(function (im, k) { var z = k === T.i ? 1 + T.d * 0.08 : 1; im.style.transform = 'scale(' + z.toFixed(3) + ')'; if (afters[k]) afters[k].style.transform = im.style.transform; });
-    show(T.i);
-    var arrived = T.t > 0.35;
+    var pos = scroller.scrollLeft / geo.W, i = Math.max(0, Math.min(NS - 1, Math.round(pos))), arrived = Math.abs(pos - i) < 0.06;
+    show(i);
+    stage.classList.toggle('first', i === 0); stage.classList.toggle('last', i === NS - 1);
     if (arrived && !card.classList.contains('show')) { card.classList.add('show'); clearTimeout(timer); timer = setTimeout(function () { card.classList.add('answered'); setAfter(true); }, 1700); }
     if (!arrived) { card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
     ring.classList.toggle('go', arrived);
-    stage.classList.toggle('fast', T.t < 0.25);
+    stage.classList.toggle('fast', !arrived);
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);

@@ -748,3 +748,14 @@ footer a:hover { color: var(--bg); }
 .day-strip .day-img.slow.on { opacity: 1; }
 .day-track { height: 700vh; }
 @media (max-width: 720px) { .day-track { height: 600vh; } }
+/* sideways: native horizontal scroller, page keeps scrolling down as normal */
+.day-track { height: auto; }
+.day-sticky { position: relative; height: 100vh; height: 100svh; }
+.day-scroller { position: absolute; inset: 0; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.day-scroller::-webkit-scrollbar { display: none; }
+.day-scroller:focus-visible { outline: 2px solid var(--acc); outline-offset: -4px; }
+.day-cam.day-strip { position: relative; display: flex; width: auto !important; height: 100% !important; }
+.day-panel { position: relative; flex: none; scroll-snap-align: start; scroll-snap-stop: always; }
+.day-arrow { position: absolute; top: 50%; z-index: 5; width: 44px; height: 44px; margin-top: -22px; border-radius: 50%; border: 0; background: rgba(244, 242, 237, 0.92); color: #201E1B; font-size: 28px; line-height: 40px; cursor: pointer; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18); }
+.day-arrow.prev { left: 14px; } .day-arrow.next { right: 14px; }
+.day-stage.first .day-arrow.prev, .day-stage.last .day-arrow.next { opacity: 0; pointer-events: none; }
