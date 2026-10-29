@@ -32,6 +32,9 @@
     {"@type":"Question","name":"What comes in the box?","acceptedAnswer":{"@type":"Answer","text":"One speaker, 21 cm tall and 14 cm square, and two plugs."}},
     {"@type":"Question","name":"How does Adam know which room someone is in?","acceptedAnswer":{"@type":"Answer","text":"The speaker and plugs sense sound, air, light and presence in each room. Adam knows the room, never your exact position."}},
     {"@type":"Question","name":"Can I keep using the assistant I already have?","acceptedAnswer":{"@type":"Answer","text":"Yes. Adam works with several AI assistants, so you can keep the one you already use."}},
+    {"@type":"Question","name":"How much is it?","acceptedAnswer":{"@type":"Answer","text":"£299 for the speaker and two plugs. No subscription needed."}},
+    {"@type":"Question","name":"Does it really call 999?","acceptedAnswer":{"@type":"Answer","text":"Yes. If Adam hears a fall, it asks the person if they are okay. If nobody answers, it calls 999 and tells your family."}},
+    {"@type":"Question","name":"What if the power or Wi-Fi goes off?","acceptedAnswer":{"@type":"Answer","text":"Adam runs on mains power, so it switches off in a power cut. Without Wi-Fi it keeps to the basics at home and cannot message your phone or call for help."}},
     {"@type":"Question","name":"When can I get one?","acceptedAnswer":{"@type":"Answer","text":"Leave your email and you will be the first to know when Adam is ready."}}
   ]}</script>
 </head>
@@ -104,15 +107,15 @@
         </ul>
         <div class="head reveal" style="margin-top:56px">
           <h2>Tested on everyday household sounds.</h2>
-          <p class="sub">In noisy rooms, Adam&rsquo;s sound model catches more than Apple&rsquo;s own sound detection.</p>
+          <p class="sub">In noisy rooms, Adam hears more than the sound recognition built into iPhones.</p>
         </div>
-        <div class="bars reveal" role="img" aria-label="Detection rate at one false alarm in 100. Glass breaking: Apple 39 percent, ours 66 percent. Knock: Apple 40 percent, ours 71 percent. Scream: Apple 27 percent, ours 52 percent.">
-          <div class="bar-key"><span><i class="k apple"></i>Apple&rsquo;s built-in sound detection</span><span><i class="k ours"></i>Our model</span></div>
+        <div class="bars reveal" role="img" aria-label="How often each one caught the sound. Glass breaking: iPhone 39 percent, Adam 66 percent. Knock: iPhone 40 percent, Adam 71 percent. Scream: iPhone 27 percent, Adam 52 percent.">
+          <div class="bar-key"><span><i class="k apple"></i>iPhone sound recognition</span><span><i class="k ours"></i>Adam</span></div>
           <div class="bar-row"><b>Glass breaking</b><div><p><span class="bar apple" style="--w:39%"></span><em>39%</em></p><p><span class="bar ours" style="--w:66%"></span><em>66%</em></p></div></div>
           <div class="bar-row"><b>Knock</b><div><p><span class="bar apple" style="--w:40%"></span><em>40%</em></p><p><span class="bar ours" style="--w:71%"></span><em>71%</em></p></div></div>
           <div class="bar-row"><b>Scream</b><div><p><span class="bar apple" style="--w:27%"></span><em>27%</em></p><p><span class="bar ours" style="--w:52%"></span><em>52%</em></p></div></div>
         </div>
-        <p class="bars-note reveal">We tested 15 everyday household sounds from FSD50K, a public research collection, on clips the model never trained on. Homes are noisy and echoey, so we added noise, echo and very short clips, and held both systems to the same strict limit of 1 false alarm in 100. Averaged over those hard conditions, ours catches about a quarter more real events than Apple&rsquo;s, 54% against 43%.</p>
+        <p class="bars-note reveal">We played both 15 everyday household sounds Adam had never heard before, with the noise and echo of a real home added. Both were allowed the same small number of false alarms. Adam caught about a quarter more of the real sounds.</p>
       </div>
     </section>
 
@@ -139,6 +142,18 @@
             <div class="acc-p" id="ap3" role="region" aria-labelledby="aq3"><div><p>Yes. Adam works with different AI assistants, so you can keep the one you already use.</p></div></div>
           </div>
           <div class="acc-item">
+            <h3><button type="button" class="acc-q" id="aq5" aria-expanded="false" aria-controls="ap5"><span>How much is it?</span><span class="pm" aria-hidden="true"></span></button></h3>
+            <div class="acc-p" id="ap5" role="region" aria-labelledby="aq5"><div><p>£299 for the speaker and two plugs. No subscription needed.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button type="button" class="acc-q" id="aq6" aria-expanded="false" aria-controls="ap6"><span>Does it really call 999?</span><span class="pm" aria-hidden="true"></span></button></h3>
+            <div class="acc-p" id="ap6" role="region" aria-labelledby="aq6"><div><p>Yes. If Adam hears a fall, it asks the person if they are okay. If nobody answers, it calls 999 and tells your family.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button type="button" class="acc-q" id="aq7" aria-expanded="false" aria-controls="ap7"><span>What if the power or Wi-Fi goes off?</span><span class="pm" aria-hidden="true"></span></button></h3>
+            <div class="acc-p" id="ap7" role="region" aria-labelledby="aq7"><div><p>Adam runs on mains power, so it switches off in a power cut. Without Wi-Fi it keeps to the basics at home and cannot message your phone or call for help.</p></div></div>
+          </div>
+          <div class="acc-item">
             <h3><button type="button" class="acc-q" id="aq4" aria-expanded="false" aria-controls="ap4"><span>When can I get one?</span><span class="pm" aria-hidden="true"></span></button></h3>
             <div class="acc-p" id="ap4" role="region" aria-labelledby="aq4"><div><p>Leave your email below and you will be the first to know when Adam is ready.</p></div></div>
           </div>
@@ -152,7 +167,7 @@
           <h2>We believe the home deserves a computer of its own.</h2>
           <p class="lede">Intuitive Devices is building Adam. I&rsquo;m Chizi, the founder, and you can write to me directly.</p>
           <div class="founder">
-            <p>I built Adam&rsquo;s agent, the app, the sound models, the sensor fusion and the device firmware myself.</p>
+            <p>I built Adam myself: the device, the app, and the way it hears and understands your home.</p>
           </div>
         </div>
       </div>
