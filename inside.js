@@ -119,6 +119,7 @@
         var bb = B[p.k];
         var hit = el('button', 'hit'); hit.type = 'button'; hit.setAttribute('aria-label', p.name);
         hit.style.left = pct(bb[0] - 0.012); hit.style.top = pct(bb[1] - 0.012); hit.style.width = pct(bb[2] - bb[0] + 0.024); hit.style.height = pct(bb[3] - bb[1] + 0.024);
+        hit.style.zIndex = String(3 + Math.round((1 - (bb[2] - bb[0]) * (bb[3] - bb[1])) * 100));
         hit.addEventListener('click', function () { open(i); });
         hit.addEventListener('mouseenter', function () { p._lay.classList.add('hov', 'hovp'); p._lin.classList.add('hovp'); stage.classList.add('peek'); });
         hit.addEventListener('mouseleave', function () { p._lay.classList.remove('hov', 'hovp'); p._lin.classList.remove('hovp'); stage.classList.remove('peek'); });
