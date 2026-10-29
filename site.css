@@ -759,3 +759,16 @@ footer a:hover { color: var(--bg); }
 .day-arrow { position: absolute; top: 50%; z-index: 5; width: 44px; height: 44px; margin-top: -22px; border-radius: 50%; border: 0; background: rgba(244, 242, 237, 0.92); color: #201E1B; font-size: 28px; line-height: 40px; cursor: pointer; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18); }
 .day-arrow.prev { left: 14px; } .day-arrow.next { right: 14px; }
 .day-stage.first .day-arrow.prev, .day-stage.last .day-arrow.next { opacity: 0; pointer-events: none; }
+/* card: small, tucked bottom-left; chips are tappable */
+.day-stage > .day-card { left: 24px; top: auto; bottom: 150px; transform: none; width: 244px; padding: 12px 14px; border-radius: 16px; pointer-events: none; }
+.day-stage > .day-card.show { pointer-events: auto; animation: cardUp 480ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes cardUp { from { opacity: 0; transform: translateY(14px) scale(0.94); } to { opacity: 1; transform: none; } }
+.day-card .dc-msg { font-size: 14px; line-height: 20px; }
+.day-card .dc-chips span { cursor: pointer; }
+.day-card .dc-chips span:hover { border-color: #201E1B; }
+.day-card:not(.answered) .dc-chips span { animation: chipNudge 2.2s var(--ease) infinite; }
+@keyframes chipNudge { 0%, 70%, 100% { box-shadow: 0 0 0 0 rgba(212, 80, 31, 0); } 85% { box-shadow: 0 0 0 5px rgba(212, 80, 31, 0.22); } }
+@media (max-width: 720px) {
+  .day-stage > .day-card { left: 16px; bottom: 138px; width: min(250px, calc(100vw - 80px)); transform: none; }
+  .day-stage > .day-card.show { animation: cardUp 480ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+}

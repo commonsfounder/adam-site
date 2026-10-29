@@ -6,6 +6,11 @@
     cot: [0.5565, 0.2551], table: [0.6968, 0.3041], entry: [0.634, 0.758], door: [0.6085, 0.8603],
     hob: [0.7682, 0.2527], kitchen: [0.7105, 0.3413], hallway: [0.5622, 0.3959], bedroom: [0.4357, 0.2549], fall: [0.5278, 0.4873]
   };
+  var OUTS = {
+    s1: ['Maya is up. Dan sleeps on.', 'Dan is up. Maya sleeps on.'], s2: ['Theo has it.'], s3: ['Gran has been reminded.', 'Maya has been told.'],
+    s4: ['Maya has been told.', 'Okay. Adam will keep listening.'], s5: ['Calling Maya now.', 'Calling Dan now.'],
+    s6: ['Calling 999. Maya and Dan have been told.', 'Okay. Maya and Dan have been told.'], s7: ['Dan has bath time.', 'Maya has been asked.'], s8: ['Quiet mode on. Lights off.']
+  };
   var S = [
     { img: 's1', time: '3:12 am', head: 'June is crying.', bg: '#131316', dark: true, at: 'cot', z: 2.9,
       narr: 'A cry in the nursery. Adam tells the grown-ups and lets the house keep sleeping.',
@@ -91,8 +96,17 @@
     tickEls.forEach(function (li, k) { li.classList.toggle('on', k === i); li.classList.toggle('past', k < i); });
     card.querySelector('.dc-from').textContent = s.from; card.querySelector('.dc-msg').textContent = s.msg;
     var ch = card.querySelector('.dc-chips'); ch.innerHTML = '';
-    s.chips.forEach(function (c, k) { var e = document.createElement('span'); e.textContent = c; if (k === s.pick) e.className = 'pick'; ch.appendChild(e); });
-    card.querySelector('.dc-done').textContent = s.done;
+    var outs = OUTS[s.img] || [s.done];
+    s.chips.forEach(function (c, k) {
+      var e = document.createElement('span'); e.textContent = c; e.setAttribute('role', 'button'); e.tabIndex = 0;
+      function choose() {
+        Array.prototype.forEach.call(ch.children, function (x) { x.classList.remove('pick'); }); e.classList.add('pick');
+        card.querySelector('.dc-done').textContent = outs[k] || s.done; card.classList.add('answered'); setAfter(true);
+      }
+      e.addEventListener('click', choose); e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); choose(); } });
+      ch.appendChild(e);
+    });
+    card.querySelector('.dc-done').textContent = '';
     card.classList.remove('show', 'answered'); setAfter(false); void card.offsetWidth;
   }
 
@@ -109,7 +123,7 @@
     var pos = scroller.scrollLeft / geo.W, i = Math.max(0, Math.min(NS - 1, Math.round(pos))), arrived = Math.abs(pos - i) < 0.06;
     show(i);
     stage.classList.toggle('first', i === 0); stage.classList.toggle('last', i === NS - 1);
-    if (arrived && !card.classList.contains('show')) { card.classList.add('show'); clearTimeout(timer); timer = setTimeout(function () { card.classList.add('answered'); setAfter(true); }, 1700); }
+    if (arrived && !card.classList.contains('show')) { card.classList.add('show'); }
     if (!arrived) { card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
     ring.classList.toggle('go', arrived);
     stage.classList.toggle('fast', !arrived);
