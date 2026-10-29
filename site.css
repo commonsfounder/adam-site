@@ -720,3 +720,16 @@ footer a:hover { color: var(--bg); }
 
 .day-img.slow { transition-duration: 1600ms; }
 .day-img.dim { transition-duration: 1600ms; }
+#make .head { text-align: left; max-width: 760px; margin-left: 0; margin-right: auto; }
+#make .head .sub { margin-left: 0; text-align: left; }
+
+.signup { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: var(--sp-300) auto 0; max-width: 560px; }
+.signup input[type="email"] { flex: 1 1 260px; min-width: 0; padding: 14px 18px; border-radius: 999px; border: 1px solid rgba(244, 242, 237, 0.28); background: rgba(244, 242, 237, 0.08); color: var(--bg); font: inherit; font-size: 16px; line-height: 24px; }
+.signup input[type="email"]::placeholder { color: rgba(244, 242, 237, 0.5); }
+.signup input[type="email"]:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.signup button { padding: 14px 22px; border-radius: 999px; border: 0; background: var(--acc); color: #fff; font: inherit; font-size: 16px; line-height: 24px; font-weight: 500; cursor: pointer; transition: transform 200ms var(--ease), opacity 200ms var(--ease); }
+.signup button:hover { transform: translateY(-1px); }
+.signup button[disabled] { opacity: 0.6; cursor: default; }
+.signup .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.signup-msg { min-height: 24px; margin: var(--sp-150, 12px) 0 0; font-size: 15px; line-height: 24px; color: rgba(244, 242, 237, 0.85); }
+.signup-msg.err { color: #ffb4a0; }
