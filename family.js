@@ -2,7 +2,7 @@
   var KEYS = [
     { c: '#6a5bd6', g: 'rgba(106, 91, 214, 0.28)' },
     { c: '#e01e5a', g: 'rgba(54, 197, 240, 0.30)', slack: true },
-    { c: '#1f7ae0', g: 'rgba(31, 122, 224, 0.28)', flight: true },
+    { c: '#1f7ae0', g: 'rgba(31, 122, 224, 0.28)' },
     { c: '#d4501f', g: 'rgba(212, 80, 31, 0.3)' },
     { c: '#c98a00', g: 'rgba(201, 138, 0, 0.3)' },
     { c: '#b83a66', g: 'rgba(184, 58, 102, 0.3)' }
@@ -16,6 +16,7 @@
   var words = Array.prototype.slice.call(para.querySelectorAll('.w'));
   var keyEls = KEYS.map(function (k, i) {
     var el = para.querySelector('.k[data-k="' + i + '"]');
+    if (!el) return null;
     el.style.setProperty('--c', k.c); el.style.setProperty('--g', k.g); return el;
   });
   var keyAt = keyEls.map(function (el) { return words.indexOf(el) + 1; });
@@ -38,6 +39,7 @@
     v.appendChild(u); s.appendChild(v); return s;
   }
   var rings = keyEls.map(function (el, i) {
+    if (!el) return null;
     var ring = document.createElement('span'); ring.className = 'kring'; ring.setAttribute('aria-hidden', 'true');
     if (i >= 3) {
     var P = PICK[i], idx = 0;
@@ -66,7 +68,7 @@
   var ticking = false;
   function build() {}
   function ring_state() {
-    keyEls.forEach(function (el, i) { rings[i].classList.toggle('on', el.classList.contains('lit')); });
+    keyEls.forEach(function (el, i) { if (el) rings[i].classList.toggle('on', el.classList.contains('lit')); });
   }
   var beats = Array.prototype.slice.call(para.querySelectorAll('.beat'));
   var T = words.map(function (w, i) { return 0.04 + 0.9 * (i / Math.max(1, words.length - 1)); });
@@ -78,7 +80,7 @@
       w.style.color = o >= 1 ? '' : o <= 0 ? '' : 'color-mix(in srgb, var(--ink) ' + (o * 100).toFixed(0) + '%, #b7b3aa)';
       w.classList.toggle('show', o >= 1);
     });
-    keyEls.forEach(function (el, i) { el.classList.toggle('lit', p >= T[words.indexOf(el)]); });
+    keyEls.forEach(function (el) { if (el) el.classList.toggle('lit', p >= T[words.indexOf(el)]); });
     ring_state();
     beats.forEach(function (b, i) {
       var first = words.indexOf(b.querySelector('.w')), next = beats[i + 1] ? words.indexOf(beats[i + 1].querySelector('.w')) : -1;

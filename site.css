@@ -983,14 +983,20 @@ footer a:hover { color: var(--bg); }
 @keyframes opRip { 0% { opacity: 0; transform: translateY(0.35em); } 55% { opacity: 1; transform: translateY(-0.07em); } 80% { transform: translateY(0.015em); } 100% { opacity: 1; transform: none; } }
 .op-ring { position: absolute; left: 0.0875em; top: 0.077em; width: 0.15em; height: 0.15em; margin: -0.075em 0 0 -0.075em; border-radius: 50%; border: 2px solid var(--acc); opacity: 0; animation: opRing 1.1s 1.23s ease-out forwards; pointer-events: none; }
 @keyframes opRing { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 0; transform: scale(14); } }
-.top { animation: opTop 0.8s 2.8s var(--ease) both; }
 @keyframes opTop { from { opacity: 0; } to { opacity: 1; } }
 .opener-hint { animation-delay: 3.2s; }
-@media (prefers-reduced-motion: reduce) { .op-l { animation: none; opacity: 1; transform: none; } .op-ring { display: none; } .top { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .op-l { animation: none; opacity: 1; transform: none; } .op-ring { display: none; } }
 .op-ring { display: none; }
 .op-l { animation: opRip 0.95s cubic-bezier(0.2, 0.8, 0.25, 1) both; }
 @keyframes opRip { 0% { opacity: 0; transform: translateY(0.4em); } 45% { opacity: 1; transform: translateY(-0.16em); } 72% { transform: translateY(0.03em); } 100% { opacity: 1; transform: none; } }
-.js:not(.opgo) .op-s, .js:not(.opgo) .op-d, .js:not(.opgo) .op-l, .js:not(.opgo) .opener-hint, .js:not(.opgo) .top { animation-play-state: paused; }
+.js:not(.opgo) .op-s, .js:not(.opgo) .op-d, .js:not(.opgo) .op-l, .js:not(.opgo) .opener-hint { animation-play-state: paused; }
 .op-d { animation-duration: 0.9s; animation-delay: 0.2s; }
 .op-d { animation-delay: 0.5s; }
-.top { animation-delay: 3.4s; } .opener-hint { animation-delay: 3.7s; }
+
+#make.card-sec { padding-top: var(--sp-500, 48px); }
+#make .sol-lead h1 { font-size: clamp(40px, 5.4vw, 72px); line-height: 1.02; letter-spacing: -0.04em; margin: 0 0 var(--sp-300, 24px); }
+#family .fam-track { height: 200vh; }
+@media (max-width: 767px) { #family .fam-track { height: 180vh; } }
+#family .fam-sentence .fin .w { font-size: 1.5em; letter-spacing: -0.045em; }
+#family .kring { display: none; }
+#family .fam-sentence .k.lit, #family .fam-sentence .k { padding: 0 !important; margin: 0 !important; }
