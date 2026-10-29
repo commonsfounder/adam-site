@@ -731,3 +731,13 @@ footer a:hover { color: var(--bg); }
 .signup .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .signup-msg { min-height: 24px; margin: var(--sp-150, 12px) 0 0; font-size: 15px; line-height: 24px; color: rgba(244, 242, 237, 0.85); }
 .signup-msg.err { color: #ffb4a0; }
+
+.btn-cta { display: inline-block; padding: 12px 22px; border-radius: 999px; background: var(--acc); color: #fff; font-size: 16px; line-height: 24px; font-weight: 500; text-decoration: none; transition: transform 200ms var(--ease); }
+.btn-cta:hover { transform: translateY(-1px); }
+.btn-cta:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.top .top-cta { margin-left: 10px; padding: 8px 16px; font-size: 14px; line-height: 20px; }
+.cta-row { margin: var(--sp-300) 0 0; }
+.cta-band { padding: var(--sp-500, 40px) var(--pad); background: var(--alt); text-align: center; }
+.cta-band .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 24px; }
+.cta-band p { margin: 0; font-size: 20px; line-height: 30px; color: var(--ink); }
+@media (max-width: 520px) { .top .top-link { display: none; } }
