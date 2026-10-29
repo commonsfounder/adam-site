@@ -4,7 +4,7 @@
   var IMG = { w: 3200, h: 2048 };
   var P = {
     cot: [0.5565, 0.2551], table: [0.6968, 0.3041], entry: [0.634, 0.758], door: [0.6085, 0.8603],
-    hob: [0.7682, 0.2527], kitchen: [0.7105, 0.3413], hallway: [0.5622, 0.3959], bedroom: [0.4357, 0.2549]
+    hob: [0.7682, 0.2527], kitchen: [0.7105, 0.3413], hallway: [0.5622, 0.3959], bedroom: [0.4357, 0.2549], fall: [0.5278, 0.4873]
   };
   var S = [
     { img: 's1', time: '3:12 am', head: 'June is crying.', bg: '#131316', dark: true, at: 'cot', z: 2.9,
@@ -14,32 +14,38 @@
       narr: 'Adam remembers what the family has told it, and says it at the moment it matters.',
       from: 'Adam', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Thanks'], pick: 0, done: 'Theo has it.' },
     { img: 's3', time: '8:10 am', head: 'Out the door.', bg: '#e6e1d8', dark: false, at: 'entry', z: 2.7,
-      narr: 'The school run is the busiest minute of the day. Adam catches what gets left behind.',
-      from: 'Adam', msg: 'Theo’s reading book is on the hall table.', chips: ['Dan, grab it'], pick: 0, done: 'Dan has it.' },
+      narr: 'The busiest minute of the day is when the small things slip. Adam keeps track of the ones that matter.',
+      from: 'Adam', msg: 'Gran has not taken her morning tablets.', chips: ['Remind her', 'Tell Maya'], pick: 0, done: 'Gran has been reminded.' },
     { img: 's4', time: '11:30 am', head: 'A knock at the door.', bg: '#ebe8e1', dark: false, at: 'door', z: 2.7,
       narr: 'Nobody is home, and nothing is watching the door. Adam still hears it and tells you.',
-      from: 'Adam', msg: 'Someone knocked at the front door. Nobody is home.', chips: ['Remind me at 5'], pick: 0, done: 'Reminder set for 5:00 pm.' },
+      from: 'Adam', msg: 'Someone knocked at the front door. Nobody is home.', chips: ['Tell Maya', 'Ignore'], pick: 0, done: 'Maya has been told.' },
     { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#ebe8e1', dark: false, at: 'hob', z: 3.0,
       narr: 'Adam’s radio keeps listening for smoke and CO alarms, even when the rest of it is asleep.',
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
-    { img: 's6', time: '5:45 pm', head: 'Whose night is it?', bg: '#2e2a26', dark: true, at: 'kitchen', z: 2.7,
-      narr: 'Most of running a home is agreeing who does what. Adam keeps the list so you do not have to.',
-      from: 'Adam', msg: 'Dinner is at 7. Who is cooking?', chips: ['Maya', 'Dan'], pick: 0, done: 'Maya cooks. Dan takes bath time.' },
+    { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.9,
+      narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there.',
+      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Alert Maya', 'Call 999'], pick: 0, done: 'Maya has been alerted.' },
     { img: 's7', time: '7:30 pm', head: 'Bath time.', bg: '#2e2a26', dark: true, at: 'hallway', z: 2.7,
       narr: 'Adam asks first, and does not do anything you have not approved.',
       from: 'Adam', msg: 'June’s bath is due. Dan, can you take it?', chips: ['Yes', 'Ask Maya'], pick: 0, done: 'Dan has bath time.' },
     { img: 's8', time: '10:30 pm', head: 'Goodnight.', bg: '#131316', dark: true, at: 'bedroom', z: 2.7,
       narr: 'A quiet house, and tomorrow already in order.',
-      from: 'Adam', msg: 'June and Theo are asleep. Tomorrow: swimming at 4, and Dan has a late meeting.', chips: ['Goodnight'], pick: 0, done: 'Quiet mode on.' }
+      from: 'Adam', msg: 'June and Theo are asleep. Tomorrow: swimming at 4, and Dan has a late meeting.', chips: ['Goodnight'], pick: 0, done: 'Quiet mode on. Lights off.', after: 's8b' }
   ];
   var WIDE = { x: 0.5, y: 0.52, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
   var cam = document.createElement('div'); cam.className = 'day-cam'; stage.appendChild(cam);
   var imgs = S.map(function (s, i) {
-    var im = document.createElement('img'); im.src = 'day/story/' + s.img + '.webp?v=1'; im.className = 'day-img'; im.decoding = 'async';
+    var im = document.createElement('img'); im.src = 'day/story/' + s.img + '.webp?v=2'; im.className = 'day-img'; im.decoding = 'async';
     im.alt = i === 0 ? 'A three-dimensional cutaway of a family home with Adam in it' : ''; if (i) im.setAttribute('aria-hidden', 'true');
     cam.appendChild(im); return im;
   });
+  var afters = S.map(function (s) {
+    if (!s.after) return null;
+    var im = document.createElement('img'); im.src = 'day/story/' + s.after + '.webp?v=2'; im.className = 'day-img slow'; im.decoding = 'async'; im.setAttribute('aria-hidden', 'true');
+    cam.appendChild(im); return im;
+  });
+  function setAfter(on) { afters.forEach(function (im, k) { if (im) { im.classList.toggle('on', on && k === shown); imgs[k].classList.toggle('dim', on && k === shown); } }); }
   var ring = document.createElement('i'); ring.className = 'day-ring'; ring.setAttribute('aria-hidden', 'true'); stage.appendChild(ring);
   var card = document.createElement('div'); card.className = 'day-card'; card.setAttribute('aria-live', 'polite');
   card.innerHTML = '<div class="dc-from"></div><div class="dc-msg"></div><div class="dc-chips"></div><div class="dc-done"></div>';
@@ -85,7 +91,7 @@
     var ch = card.querySelector('.dc-chips'); ch.innerHTML = '';
     s.chips.forEach(function (c, k) { var e = document.createElement('span'); e.textContent = c; if (k === s.pick) e.className = 'pick'; ch.appendChild(e); });
     card.querySelector('.dc-done').textContent = s.done;
-    card.classList.remove('show', 'answered'); void card.offsetWidth;
+    card.classList.remove('show', 'answered'); setAfter(false); void card.offsetWidth;
   }
 
   var timer = 0;
@@ -104,8 +110,8 @@
     cam.style.setProperty('--inv', (1 / cz).toFixed(3));
     show(T.i);
     var arrived = T.t > 0.3;
-    if (arrived && !card.classList.contains('show')) { card.classList.add('show'); clearTimeout(timer); timer = setTimeout(function () { card.classList.add('answered'); }, 1700); }
-    if (!arrived) { card.classList.remove('show', 'answered'); clearTimeout(timer); }
+    if (arrived && !card.classList.contains('show')) { card.classList.add('show'); clearTimeout(timer); timer = setTimeout(function () { card.classList.add('answered'); setAfter(true); }, 1700); }
+    if (!arrived) { card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
     ring.classList.toggle('go', arrived);
     stage.classList.toggle('fast', T.t < 0.2);
     requestAnimationFrame(frame);
