@@ -72,7 +72,7 @@
       return line;
     }
 
-    function insideUrl(name) { return (window.AdamColour ? window.AdamColour.insideUrl(name) : 'inside/' + name) + '?v=4'; }
+    function insideUrl(name) { return (window.AdamColour ? window.AdamColour.insideUrl(name) : 'inside/' + name) + '?v=5'; }
     function recolour() {
       SETS[set].forEach(function (p) {
         if (p._lay) p._lay.src = insideUrl(set + '_' + p.k + '.webp');
