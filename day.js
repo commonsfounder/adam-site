@@ -11,6 +11,13 @@
     s4: ['Maya has been told.', 'Okay. Adam will keep listening.'], s5: ['Calling Maya now.', 'Calling Dan now.'],
     s6: ['Calling 999. Maya and Dan have been told.', 'Okay. Maya and Dan have been told.'], s7: ['Dan has bath time.', 'Maya has been asked.'], s8: ['Quiet mode on. Lights off.']
   };
+  // what lands on someone's phone when a reply is tapped: [name, text, tone]
+  var TOAST = {
+    s1: [['Maya', 'June is crying in the nursery.'], ['Dan', 'June is crying in the nursery.']], s2: [['Theo', 'PE today. Your kit is by the dryer.']],
+    s3: [['Gran', 'Gran, have you taken your morning tablets?'], ['Maya', 'Gran has not taken her morning tablets.']],
+    s4: [['Maya', 'Someone knocked at the front door. Nobody is home.'], null], s5: [['Maya', 'The smoke alarm is sounding in the kitchen.'], ['Dan', 'The smoke alarm is sounding in the kitchen.']],
+    s6: [['999', 'Fall at home. Gran is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
+  };
   var S = [
     { img: 's1', time: '3:12 am', head: 'June is crying.', bg: '#131316', dark: true, at: 'cot', z: 2.9,
       narr: 'A cry in the nursery. Adam tells the grown-ups and lets the house keep sleeping.',
@@ -53,6 +60,17 @@
     panels[i].appendChild(im); return im;
   });
   function setAfter(on) { afters.forEach(function (im, k) { if (im) { im.classList.toggle('on', on && k === shown); imgs[k].classList.toggle('dim', on && k === shown); } }); }
+  var tint = document.createElement('i'); tint.className = 'day-tint'; stage.appendChild(tint);
+  var toast = document.createElement('div'); toast.className = 'day-toast'; toast.setAttribute('aria-live', 'polite');
+  toast.innerHTML = '<span class="dt-av"></span><div class="dt-txt"><b></b><span></span></div>'; stage.appendChild(toast);
+  function react(t) {
+    toast.classList.remove('show'); tint.classList.remove('red', 'go'); void toast.offsetWidth;
+    var red = t && t[2] === 'red';
+    stage.querySelectorAll('.day-wave').forEach(function (w) { w.remove(); });
+    if (t) for (var n = 0; n < 3; n++) { var w = document.createElement('i'); w.className = 'day-wave' + (red ? ' red' : ''); w.style.animationDelay = n * 280 + 'ms'; stage.appendChild(w); }
+    if (red) { tint.classList.add('red'); void tint.offsetWidth; tint.classList.add('go'); }
+    if (t) { toast.querySelector('.dt-av').textContent = t[0].charAt(0); toast.querySelector('b').textContent = t[0] === '999' ? 'Emergency services' : t[0]; toast.querySelector('.dt-txt span').textContent = t[1]; toast.classList.toggle('red', red); setTimeout(function () { toast.classList.add('show'); }, 380); }
+  }
   var ring = document.createElement('i'); ring.className = 'day-ring'; ring.setAttribute('aria-hidden', 'true'); stage.appendChild(ring);
   var card = document.createElement('div'); card.className = 'day-card'; card.setAttribute('aria-live', 'polite');
   card.innerHTML = '<div class="dc-from"></div><div class="dc-msg"></div><div class="dc-chips"></div><div class="dc-done"></div>';
@@ -101,13 +119,13 @@
       var e = document.createElement('span'); e.textContent = c; e.setAttribute('role', 'button'); e.tabIndex = 0;
       function choose() {
         Array.prototype.forEach.call(ch.children, function (x) { x.classList.remove('pick'); }); e.classList.add('pick');
-        card.querySelector('.dc-done').textContent = outs[k] || s.done; card.classList.add('answered'); setAfter(true);
+        card.querySelector('.dc-done').textContent = outs[k] || s.done; card.classList.add('answered'); setAfter(true); react((TOAST[s.img] || [])[k] || null);
       }
       e.addEventListener('click', choose); e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); choose(); } });
       ch.appendChild(e);
     });
     card.querySelector('.dc-done').textContent = '';
-    card.classList.remove('show', 'answered'); setAfter(false); void card.offsetWidth;
+    card.classList.remove('show', 'answered'); setAfter(false); toast.classList.remove('show'); tint.classList.remove('go'); stage.querySelectorAll('.day-wave').forEach(function (w) { w.remove(); }); void card.offsetWidth;
   }
 
   function go(i) { i = Math.max(0, Math.min(NS - 1, i)); scroller.scrollTo({ left: i * geo.W, behavior: 'smooth' }); }
@@ -124,7 +142,7 @@
     show(i);
     stage.classList.toggle('first', i === 0); stage.classList.toggle('last', i === NS - 1);
     if (arrived && !card.classList.contains('show')) { card.classList.add('show'); }
-    if (!arrived) { card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
+    if (!arrived) { if (card.classList.contains('show')) { toast.classList.remove('show'); tint.classList.remove('go'); } card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
     ring.classList.toggle('go', arrived);
     stage.classList.toggle('fast', !arrived);
     requestAnimationFrame(frame);
