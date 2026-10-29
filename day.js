@@ -21,25 +21,25 @@
   var S = [
     { img: 's1', time: '3:12 am', head: 'June is crying.', bg: '#131316', dark: true, at: 'cot', z: 2.9,
       narr: 'A cry in the nursery. Adam tells the grown-ups and lets the house keep sleeping.',
-      from: 'Adam', msg: 'June is crying in the nursery. Who is up?', chips: ['Maya', 'Dan'], pick: 0, done: 'Maya is up. Dan sleeps on.' },
+      from: 'Adam', msg: 'June is crying in the nursery.', chips: ['Maya', 'Dan'], pick: 0, done: 'Telling Maya. Dan sleeps on.' },
     { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#e3d9cc', dark: false, at: 'table', z: 2.7,
       narr: 'Adam remembers what the family has told it, and says it at the moment it matters.',
-      from: 'Adam', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Thanks'], pick: 0, done: 'Theo has it.' },
+      from: 'Adam', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Thanks'], pick: 0, done: 'Reminding Theo.' },
     { img: 's3', time: '8:10 am', head: 'Out the door.', bg: '#e6e1d8', dark: false, at: 'entry', z: 2.7,
       narr: 'The busiest minute of the day is when the small things slip. Adam keeps track of the ones that matter.',
-      from: 'Adam', msg: 'Gran has not taken her morning tablets.', chips: ['Remind her', 'Tell Maya'], pick: 0, done: 'Gran has been reminded.' },
+      from: 'Adam', msg: 'Gran has not taken her morning tablets.', chips: ['Remind her', 'Tell Maya'], pick: 0, done: 'Reminding Gran.' },
     { img: 's4', time: '11:30 am', head: 'A knock at the door.', bg: '#ebe8e1', dark: false, at: 'door', z: 2.7,
       narr: 'Nobody is home, and nothing is watching the door. Adam still hears it and tells you.',
-      from: 'Adam', msg: 'Someone knocked at the front door. Nobody is home.', chips: ['Tell Maya', 'Ignore'], pick: 0, done: 'Maya has been told.' },
+      from: 'Adam', msg: 'Someone knocked at the front door. Nobody is home.', chips: ['Tell Maya', 'Ignore'], pick: 0, done: 'Telling Maya.' },
     { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#ebe8e1', dark: false, at: 'hob', z: 3.0,
       narr: 'Adam’s radio keeps listening for smoke and CO alarms, even when the rest of it is asleep.',
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.9,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there.',
-      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering. Should I call 999?', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' },
+      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' },
     { img: 's7', time: '7:30 pm', head: 'Bath time.', bg: '#2e2a26', dark: true, at: 'hallway', z: 2.7,
-      narr: 'Adam asks first, and does not do anything you have not approved.',
-      from: 'Adam', msg: 'June’s bath is due. Dan, can you take it?', chips: ['Yes', 'Ask Maya'], pick: 0, done: 'Dan has bath time.' },
+      narr: 'Adam works out whose turn it is, and asks them.',
+      from: 'Adam', msg: 'June’s bath is due.', chips: ['Yes', 'Ask Maya'], pick: 0, done: 'Asking Dan to take it.' },
     { img: 's8', time: '10:30 pm', head: 'Goodnight.', bg: '#131316', dark: true, at: 'bedroom', z: 2.7,
       narr: 'A quiet house, and tomorrow already in order.',
       from: 'Adam', msg: 'June and Theo are asleep. Tomorrow: swimming at 4, and Dan has a late meeting.', chips: ['Goodnight'], pick: 0, done: 'Quiet mode on. Lights off.', after: 's8b' }
@@ -114,16 +114,7 @@
     tickEls.forEach(function (li, k) { li.classList.toggle('on', k === i); li.classList.toggle('past', k < i); });
     card.querySelector('.dc-from').textContent = s.from; card.querySelector('.dc-msg').textContent = s.msg;
     var ch = card.querySelector('.dc-chips'); ch.innerHTML = '';
-    var outs = OUTS[s.img] || [s.done];
-    s.chips.forEach(function (c, k) {
-      var e = document.createElement('span'); e.textContent = c; e.setAttribute('role', 'button'); e.tabIndex = 0;
-      function choose() {
-        Array.prototype.forEach.call(ch.children, function (x) { x.classList.remove('pick'); }); e.classList.add('pick');
-        card.querySelector('.dc-done').textContent = outs[k] || s.done; card.classList.add('answered'); setAfter(true); react((TOAST[s.img] || [])[k] || null);
-      }
-      e.addEventListener('click', choose); e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); choose(); } });
-      ch.appendChild(e);
-    });
+    ch.innerHTML = '';
     card.querySelector('.dc-done').textContent = '';
     card.classList.remove('show', 'answered'); setAfter(false); toast.classList.remove('show'); tint.classList.remove('go'); stage.querySelectorAll('.day-wave').forEach(function (w) { w.remove(); }); void card.offsetWidth;
   }
@@ -141,7 +132,7 @@
     var pos = scroller.scrollLeft / geo.W, i = Math.max(0, Math.min(NS - 1, Math.round(pos))), arrived = Math.abs(pos - i) < 0.06;
     show(i);
     stage.classList.toggle('first', i === 0); stage.classList.toggle('last', i === NS - 1);
-    if (arrived && !card.classList.contains('show')) { card.classList.add('show'); }
+    if (arrived && !card.classList.contains('show')) { card.classList.add('show'); clearTimeout(timer); var cur = S[i]; timer = setTimeout(function () { card.querySelector('.dc-done').textContent = cur.done; card.classList.add('answered'); setAfter(true); react((TOAST[cur.img] || [])[0] || null); }, 1100); }
     if (!arrived) { if (card.classList.contains('show')) { toast.classList.remove('show'); tint.classList.remove('go'); } card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
     ring.classList.toggle('go', arrived);
     stage.classList.toggle('fast', !arrived);
