@@ -57,6 +57,21 @@
       if (side === 'b') { t.style.left = pct(cx); t.style.top = pct(y1 + g); t.style.transform = 'translateX(-50%)'; }
     }
 
+    // ordered callouts: odd parts on the left, even on the right, each with a straight arrow to its part
+    var COL = 0.30;
+    function layoutTag(tag, p, bb, i) {
+      var left = i % 2 === 0, cy = (bb[1] + bb[3]) / 2;
+      p.side = p.cardSide = left ? 'l' : 'r';
+      tag.style.left = tag.style.right = tag.style.top = tag.style.bottom = 'auto';
+      tag.style.top = pct(cy); tag.style.transform = 'translateY(-50%)';
+      var line = el('i', 'pline ' + (left ? 'l' : 'r')); line.setAttribute('aria-hidden', 'true');
+      var pad = 0.006;
+      if (left) { tag.style.right = pct(1 - COL); line.style.left = pct(COL); line.style.width = pct(Math.max(0.02, bb[0] - pad - COL)); }
+      else { tag.style.left = pct(1 - COL); line.style.left = pct(bb[2] + pad); line.style.width = pct(Math.max(0.02, (1 - COL) - bb[2] - pad)); }
+      line.style.top = pct(cy);
+      return line;
+    }
+
     function insideUrl(name) { return (window.AdamColour ? window.AdamColour.insideUrl(name) : 'inside/' + name) + '?v=4'; }
     function recolour() {
       SETS[set].forEach(function (p) {
@@ -79,6 +94,12 @@
       if (r.left < sr.left + 6) dx = sr.left + 6 - r.left;
       if (r.right > sr.right - 6) dx = sr.right - 6 - r.right;
       if (dx) card.style.marginLeft = dx + 'px';
+      card.style.marginTop = '';
+      r = card.getBoundingClientRect();
+      var dy = 0;
+      if (r.top < sr.top + 6) dy = sr.top + 6 - r.top;
+      if (r.bottom > sr.bottom - 6) dy = sr.bottom - 6 - r.bottom;
+      if (dy) card.style.marginTop = dy + 'px';
     }
 
     function build() {
@@ -97,14 +118,14 @@
       parts.forEach(function (p, i) {
         var bb = B[p.k];
         var hit = el('button', 'hit'); hit.type = 'button'; hit.setAttribute('aria-label', p.name);
-        hit.style.left = pct(bb[0]); hit.style.top = pct(bb[1]); hit.style.width = pct(bb[2] - bb[0]); hit.style.height = pct(bb[3] - bb[1]);
+        hit.style.left = pct(bb[0] - 0.012); hit.style.top = pct(bb[1] - 0.012); hit.style.width = pct(bb[2] - bb[0] + 0.024); hit.style.height = pct(bb[3] - bb[1] + 0.024);
         hit.addEventListener('click', function () { open(i); });
         hit.addEventListener('mouseenter', function () { p._lay.classList.add('hov'); });
         hit.addEventListener('mouseleave', function () { p._lay.classList.remove('hov'); });
         stage.appendChild(hit);
         var tag = el('div', 'ptag'); var tb = el('span', 'ptagb'); tb.textContent = (i + 1 < 10 ? '0' : '') + (i + 1) + ' ' + p.name; tag.appendChild(tb);
         tb.addEventListener('click', function () { open(i); });
-        place(tag, p, bb);
+        var pl = layoutTag(tag, p, bb, i); stage.appendChild(pl); p._line = pl;
         stage.appendChild(tag);
         var card = makeCard(p); card.classList.add('floating');
         place(null, p, bb, card);
@@ -373,7 +394,7 @@
         nodes[k].tag.style.visibility = (k === n && isDesktop()) ? 'hidden' : '';
       });
       var node = nodes[n];
-      node.card.style.marginLeft = '';
+      node.card.style.marginLeft = ''; node.card.style.marginTop = '';
       node.card.classList.add('on'); node.mc.classList.add('on');
       clamp(node.card);
       stopWeave(); stopGame(); clearTimeout(zoomTimer);
