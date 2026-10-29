@@ -741,3 +741,10 @@ footer a:hover { color: var(--bg); }
 .cta-band .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 24px; }
 .cta-band p { margin: 0; font-size: 20px; line-height: 30px; color: var(--ink); }
 @media (max-width: 520px) { .top .top-link { display: none; } }
+.day-cam.day-strip { inset: auto; left: 0; top: 0; transform-origin: 0 0; }
+.day-panel { position: absolute; top: 0; overflow: hidden; }
+.day-strip .day-img { inset: auto; max-width: none; object-fit: fill; opacity: 1; transition: opacity 450ms var(--ease); }
+.day-strip .day-img.slow { opacity: 0; }
+.day-strip .day-img.slow.on { opacity: 1; }
+.day-track { height: 700vh; }
+@media (max-width: 720px) { .day-track { height: 600vh; } }

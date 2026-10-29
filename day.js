@@ -34,16 +34,17 @@
   ];
   var WIDE = { x: 0.5, y: 0.52, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
-  var cam = document.createElement('div'); cam.className = 'day-cam'; stage.appendChild(cam);
+  var cam = document.createElement('div'); cam.className = 'day-cam day-strip'; stage.appendChild(cam);
+  var panels = S.map(function () { var d = document.createElement('div'); d.className = 'day-panel'; cam.appendChild(d); return d; });
   var imgs = S.map(function (s, i) {
     var im = document.createElement('img'); im.src = 'day/story/' + s.img + '.webp?v=2'; im.className = 'day-img'; im.decoding = 'async';
     im.alt = i === 0 ? 'A three-dimensional cutaway of a family home with Adam in it' : ''; if (i) im.setAttribute('aria-hidden', 'true');
-    cam.appendChild(im); return im;
+    panels[i].appendChild(im); return im;
   });
-  var afters = S.map(function (s) {
+  var afters = S.map(function (s, i) {
     if (!s.after) return null;
     var im = document.createElement('img'); im.src = 'day/story/' + s.after + '.webp?v=2'; im.className = 'day-img slow'; im.decoding = 'async'; im.setAttribute('aria-hidden', 'true');
-    cam.appendChild(im); return im;
+    panels[i].appendChild(im); return im;
   });
   function setAfter(on) { afters.forEach(function (im, k) { if (im) { im.classList.toggle('on', on && k === shown); imgs[k].classList.toggle('dim', on && k === shown); } }); }
   var ring = document.createElement('i'); ring.className = 'day-ring'; ring.setAttribute('aria-hidden', 'true'); stage.appendChild(ring);
@@ -52,13 +53,26 @@
   stage.appendChild(card);
   var time = document.getElementById('dayTime'), head = document.getElementById('dayHead'), narr = document.getElementById('dayNarr'), ticks = document.getElementById('dayTicks');
   var tickEls = S.map(function (s) { var li = document.createElement('li'); li.innerHTML = '<span></span><b>' + s.time + '</b>'; ticks.appendChild(li); return li; });
-  var NS = S.length, shown = -1, tx = WIDE.x, ty = WIDE.y, tz = WIDE.z, cx = tx, cy = ty, cz = tz, spd = 0;
+  var NS = S.length, shown = -1, cx = 0, spd = 0;
   var geo = { w: 0, h: 0, iw: 0, ih: 0, l: 0, t: 0 };
 
+  function place() {
+    S.forEach(function (sc, i) {
+      var f = foc(i), els = [imgs[i], afters[i]];
+      els.forEach(function (im) {
+        if (!im) return;
+        im.style.width = geo.iw * f.z + 'px'; im.style.height = geo.ih * f.z + 'px';
+        im.style.left = (geo.W / 2 - f.z * f.x * geo.iw) + 'px'; im.style.top = (geo.H / 2 - f.z * f.y * geo.ih) + 'px';
+        im.style.transformOrigin = (f.x * 100) + '% ' + (f.y * 100) + '%';
+      });
+    });
+  }
   function layout() {
-    var W = stage.clientWidth, H = stage.clientHeight, k = Math.max(W / IMG.w, H / IMG.h) * 1.0;
-    geo.W = W; geo.H = H; geo.iw = IMG.w * k; geo.ih = IMG.h * k; geo.l = (W - geo.iw) / 2; geo.t = (H - geo.ih) / 2;
-    cam.style.width = geo.iw + 'px'; cam.style.height = geo.ih + 'px'; cam.style.left = geo.l + 'px'; cam.style.top = geo.t + 'px';
+    var W = stage.clientWidth, H = stage.clientHeight, k = Math.max(W / IMG.w, H / IMG.h);
+    geo.W = W; geo.H = H; geo.iw = IMG.w * k; geo.ih = IMG.h * k;
+    cam.style.width = W * NS + 'px'; cam.style.height = H + 'px';
+    panels.forEach(function (p, i) { p.style.left = i * W + 'px'; p.style.width = W + 'px'; p.style.height = H + 'px'; });
+    place();
   }
   layout(); window.addEventListener('resize', layout);
 
@@ -67,17 +81,10 @@
   function mix(a, b, t) { return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t, z: a.z + (b.z - a.z) * t }; }
 
   function target(p) {
-    var f = p * NS, i = Math.min(NS - 1, Math.floor(f)), t = f - i, now = foc(i), out;
-    if (t < 0.2) {
-      var prev = i === 0 ? WIDE : foc(i - 1), k = t / 0.2;
-      var mid = mix(prev, WIDE, Math.min(1, k * 2)), arr = mix(WIDE, now, ease(Math.max(0, k * 2 - 1)));
-      out = k < 0.5 ? mid : arr;
-      if (i === 0) out = mix(WIDE, now, ease(k));
-    } else {
-      var d = (t - 0.2) / 0.8;
-      out = { x: now.x, y: now.y, z: now.z * (1 + d * 0.1) };
-    }
-    return { i: i, t: t, c: out };
+    var f = p * NS, i = Math.min(NS - 1, Math.floor(f)), t = f - i, pos = i, d = 0;
+    if (t < 0.25 && i > 0) pos = i - 1 + ease(t / 0.25);
+    else d = (t - 0.25) / 0.75;
+    return { i: i, t: t, pos: pos, d: Math.max(0, d) };
   }
 
   function show(i) {
@@ -99,21 +106,17 @@
     var r = track.getBoundingClientRect(), total = r.height - innerHeight;
     var p = total > 0 ? Math.min(0.9999, Math.max(0, -r.top / total)) : 0;
     var T = target(p);
-    tx = T.c.x; ty = T.c.y; tz = T.c.z;
-    var ox = cx, oy = cy, oz = cz;
-    cx += (tx - cx) * 0.14; cy += (ty - cy) * 0.14; cz += (tz - cz) * 0.14;
-    var sp = Math.min(1, (Math.abs(cx - ox) * 50 + Math.abs(cy - oy) * 50 + Math.abs(cz - oz) * 2.5));
-    spd += (sp - spd) * 0.25;
-    var tX = geo.W / 2 - geo.l - cz * cx * geo.iw, tY = geo.H / 2 - geo.t - cz * cy * geo.ih;
-    cam.style.transform = 'translate3d(' + tX.toFixed(1) + 'px,' + tY.toFixed(1) + 'px,0) scale(' + cz.toFixed(3) + ')';
-    cam.style.filter = spd > 0.05 ? 'blur(' + (spd * 2.4).toFixed(2) + 'px)' : 'none';
-    cam.style.setProperty('--inv', (1 / cz).toFixed(3));
+    var op = cx; cx += (T.pos - cx) * 0.18;
+    var sp = Math.min(1, Math.abs(cx - op) * 6); spd += (sp - spd) * 0.25;
+    cam.style.transform = 'translate3d(' + (-cx * geo.W).toFixed(1) + 'px,0,0)';
+    cam.style.filter = spd > 0.05 ? 'blur(' + (spd * 1.6).toFixed(2) + 'px)' : 'none';
+    imgs.forEach(function (im, k) { var z = k === T.i ? 1 + T.d * 0.08 : 1; im.style.transform = 'scale(' + z.toFixed(3) + ')'; if (afters[k]) afters[k].style.transform = im.style.transform; });
     show(T.i);
-    var arrived = T.t > 0.3;
+    var arrived = T.t > 0.35;
     if (arrived && !card.classList.contains('show')) { card.classList.add('show'); clearTimeout(timer); timer = setTimeout(function () { card.classList.add('answered'); setAfter(true); }, 1700); }
     if (!arrived) { card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
     ring.classList.toggle('go', arrived);
-    stage.classList.toggle('fast', T.t < 0.2);
+    stage.classList.toggle('fast', T.t < 0.25);
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
