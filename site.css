@@ -919,3 +919,7 @@ footer a:hover { color: var(--bg); }
 #family .fam-track { height: 300vh; }
 #family .problem-rows { padding-top: var(--sp-500, 56px); }
 @media (max-width: 767px) { #family .fam-track { height: 270vh; } }
+
+/* the problem is one passage that ends on the flourish; nothing follows it */
+#family .fam-track { height: 360vh; }
+@media (max-width: 767px) { #family .fam-track { height: 330vh; } }
