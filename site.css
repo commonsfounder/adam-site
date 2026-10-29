@@ -909,3 +909,7 @@ footer a:hover { color: var(--bg); }
 #family .rows-title { margin-top: var(--sp-700, 96px); margin-bottom: var(--sp-500, 48px); }
 #family .problem-rows { padding-bottom: var(--sp-700, 72px); }
 #family .problem-rows .make-rows { max-width: 1100px; margin: 0 auto; }
+
+/* the lead is one left-aligned paragraph, not a centred block */
+#family .problem-lead { max-width: 900px; margin: 0 0 var(--sp-500, 48px); padding: 0; text-align: left; text-wrap: pretty; }
+#family .problem-rows { max-width: 1100px; margin-left: auto; margin-right: auto; padding-left: var(--pad, 24px); padding-right: var(--pad, 24px); }
