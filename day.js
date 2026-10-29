@@ -15,7 +15,7 @@
   var TOAST = {
     s1: [['Maya', 'June is crying in the nursery.'], ['Dan', 'June is crying in the nursery.']], s2: [['Theo', 'PE today. Your kit is by the dryer.']],
     s3: [['Gran', 'Gran, have you taken your morning tablets?'], ['Maya', 'Gran has not taken her morning tablets.']],
-    s4: [['Maya', 'Someone knocked at the front door. Nobody is home.'], null], s5: [['Maya', 'The smoke alarm is sounding in the kitchen.'], ['Dan', 'The smoke alarm is sounding in the kitchen.']],
+    s4: [['Maya', 'Someone rang the doorbell. Nobody is home.'], null], s5: [['Maya', 'The smoke alarm is sounding in the kitchen.'], ['Dan', 'The smoke alarm is sounding in the kitchen.']],
     s6: [['999', 'Fall at home. Gran is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
   };
   var S = [
@@ -25,24 +25,15 @@
     { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#e3d9cc', dark: false, at: 'table', z: 2.7,
       narr: 'Adam remembers what the family has told it, and says it at the moment it matters.',
       from: 'Adam', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Thanks'], pick: 0, done: 'Reminding Theo.' },
-    { img: 's3', time: '8:10 am', head: 'Out the door.', bg: '#e6e1d8', dark: false, at: 'entry', z: 2.7,
-      narr: 'The busiest minute of the day is when the small things slip. Adam keeps track of the ones that matter.',
-      from: 'Adam', msg: 'Gran has not taken her morning tablets.', chips: ['Remind her', 'Tell Maya'], pick: 0, done: 'Reminding Gran.' },
-    { img: 's4', time: '11:30 am', head: 'A knock at the door.', bg: '#ebe8e1', dark: false, at: 'door', z: 2.7,
+    { img: 's4', time: '11:30 am', head: 'The doorbell.', bg: '#ebe8e1', dark: false, at: 'door', z: 2.7,
       narr: 'Nobody is home, and nothing is watching the door. Adam still hears it and tells you.',
-      from: 'Adam', msg: 'Someone knocked at the front door. Nobody is home.', chips: ['Tell Maya', 'Ignore'], pick: 0, done: 'Telling Maya.' },
+      from: 'Adam', msg: 'Someone rang the doorbell. Nobody is home.', chips: ['Tell Maya', 'Ignore'], pick: 0, done: 'Telling Maya.' },
     { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#ebe8e1', dark: false, at: 'hob', z: 3.0,
       narr: 'Adam’s radio keeps listening for smoke and CO alarms, even when the rest of it is asleep.',
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.9,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there.',
-      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' },
-    { img: 's7', time: '7:30 pm', head: 'Bath time.', bg: '#2e2a26', dark: true, at: 'hallway', z: 2.7,
-      narr: 'Adam works out whose turn it is, and asks them.',
-      from: 'Adam', msg: 'June’s bath is due.', chips: ['Yes', 'Ask Maya'], pick: 0, done: 'Asking Dan to take it.' },
-    { img: 's8', time: '10:30 pm', head: 'Goodnight.', bg: '#131316', dark: true, at: 'bedroom', z: 2.7,
-      narr: 'A quiet house, and tomorrow already in order.',
-      from: 'Adam', msg: 'June and Theo are asleep. Tomorrow: swimming at 4, and Dan has a late meeting.', chips: ['Goodnight'], pick: 0, done: 'Quiet mode on. Lights off.', after: 's8b' }
+      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' }
   ];
   var WIDE = { x: 0.5, y: 0.52, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
@@ -61,15 +52,12 @@
   });
   function setAfter(on) { afters.forEach(function (im, k) { if (im) { im.classList.toggle('on', on && k === shown); imgs[k].classList.toggle('dim', on && k === shown); } }); }
   var tint = document.createElement('i'); tint.className = 'day-tint'; stage.appendChild(tint);
-  var toast = document.createElement('div'); toast.className = 'day-toast'; toast.setAttribute('aria-live', 'polite');
-  toast.innerHTML = '<span class="dt-av"></span><div class="dt-txt"><b></b><span></span></div>'; stage.appendChild(toast);
   function react(t) {
-    toast.classList.remove('show'); tint.classList.remove('red', 'go'); void toast.offsetWidth;
+    tint.classList.remove('red', 'go');
     var red = t && t[2] === 'red';
     stage.querySelectorAll('.day-wave').forEach(function (w) { w.remove(); });
     if (t) for (var n = 0; n < 3; n++) { var w = document.createElement('i'); w.className = 'day-wave' + (red ? ' red' : ''); w.style.animationDelay = n * 280 + 'ms'; stage.appendChild(w); }
     if (red) { tint.classList.add('red'); void tint.offsetWidth; tint.classList.add('go'); }
-    if (t) { toast.querySelector('.dt-av').textContent = t[0].charAt(0); toast.querySelector('b').textContent = t[0] === '999' ? 'Emergency services' : t[0]; toast.querySelector('.dt-txt span').textContent = t[1]; toast.classList.toggle('red', red); setTimeout(function () { toast.classList.add('show'); }, 380); }
   }
   var ring = document.createElement('i'); ring.className = 'day-ring'; ring.setAttribute('aria-hidden', 'true'); stage.appendChild(ring);
   var card = document.createElement('div'); card.className = 'day-card'; card.setAttribute('aria-live', 'polite');
@@ -116,7 +104,7 @@
     var ch = card.querySelector('.dc-chips'); ch.innerHTML = '';
     ch.innerHTML = '';
     card.querySelector('.dc-done').textContent = '';
-    card.classList.remove('show', 'answered'); setAfter(false); toast.classList.remove('show'); tint.classList.remove('go'); stage.querySelectorAll('.day-wave').forEach(function (w) { w.remove(); }); void card.offsetWidth;
+    card.classList.remove('show', 'answered'); setAfter(false); tint.classList.remove('go'); stage.querySelectorAll('.day-wave').forEach(function (w) { w.remove(); }); void card.offsetWidth;
   }
 
   function go(i) { i = Math.max(0, Math.min(NS - 1, i)); scroller.scrollTo({ left: i * geo.W, behavior: 'smooth' }); }
@@ -133,7 +121,7 @@
     show(i);
     stage.classList.toggle('first', i === 0); stage.classList.toggle('last', i === NS - 1);
     if (arrived && !card.classList.contains('show')) { card.classList.add('show'); clearTimeout(timer); var cur = S[i]; timer = setTimeout(function () { card.querySelector('.dc-done').textContent = cur.done; card.classList.add('answered'); setAfter(true); react((TOAST[cur.img] || [])[0] || null); }, 1100); }
-    if (!arrived) { if (card.classList.contains('show')) { toast.classList.remove('show'); tint.classList.remove('go'); } card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
+    if (!arrived) { if (card.classList.contains('show')) { tint.classList.remove('go'); } card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
     ring.classList.toggle('go', arrived);
     stage.classList.toggle('fast', !arrived);
     requestAnimationFrame(frame);
