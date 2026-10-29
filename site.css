@@ -826,4 +826,8 @@ footer a:hover { color: var(--bg); }
 /* the blueprint outline shows on hover only; clicking a part no longer turns the others into blueprints */
 .gstage.focus .lay { opacity: 1; }
 .gstage.focus .lin, .gstage.focus .lin.sel { opacity: 0; }
-.lin.hov, .gstage.focus .lin.hov, .gstage.focus .lin.sel.hov { opacity: 1; }
+/* hovering a part turns every other part into a blueprint, and the hovered one stays solid */
+.gstage.peek .lay, .gstage.focus.peek .lay { opacity: 0; }
+.gstage.peek .lin, .gstage.focus.peek .lin { opacity: 1; }
+.gstage.peek .lay.hovp, .gstage.focus.peek .lay.hovp { opacity: 1; transform: scale(1.04); }
+.gstage.peek .lin.hovp, .gstage.focus.peek .lin.hovp { opacity: 0; }
