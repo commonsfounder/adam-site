@@ -41,13 +41,13 @@
   var cam = document.createElement('div'); cam.className = 'day-cam day-strip'; scroller.appendChild(cam);
   var panels = S.map(function () { var d = document.createElement('div'); d.className = 'day-panel'; cam.appendChild(d); return d; });
   var imgs = S.map(function (s, i) {
-    var im = document.createElement('img'); im.src = 'day/story/' + s.img + '.webp?v=2'; im.className = 'day-img'; im.decoding = 'async';
+    var im = document.createElement('img'); im.src = 'day/story/' + s.img + '.webp?v=3'; im.className = 'day-img'; im.decoding = 'async';
     im.alt = i === 0 ? 'A three-dimensional cutaway of a family home with Adam in it' : ''; if (i) im.setAttribute('aria-hidden', 'true');
     panels[i].appendChild(im); return im;
   });
   var afters = S.map(function (s, i) {
     if (!s.after) return null;
-    var im = document.createElement('img'); im.src = 'day/story/' + s.after + '.webp?v=2'; im.className = 'day-img slow'; im.decoding = 'async'; im.setAttribute('aria-hidden', 'true');
+    var im = document.createElement('img'); im.src = 'day/story/' + s.after + '.webp?v=3'; im.className = 'day-img slow'; im.decoding = 'async'; im.setAttribute('aria-hidden', 'true');
     panels[i].appendChild(im); return im;
   });
   function setAfter(on) { afters.forEach(function (im, k) { if (im) { im.classList.toggle('on', on && k === shown); imgs[k].classList.toggle('dim', on && k === shown); } }); }
