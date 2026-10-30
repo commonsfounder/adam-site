@@ -1059,7 +1059,7 @@ footer a:hover { color: var(--bg); }
 .day-intro p { margin: 0; font-size: clamp(18px, 1.8vw, 22px); color: rgba(244, 242, 237, 0.7); }
 .day-stage::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; box-shadow: inset 0 0 160px 60px var(--dbg); transition: box-shadow 700ms var(--ease); }
 .day-narr { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.4; max-width: 620px; }
-.day-ticks { grid-template-columns: repeat(8, 1fr); }
+.day-ticks { grid-template-columns: repeat(5, 1fr); }
 #why .vows { display: grid; gap: 0 40px; margin-bottom: 28px; }
 @media (min-width: 800px) { #why .vows { grid-template-columns: 1fr 1fr; } }
 #why .vows li { font-size: clamp(22px, 2.4vw, 32px); }

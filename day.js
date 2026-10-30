@@ -17,8 +17,7 @@
     s1: [['Maya', 'June is crying in the nursery.'], ['Dan', 'June is crying in the nursery.']], s2: [['Theo', 'PE today. Your kit is by the dryer.']],
     s3: [['Gran', 'Gran, have you taken your morning tablets?'], ['Maya', 'Gran has not taken her morning tablets.']],
     s4: [['Maya', 'Your parcel is in the porch.'], null], s5: [['Maya', 'The smoke alarm is sounding in the kitchen.'], ['Dan', 'The smoke alarm is sounding in the kitchen.']],
-    s6: [['999', 'Fall at home. Gran is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null],
-    dinner: [null], film: [null], call: [['Dan', 'Goodnight, all of you.']]
+    s6: [['999', 'Fall at home. Gran is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
   };
   var S = [
     { img: 's1', time: '3:12 am', head: 'June is crying.', bg: '#131316', dark: true, at: 'cot', z: 2.2,
@@ -35,16 +34,7 @@
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.2,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there.',
-      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' },
-    { img: '../evening', key: 'dinner', time: '6:30 pm', head: 'Dinner.', bg: '#2a2420', dark: true, at: 'kitchen', z: 2.2,
-      narr: 'Adam puts the family playlist on in the kitchen, quiet enough to talk over.',
-      from: 'Adam', msg: 'Playing your dinner playlist in the kitchen.', chips: ['A bit louder', 'Something else'], pick: 0, done: 'Turned it up a little.' },
-    { img: '../evening', key: 'film', time: '7:45 pm', head: 'Film night.', bg: '#1d1a22', dark: true, at: 'fall', z: 2.2,
-      narr: 'Ask for a film and Adam finds it, puts it on the TV and dims the lights.',
-      from: 'Adam', msg: 'Starting the film on the TV. Lights down.', chips: ['Start it', 'Not yet'], pick: 0, done: 'Enjoy the film.' },
-    { img: '../night', key: 'call', time: '8:30 pm', head: 'Dan calls home.', bg: '#141418', dark: true, at: 'bedroom', z: 2.2,
-      narr: 'Dan is away for work. Adam puts him on the speaker so the kids can say goodnight.',
-      from: 'Adam', msg: 'Dan is calling. Put him through to the kids?', chips: ['Put him through', 'Later'], pick: 0, done: 'Dan is on the speaker.' }
+      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' }
   ];
   var WIDE = { x: 0.5, y: 0.52, z: 1.0 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
