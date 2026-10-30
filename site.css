@@ -1220,3 +1220,4 @@ footer a:hover { color: var(--bg); }
 .hero-h .for-fl svg { position: static; width: 0.36em; height: 0.36em; margin: 0; }
 @media (max-width: 600px) { .hero-h .for-word { display: block; } }
 .hero-h .for-word { display: block; white-space: nowrap; }
+@media (min-width: 1000px) { .head .hero-h { font-size: clamp(40px, 4.3vw, 64px); } }
