@@ -51,8 +51,8 @@
   }
   function onScroll() {
     if (reduce) return;
-    var r = track.getBoundingClientRect(), ih = window.innerHeight;
-    prog = Math.max(0, Math.min(1, (ih - r.top) / (ih * 0.55 + r.height * 0.5)));
+    var r = track.getBoundingClientRect(), tot = r.height - window.innerHeight;
+    prog = Math.max(0, Math.min(1, -r.top / tot));
     words.forEach(function (w) { w.classList.toggle('on', prog >= at(w)); });
   }
   if (reduce) { words.forEach(function (w) { w.classList.add('on'); }); }

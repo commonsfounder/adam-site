@@ -1160,7 +1160,8 @@ footer a:hover { color: var(--bg); }
 .hero-bar .seg { display: inline-flex; visibility: hidden; }
 .product-hero.open .hero-bar .seg { visibility: visible; }
 @media (max-width: 600px) { .for-word { display: table; margin: 0.12em auto 0; } }
-.wk-sticky { padding: clamp(56px, 8vw, 104px) 16px; text-align: center; overflow: hidden; }
+.wk-track { height: 320vh; }
+.wk-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; place-content: center; padding: 0 16px; text-align: center; overflow: hidden; }
 .wk-ln { margin: 0; font-size: clamp(24px, 3.6vw, 50px); line-height: 1.1; letter-spacing: -0.04em; font-weight: 500; }
 .wk-w { color: #c9c4ba; transition: color 300ms var(--ease); }
 .wk-w.on { color: var(--ink); }
@@ -1170,3 +1171,4 @@ footer a:hover { color: var(--bg); }
 .wk-path path { fill: none; stroke: #d9d4ca; stroke-width: 1.5; stroke-dasharray: 2 6; stroke-linecap: round; }
 .wk-lg { position: absolute; left: 50%; top: 50%; z-index: 1; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); border-radius: 23%; overflow: hidden; background: #fff; box-shadow: 0 2px 8px rgba(32, 30, 27, 0.14); opacity: 0; will-change: transform, opacity; }
 .wk-lg img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) { .wk-track { height: auto; } .wk-sticky { position: static; height: auto; padding: 96px 16px; } }
