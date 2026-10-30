@@ -1182,3 +1182,5 @@ footer a:hover { color: var(--bg); }
   .wk-ln { font-size: clamp(24px, 7vw, 30px); line-height: 4; }
   .wk-loop { margin: 0; padding: 0; }
 }
+.wk-ln, .wk-ln:is(*) { font-size: clamp(26px, 4.2vw, 54px); line-height: 3.4; white-space: normal; }
+.wk-loop { margin: 0; padding: 0; }

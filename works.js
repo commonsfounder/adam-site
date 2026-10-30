@@ -13,7 +13,7 @@
   var prog = reduce ? 1 : 0, running = false;
   function at(el) { return 0.04 + 0.66 * words.indexOf(el) / (words.length - 1); }
   var loops = Array.prototype.slice.call(root.querySelectorAll('.wk-loop')).map(function (el) {
-    var fs = parseFloat(getComputedStyle(el).fontSize) || 32, size = window.innerWidth < 700 ? 20 : Math.round(Math.max(16, fs * 0.5));
+    var fs = parseFloat(getComputedStyle(el).fontSize) || 32, size = Math.round(Math.max(18, Math.min(28, fs * 0.5)));
     var sv = document.createElementNS(NS, 'svg'); sv.setAttribute('class', 'wk-path'); sv.setAttribute('aria-hidden', 'true');
     var pa = document.createElementNS(NS, 'path'); sv.appendChild(pa); el.insertBefore(sv, el.firstChild);
     var items = SETS[el.dataset.set].map(function (x) {
@@ -28,7 +28,7 @@
       var w = L.el.querySelector('b').offsetWidth, h = (parseFloat(getComputedStyle(L.el).fontSize) || 30) * 1.1;
       if (L.w !== w || L.vw !== window.innerWidth) {
         L.w = w; L.vw = window.innerWidth;
-        var sz = parseFloat(L.items[0].style.getPropertyValue('--s')) || 20, rx = Math.max(w / 2 + 2, sz * 2.4), ry = h * 1.3;
+        var sz = parseFloat(L.items[0].style.getPropertyValue('--s')) || 20, rx = Math.max(w / 2 + 6, sz * 2.4), ry = h * 1.0;
         var P = [], len = [0], d = '', on = false;
         for (var k = 0; k <= 400; k++) {
           var t = k / 400 * Math.PI * 2, c = Math.cos(t), q = [rx * c, ry * Math.sin(t), Math.sin(t), Math.max(0, Math.min(1, (0.93 - Math.abs(c)) / 0.18))]; P.push(q);
