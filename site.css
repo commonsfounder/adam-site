@@ -1214,3 +1214,4 @@ footer a:hover { color: var(--bg); }
 .what-fin { margin-top: clamp(32px, 5vw, 56px); }
 .what-fin .fam-sentence { text-align: left; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.5; letter-spacing: -0.04em; font-weight: 500; max-width: none; margin: 0; }
 @media (min-width: 1000px) { #make > .wrap .hero-bar { justify-content: flex-start; } }
+.head .hero-h { font-size: clamp(40px, 5vw, 72px); line-height: 1.02; letter-spacing: -0.05em; }
