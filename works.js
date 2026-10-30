@@ -43,8 +43,8 @@
         var target = (((reduce ? 0 : now / 40000) + i / n) % 1) * T, lo = 0, hi = L.len.length - 1;
         while (hi - lo > 1) { var m = (lo + hi) >> 1; if (L.len[m] < target) lo = m; else hi = m; }
         var q = L.P[lo], z = (q[2] + 1) / 2, s = 0.25 + 0.75 * g;
-        it.style.transform = 'translate(' + (q[0] * s).toFixed(1) + 'px,' + (q[1] * s).toFixed(1) + 'px) scale(' + ((0.72 + 0.28 * z) * (0.4 + 0.6 * g)).toFixed(3) + ')';
-        it.style.opacity = ((0.5 + 0.5 * z) * q[3] * R).toFixed(3);
+        it.style.transform = 'translate(' + (q[0] * s).toFixed(1) + 'px,' + (q[1] * s).toFixed(1) + 'px) scale(' + ((0.86 + 0.14 * z) * (0.4 + 0.6 * g)).toFixed(3) + ')';
+        it.style.opacity = ((0.92 + 0.08 * z) * q[3] * R).toFixed(3);
         it.style.zIndex = q[2] > 0 ? '3' : '1';
       });
     });
