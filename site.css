@@ -1179,6 +1179,6 @@ footer a:hover { color: var(--bg); }
 }
 .wk-br { display: none; }
 @media (max-width: 699px) {
-  .wk-ln { font-size: clamp(24px, 7vw, 30px); line-height: 3.2; }
+  .wk-ln { font-size: clamp(24px, 7vw, 30px); line-height: 4; }
   .wk-loop { margin: 0; padding: 0; }
 }
