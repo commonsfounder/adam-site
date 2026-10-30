@@ -29,7 +29,7 @@
       var w = L.el.querySelector('b').offsetWidth, h = L.el.offsetHeight, gap = w / 2 + 4;
       if (L.w !== w || L.vw !== window.innerWidth) {
         L.w = w; L.vw = window.innerWidth;
-        var lobe = Math.max(64, Math.min(h * 5.5, (window.innerWidth - w) / 2 - 34)), A = gap + lobe, K = Math.min(1.5, (h * 0.8) / (0.354 * A));
+        var A = Math.max(gap + 64, Math.min(h * 7.5, window.innerWidth / 2 - 34)), K = Math.min(1.5, (h * 0.8) / (0.354 * A));
         var P = [], len = [0], d = '', on = false;
         for (var k = 0; k <= 600; k++) {
           var q = pos(k / 600 * Math.PI * 2, A, K); P.push(q);
