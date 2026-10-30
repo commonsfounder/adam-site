@@ -57,7 +57,7 @@
     tint.classList.remove('red', 'go');
     var red = t && t[2] === 'red';
     stage.querySelectorAll('.day-wave').forEach(function (w) { w.remove(); });
-    if (t) for (var n = 0; n < 3; n++) { var w = document.createElement('i'); w.className = 'day-wave' + (red ? ' red' : ''); w.style.animationDelay = n * 280 + 'ms'; stage.appendChild(w); }
+    if (t) for (var n = 0; n < 3; n++) { var w = document.createElement('i'); w.className = 'day-wave' + (red ? ' red' : ''); w.style.animationDelay = n * 280 + 'ms'; var sp = geo['spot' + shown]; if (sp) { w.style.left = sp[0] + 'px'; w.style.top = sp[1] + 'px'; } stage.appendChild(w); }
     if (red) { tint.classList.add('red'); void tint.offsetWidth; tint.classList.add('go'); }
   }
   var ring = document.createElement('i'); ring.className = 'day-ring'; ring.setAttribute('aria-hidden', 'true'); stage.appendChild(ring);
