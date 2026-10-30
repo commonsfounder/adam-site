@@ -2,6 +2,7 @@
   var root = document.getElementById('works');
   if (!root) return;
   var SETS = {
+    p: [['Gmail', 'gmail'], ['Google Calendar', 'gcal'], ['Apple Calendar', 'applecal'], ['Apple Health', 'health'], ['WHOOP', 'whoop'], ['Oura', 'oura'], ['Spotify', 'spotify'], ['WhatsApp', 'whatsapp'], ['Outlook', 'outlook'], ['Strava', 'strava']],
     a: [['Claude Duet', 'duet'], ['ChatGPT Dots', 'chatgpt'], ['Grok Bot', 'grokbot'], ['Muse', 'muse'], ['Gemini', 'gemini'], ['Instinct', 'instinct'], ['Poke', 'poke'], ['Pally', 'pally'], ['Town', 'town'], ['Wabi', 'wabi']],
     h: [['Philips Hue', 'hue'], ['Sonos', 'sonos'], ['Ring', 'ring'], ['Google Home', 'googlehome'], ['Alexa', 'alexa'], ['Apple Home', 'applehome'], ['Dyson', 'dyson'], ['Nest', 'nest'], ['IKEA', 'ikea'], ['Hive', 'hive']]
   };
