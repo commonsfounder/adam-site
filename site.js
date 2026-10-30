@@ -105,3 +105,8 @@
       .catch(function () { btn.disabled = false; msg.className = 'signup-msg err'; msg.textContent = 'Something went wrong. Please email us instead.'; });
   });
 })();
+
+(function () {
+  var b = document.getElementById('lookInside'), open = document.getElementById('explodeBtn');
+  if (b && open) b.addEventListener('click', function () { open.click(); });
+})();

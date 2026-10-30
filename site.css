@@ -995,8 +995,8 @@ footer a:hover { color: var(--bg); }
 
 #make.card-sec { padding-top: var(--sp-500, 48px); }
 #make .sol-lead h1 { font-size: clamp(40px, 5.4vw, 72px); line-height: 1.02; letter-spacing: -0.04em; margin: 0 0 var(--sp-300, 24px); }
-#family .fam-track { height: 280vh; }
-@media (max-width: 767px) { #family .fam-track { height: 250vh; } }
+#family .fam-track { height: 170vh; }
+@media (max-width: 767px) { #family .fam-track { height: 160vh; } }
 #family .fam-sentence .big { display: block; }
 #family .fam-sentence .big .w { font-size: 1.5em; letter-spacing: -0.045em; }
 
@@ -1018,3 +1018,19 @@ footer a:hover { color: var(--bg); }
 .try-band p { margin: 0 0 20px; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.15; letter-spacing: -0.03em; font-weight: 500; }
 .toplayer .glyph:focus { outline: none; }
 .toplayer .glyph:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.8); outline-offset: 4px; border-radius: 50%; }
+
+#family .fam-sentence .w { color: #8f8a81; }
+#family .fam-sentence .w.show { color: var(--ink); }
+.look-inside { font: inherit; font-size: 15px; line-height: 22px; padding: 8px 16px; border-radius: 9999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; transition: border-color 200ms var(--ease), background-color 200ms var(--ease); }
+.look-inside:hover { border-color: var(--ink); }
+.product-hero.open .look-inside { display: none; }
+.assist-low { margin: 0 0 var(--sp-700, 72px); }
+@media (min-width: 1000px) {
+  #make > .wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px; align-items: center; min-height: calc(100svh - 120px); padding-top: 0; padding-bottom: 0; }
+  #make > .wrap > .sol-lead { margin: 0; }
+  #make > .wrap > .product-wrap { min-width: 0; }
+  #make > .wrap .product-hero { border-top: 0; padding-top: 0; }
+  #make > .wrap:has(.product-hero.open) { display: block; min-height: 0; }
+  #make > .wrap:has(.product-hero.open) > .sol-lead { margin-bottom: var(--sp-400, 40px); }
+}
+@media (min-width: 1000px) { #make.card-sec { padding-top: 0; padding-bottom: 0; } #make > .wrap .hero-view { max-width: none; } #make > .wrap .hero-bar { justify-content: flex-end; } }

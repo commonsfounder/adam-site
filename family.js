@@ -77,7 +77,7 @@
     words.forEach(function (w, i) {
       if (keyEls.indexOf(w) >= 0) return;
       var o = Math.min(1, Math.max(0, (p - (T[i] - FADE)) / FADE));
-      w.style.color = o >= 1 ? '' : o <= 0 ? '' : 'color-mix(in srgb, var(--ink) ' + (o * 100).toFixed(0) + '%, #b7b3aa)';
+      w.style.color = o >= 1 ? '' : o <= 0 ? '' : 'color-mix(in srgb, var(--ink) ' + (o * 100).toFixed(0) + '%, #8f8a81)';
       w.classList.toggle('show', o >= 1);
     });
     keyEls.forEach(function (el) { if (el) el.classList.toggle('lit', p >= T[words.indexOf(el)]); });
