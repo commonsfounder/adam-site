@@ -74,8 +74,11 @@
       var f = foc(i), els = [imgs[i], afters[i]];
       els.forEach(function (im) {
         if (!im) return;
-        im.style.width = geo.iw * f.z + 'px'; im.style.height = geo.ih * f.z + 'px';
-        im.style.left = (geo.W / 2 - f.z * f.x * geo.iw) + 'px'; im.style.top = (geo.H / 2 - f.z * f.y * geo.ih) + 'px';
+        var w = geo.iw * f.z, h = geo.ih * f.z;
+        var l = Math.min(0, Math.max(geo.W - w, geo.W / 2 - f.z * f.x * geo.iw)), t = Math.min(0, Math.max(geo.H - h, geo.H / 2 - f.z * f.y * geo.ih));
+        im.style.width = w + 'px'; im.style.height = h + 'px';
+        im.style.left = l + 'px'; im.style.top = t + 'px';
+        if (im === imgs[i]) geo['spot' + i] = [l + f.z * f.x * geo.iw, t + f.z * f.y * geo.ih];
         im.style.transformOrigin = (f.x * 100) + '% ' + (f.y * 100) + '%';
       });
     });
@@ -123,6 +126,7 @@
     stage.classList.toggle('first', i === 0); stage.classList.toggle('last', i === NS - 1);
     if (arrived && !card.classList.contains('show')) { card.classList.add('show'); clearTimeout(timer); var cur = S[i]; timer = setTimeout(function () { card.querySelector('.dc-done').textContent = cur.done; card.classList.add('answered'); setAfter(true); react((TOAST[cur.key || cur.img] || [])[0] || null); }, 1100); }
     if (!arrived) { if (card.classList.contains('show')) { tint.classList.remove('go'); } card.classList.remove('show', 'answered'); clearTimeout(timer); setAfter(false); }
+    var sp = geo['spot' + i]; if (sp) { ring.style.left = sp[0] + 'px'; ring.style.top = sp[1] + 'px'; }
     ring.classList.toggle('go', arrived);
     stage.classList.toggle('fast', !arrived);
     requestAnimationFrame(frame);
