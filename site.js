@@ -107,6 +107,17 @@
 })();
 
 (function () {
-  var b = document.getElementById('lookInside'), open = document.getElementById('explodeBtn');
-  if (b && open) b.addEventListener('click', function () { open.click(); });
+  var peek = document.getElementById('peek'), open = document.getElementById('explodeBtn');
+  if (peek && open && 'IntersectionObserver' in window) {
+    var shown = false, t1, t2;
+    function hide() { peek.classList.remove('show'); clearTimeout(t1); clearTimeout(t2); }
+    var io = new IntersectionObserver(function (es) {
+      if (shown || !es[0].isIntersecting) return;
+      shown = true; io.disconnect();
+      t1 = setTimeout(function () { peek.classList.add('show'); }, 900);
+      t2 = setTimeout(hide, 5200);
+    }, { threshold: 0.35 });
+    io.observe(open);
+    open.addEventListener('click', hide);
+  }
 })();

@@ -71,11 +71,13 @@
     keyEls.forEach(function (el, i) { if (el) rings[i].classList.toggle('on', el.classList.contains('lit')); });
   }
   var beats = Array.prototype.slice.call(para.querySelectorAll('.beat'));
+  var first = beats.length ? Array.prototype.slice.call(beats[0].querySelectorAll('.w')) : [];
   var T = words.map(function (w, i) { return 0.04 + 0.9 * (i / Math.max(1, words.length - 1)); });
   var FADE = 0.035;
   function render(p) {
     words.forEach(function (w, i) {
       if (keyEls.indexOf(w) >= 0) return;
+      if (first.indexOf(w) >= 0) { w.style.color = ''; w.classList.add('show'); return; }
       var o = Math.min(1, Math.max(0, (p - (T[i] - FADE)) / FADE));
       w.style.color = o >= 1 ? '' : o <= 0 ? '' : 'color-mix(in srgb, var(--ink) ' + (o * 100).toFixed(0) + '%, #8f8a81)';
       w.classList.toggle('show', o >= 1);
