@@ -33,7 +33,7 @@
       narr: 'Adam always listens for smoke and CO alarms, day and night.',
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.2,
-      narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there.',
+      narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there on time.',
       from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' }
   ];
   var WIDE = { x: 0.5, y: 0.52, z: 1.0 };

@@ -1032,11 +1032,11 @@ footer a:hover { color: var(--bg); }
 }
 @media (min-width: 1000px) { #make.card-sec { padding-top: 0; padding-bottom: 0; } #make > .wrap .hero-view { max-width: none; } #make > .wrap .hero-bar { justify-content: flex-end; } }
 
-.peek { position: absolute; left: 34%; top: 14%; z-index: 3; margin: 0; padding: 8px 12px; border-radius: 8px; background: var(--ink); color: var(--bg); font-size: 14px; line-height: 20px; pointer-events: none; opacity: 0; transform: translate(-50%, 6px); transition: opacity 400ms var(--ease), transform 400ms var(--ease); white-space: nowrap; }
-.peek::after { content: ""; position: absolute; left: 50%; top: 100%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--ink); }
-.peek.show { opacity: 1; transform: translate(-50%, 0); }
-.product-hero.open .peek { display: none; }
-@media (prefers-reduced-motion: reduce) { .peek { transition: none; } }
+.taphint { position: absolute; left: 34%; top: 14%; z-index: 3; margin: 0; padding: 8px 12px; border-radius: 8px; background: var(--ink); color: var(--bg); font-size: 14px; line-height: 20px; pointer-events: none; opacity: 0; transform: translate(-50%, 6px); transition: opacity 400ms var(--ease), transform 400ms var(--ease); white-space: nowrap; }
+.taphint::after { content: ""; position: absolute; left: 50%; top: 100%; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--ink); }
+.taphint.show { opacity: 1; transform: translate(-50%, 0); }
+.product-hero.open .taphint { display: none; }
+@media (prefers-reduced-motion: reduce) { .taphint { transition: none; } }
 
 #family.problem { padding: var(--sp-900, 120px) 0 var(--sp-700, 72px); }
 #family.problem .fam-track { height: 190vh !important; margin-top: 0; }
@@ -1104,17 +1104,17 @@ footer a:hover { color: var(--bg); }
 @media (max-width: 767px) { #family.problem .fam-track { height: 380vh !important; } }
 #family.problem .fam-sentence { font-size: clamp(28px, 3.8vw, 54px); max-width: 1000px; }
 .sol-h { margin: 0 0 var(--sp-300, 24px); font-size: clamp(34px, 3.8vw, 56px); line-height: 1.04; letter-spacing: -0.04em; font-weight: 500; }
-.peek { display: flex; align-items: center; gap: 8px; padding: 10px 16px 10px 12px; border-radius: 9999px; font-size: 15px; font-weight: 500; box-shadow: 0 10px 30px rgba(32, 30, 27, 0.25); top: 8%; }
-.peek svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: peekTap 1.4s ease-in-out infinite; }
+.taphint { display: flex; align-items: center; gap: 8px; padding: 10px 16px 10px 12px; border-radius: 9999px; font-size: 15px; font-weight: 500; box-shadow: 0 10px 30px rgba(32, 30, 27, 0.25); top: 8%; }
+.taphint svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: peekTap 1.4s ease-in-out infinite; }
 @keyframes peekTap { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px) scale(0.92); } }
-.peek::after { display: none; }
+.taphint::after { display: none; }
 .peek-ring { position: absolute; left: 34%; top: 46%; width: 0; height: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 400ms var(--ease); }
 .peek-ring.show { opacity: 1; }
 .peek-ring i { position: absolute; left: -36px; top: -36px; width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--acc); animation: peekPulse 1.8s ease-out infinite; }
 .peek-ring i + i { animation-delay: 0.9s; }
 @keyframes peekPulse { 0% { transform: scale(0.4); opacity: 0.9; } 100% { transform: scale(1.6); opacity: 0; } }
 .product-hero.open .peek-ring { display: none; }
-@media (prefers-reduced-motion: reduce) { .peek-ring i, .peek svg { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .peek-ring i, .taphint svg { animation: none; } }
 .product-hero.open .hero-assembled { opacity: 1; visibility: visible; }
 .product-hero.open:has(.gstage.ready) .hero-assembled { opacity: 0; visibility: hidden; }
 .product-hero.open .gstage:not(.ready) { opacity: 0; }
@@ -1135,3 +1135,26 @@ footer a:hover { color: var(--bg); }
 #faq .acc-p { grid-template-rows: 1fr !important; opacity: 1 !important; }
 #faq .acc-p p { margin: 8px 0 0; font-size: 16px; line-height: 25px; color: var(--mut); }
 .signup { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
+
+.opener { position: fixed; inset: 0; z-index: 200; min-height: 0; background: var(--bg); animation: opOut 600ms 4.35s var(--ease) forwards; }
+.op-d2 { will-change: transform; animation: opDrop 700ms 2.8s cubic-bezier(0.5, 0, 0.75, 0) forwards, opBurst 800ms 3.5s cubic-bezier(0.7, 0, 0.84, 0) forwards; }
+@keyframes opDrop { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 1; transform: translateY(1.4em); } }
+@keyframes opBurst { 0% { opacity: 1; transform: translateY(1.4em) scale(1); } 100% { opacity: 1; transform: translateY(1.4em) scale(420); } }
+@keyframes opOut { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+.opskip .opener { animation: opOut 300ms var(--ease) forwards; }
+.opdone .opener { display: none; }
+.js:not(.opgo) .opener { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .opener { display: none; } }
+#family .fam-sentence, #family.problem .fam-sentence { display: block; font-size: clamp(24px, 3.1vw, 44px); line-height: 1.3; }
+#family .fam-sentence .beat { display: inline; opacity: 1; margin: 0; transition: none; }
+@media (max-width: 767px) { #family .fam-sentence, #family.problem .fam-sentence { font-size: clamp(21px, 5.6vw, 27px); } }
+.for-word { position: relative; display: inline-block; padding: 0 0.12em; }
+.for-fl svg { position: absolute; width: 0.4em; height: 0.4em; fill: none; stroke: var(--fc); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.3) rotate(var(--r)); animation: flPop 520ms var(--d) cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.for-fl .f0 { left: -0.32em; top: -0.3em; --r: -14deg; }
+.for-fl .f1 { right: -0.28em; top: -0.42em; --r: 12deg; }
+.for-fl .f2 { right: -0.46em; bottom: -0.18em; --r: -8deg; }
+.for-fl .f3 { left: 18%; bottom: -0.5em; --r: 10deg; width: 0.32em; height: 0.32em; }
+@keyframes flPop { to { opacity: 1; transform: scale(1) rotate(var(--r)); } }
+@media (prefers-reduced-motion: reduce) { .for-fl svg { animation: none; opacity: 1; transform: rotate(var(--r)); } }
+.hero-bar .seg { display: inline-flex; visibility: hidden; }
+.product-hero.open .hero-bar .seg { visibility: visible; }

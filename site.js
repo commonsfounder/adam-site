@@ -126,16 +126,43 @@
   var box = document.getElementById('forWord');
   if (!box) return;
   var L = [
-    ['parents.', 'hand-heart', '#d4501f'], ['grandparents.', 'phone', '#b83a66'], ['students.', 'lightbulb', '#c98a00'],
-    ['developers.', 'hash', '#3f6fd8'], ['you.', 'smile', '#2f8f5b']
+    ['new parents.', '#d4501f', ['baby', 'milk', 'bed-double', 'heart']],
+    ['grandparents.', '#b83a66', ['phone', 'hand-heart', 'coffee', 'heart-pulse']],
+    ['busy families.', '#c98a00', ['calendar', 'shopping-basket', 'utensils', 'house']],
+    ['flatmates.', '#3f6fd8', ['key-round', 'sofa', 'music-2', 'users']],
+    ['pet owners.', '#a0522d', ['paw-print', 'dog', 'cat', 'bone']],
+    ['carers.', '#2f8f5b', ['stethoscope', 'pill', 'hand-heart', 'phone']],
+    ['students.', '#7a4fd0', ['graduation-cap', 'book-open', 'backpack', 'lightbulb']],
+    ['night owls.', '#2b4a8a', ['moon', 'headphones', 'coffee', 'star']],
+    ['developers.', '#0f7c86', ['code', 'terminal', 'braces', 'cpu']],
+    ['you.', '#d4501f', ['smile', 'heart', 'party-popper', 'star']]
   ];
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var i = 0, use = box.querySelector('use'), word = box.querySelector('b');
-  function set(k) { var x = L[k]; word.textContent = x[0]; use.setAttribute('href', 'family/icons.svg#i-' + x[1]); box.style.setProperty('--fc', x[2]); }
+  var i = 0, word = box.querySelector('b'), fl = box.querySelector('.for-fl'), NS = 'http://www.w3.org/2000/svg';
+  function set(k) {
+    var x = L[k]; word.textContent = x[0]; box.style.setProperty('--fc', x[1]);
+    fl.innerHTML = '';
+    x[2].forEach(function (n, j) {
+      var v = document.createElementNS(NS, 'svg'); v.setAttribute('viewBox', '0 0 24 24'); v.setAttribute('class', 'f' + j);
+      v.style.setProperty('--d', (80 + j * 90) + 'ms');
+      var u = document.createElementNS(NS, 'use'); u.setAttribute('href', 'family/icons.svg?v=2#i-' + n);
+      v.appendChild(u); fl.appendChild(v);
+    });
+  }
   set(0);
   if (reduce) return;
   setInterval(function () {
     box.classList.add('out');
     setTimeout(function () { i = (i + 1) % L.length; set(i); box.classList.remove('out'); }, 320);
-  }, 2400);
+  }, 2600);
+})();
+
+(function () {
+  var op = document.getElementById('opener'), root = document.documentElement;
+  if (!op || root.classList.contains('opdone')) return;
+  function done() { try { sessionStorage.setItem('op', '1'); } catch (e) {} }
+  function skip() { root.classList.add('opskip'); done(); off(); }
+  function off() { ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { window.removeEventListener(e, skip); }); }
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { window.addEventListener(e, skip, { passive: true }); });
+  op.addEventListener('animationend', function (e) { if (e.target === op) { done(); off(); } });
 })();

@@ -35,7 +35,7 @@
     s.style.setProperty('--rot', ((rnd(seed + 7) - 0.5) * 30).toFixed(1) + 'deg');
     s.style.setProperty('--sz', (0.86 + rnd(seed + 13) * 0.3).toFixed(2));
     var v = document.createElementNS(NS, 'svg'); v.setAttribute('viewBox', '0 0 24 24');
-    var u = document.createElementNS(NS, 'use'); u.setAttribute('href', 'family/icons.svg#i-' + name);
+    var u = document.createElementNS(NS, 'use'); u.setAttribute('href', 'family/icons.svg?v=2#i-' + name);
     v.appendChild(u); s.appendChild(v); return s;
   }
   var rings = keyEls.map(function (el, i) {
