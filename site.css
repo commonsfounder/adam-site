@@ -1196,3 +1196,20 @@ footer a:hover { color: var(--bg); }
 .does li { font-size: 18px; line-height: 27px; color: var(--mut); }
 .does b { display: block; color: var(--ink); font-weight: 600; }
 @media (max-width: 999px) { #make > .wrap { display: flex; flex-direction: column; } #make > .wrap > .product-wrap { order: -1; } #make.card-sec { padding-top: 0; } #family.problem .fam-sticky { padding-bottom: 8px; } }
+#make .sol-lead { text-align: left; }
+.hero-h { margin: 0 0 var(--sp-300); font-size: clamp(40px, 6.4vw, 84px); line-height: 1.02; letter-spacing: -0.05em; font-weight: 500; }
+.hero-h .for-word { display: inline-block; padding: 0; margin: 0; }
+@media (max-width: 600px) { .hero-h .for-word { display: block; margin: 0; } }
+#make .sol-lead .sub { max-width: 34em; margin-bottom: var(--sp-300); font-size: 18px; line-height: 27px; color: var(--mut); }
+@media (max-width: 999px) { #make > .wrap > .product-wrap { order: 0; margin-top: var(--sp-400); } #make.card-sec { padding-top: var(--sp-500); } }
+.what { padding: var(--sp-500) 0 var(--sp-800); }
+.what-card { background: #ece5da; border-radius: 28px; padding: clamp(28px, 5vw, 64px); }
+.what-l { margin: 0; font-size: clamp(30px, 4.6vw, 60px); line-height: 1.1; letter-spacing: -0.045em; font-weight: 500; }
+.what-l em { font-style: normal; color: var(--acc); }
+.what-like { margin: clamp(28px, 4vw, 48px) 0 var(--sp-200); color: var(--mut); font-size: 18px; }
+.tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 800px) { .tiles { grid-template-columns: repeat(4, 1fr); } }
+.tiles li { display: flex; flex-direction: column; gap: 22px; padding: 18px; min-height: 112px; background: var(--card); border-radius: 18px; font-size: 16px; line-height: 22px; font-weight: 500; }
+.tiles svg { width: 24px; height: 24px; fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.what-fin { margin-top: clamp(32px, 5vw, 56px); }
+.what-fin .fam-sentence { text-align: left; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.5; letter-spacing: -0.04em; font-weight: 500; max-width: none; margin: 0; }
