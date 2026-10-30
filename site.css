@@ -1082,3 +1082,10 @@ footer a:hover { color: var(--bg); }
 .closing .fine { color: rgba(244, 242, 237, 0.82); }
 .closing .fine a { color: var(--bg); }
 .signup button, .try-band .btn:hover { background: var(--accd); }
+
+.day-top { align-items: flex-end; padding-top: 22px; }
+.day-kicker { margin: 0 0 8px; font-size: 15px; line-height: 20px; opacity: 0.7; text-shadow: 0 1px 14px var(--dbg); }
+@media (max-width: 600px) {
+  .gstage .ptag, .gstage .ptag:has(.ptagb) { white-space: normal; max-width: 27vw; }
+  .ptagb { white-space: normal; max-width: 27vw; padding: 3px 6px; font-size: 10.5px; line-height: 13px; }
+}
