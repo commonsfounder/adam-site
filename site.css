@@ -1039,7 +1039,9 @@ footer a:hover { color: var(--bg); }
 @media (prefers-reduced-motion: reduce) { .peek { transition: none; } }
 
 #family.problem { padding: var(--sp-900, 120px) 0 var(--sp-700, 72px); }
-#family.problem .fam-track { height: auto !important; margin-top: var(--sp-700, 72px); }
+#family.problem .fam-track { height: 190vh !important; margin-top: 0; }
+@media (max-width: 767px) { #family.problem .fam-track { height: 170vh !important; } }
+#family.problem { padding-bottom: 0; }
 #family.problem .fam-sentence { text-align: left; font-size: clamp(28px, 3.4vw, 48px); max-width: 1000px; }
 .pb-grid { display: grid; gap: 20px; }
 .pb-grid h2 { margin: 0; font-size: clamp(40px, 5.6vw, 80px); line-height: 1; letter-spacing: -0.045em; max-width: 14ch; }
@@ -1089,3 +1091,4 @@ footer a:hover { color: var(--bg); }
   .gstage .ptag, .gstage .ptag:has(.ptagb) { white-space: normal; max-width: 27vw; }
   .ptagb { white-space: normal; max-width: 27vw; padding: 3px 6px; font-size: 10.5px; line-height: 13px; }
 }
+#family.problem .fam-sentence { text-align: center; margin: 0 auto; }
