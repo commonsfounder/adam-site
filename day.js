@@ -8,14 +8,14 @@
   };
   var OUTS = {
     s1: ['Maya is up. Dan sleeps on.', 'Dan is up. Maya sleeps on.'], s2: ['Theo has it.'], s3: ['Gran has been reminded.', 'Maya has been told.'],
-    s4: ['Maya has been told.', 'Okay. Adam will keep listening.'], s5: ['Calling Maya now.', 'Calling Dan now.'],
+    s4: ['Adam will tell Maya when she gets in.', 'Okay.'], s5: ['Calling Maya now.', 'Calling Dan now.'],
     s6: ['Calling 999. Maya and Dan have been told.', 'Okay. Maya and Dan have been told.'], s7: ['Dan has bath time.', 'Maya has been asked.'], s8: ['Quiet mode on. Lights off.']
   };
   // what lands on someone's phone when a reply is tapped: [name, text, tone]
   var TOAST = {
     s1: [['Maya', 'June is crying in the nursery.'], ['Dan', 'June is crying in the nursery.']], s2: [['Theo', 'PE today. Your kit is by the dryer.']],
     s3: [['Gran', 'Gran, have you taken your morning tablets?'], ['Maya', 'Gran has not taken her morning tablets.']],
-    s4: [['Maya', 'Someone rang the doorbell. Nobody is home.'], null], s5: [['Maya', 'The smoke alarm is sounding in the kitchen.'], ['Dan', 'The smoke alarm is sounding in the kitchen.']],
+    s4: [['Maya', 'Your parcel is in the porch.'], null], s5: [['Maya', 'The smoke alarm is sounding in the kitchen.'], ['Dan', 'The smoke alarm is sounding in the kitchen.']],
     s6: [['999', 'Fall at home. Gran is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
   };
   var S = [
@@ -25,9 +25,9 @@
     { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#e3d9cc', dark: false, at: 'table', z: 2.7,
       narr: 'Adam remembers what the family has told it, and says it at the moment it matters.',
       from: 'Adam', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Thanks'], pick: 0, done: 'Reminding Theo.' },
-    { img: 's4', time: '11:30 am', head: 'The doorbell.', bg: '#ebe8e1', dark: false, at: 'door', z: 2.7,
-      narr: 'Nobody is home, and nothing is watching the door. Adam still hears it and tells you.',
-      from: 'Adam', msg: 'Someone rang the doorbell. Nobody is home.', chips: ['Tell Maya', 'Ignore'], pick: 0, done: 'Telling Maya.' },
+    { img: 's4', time: '11:30 am', head: 'A delivery.', bg: '#ebe8e1', dark: false, at: 'door', z: 2.7,
+      narr: 'Nobody is home, so Adam tells you, then tells whoever gets in first that the parcel is in the porch.',
+      from: 'Adam', msg: 'A parcel was left in the porch. Nobody is home.', chips: ['Tell Maya', 'Leave it'], pick: 0, done: 'Adam will tell Maya when she gets in.' },
     { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#ebe8e1', dark: false, at: 'hob', z: 3.0,
       narr: 'Adam always listens for smoke and CO alarms, day and night.',
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Calling Maya now.' },
