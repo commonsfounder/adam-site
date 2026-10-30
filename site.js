@@ -107,17 +107,35 @@
 })();
 
 (function () {
-  var peek = document.getElementById('peek'), open = document.getElementById('explodeBtn');
+  var peek = document.getElementById('peek'), ring = document.getElementById('peekRing'), open = document.getElementById('explodeBtn');
   if (peek && open && 'IntersectionObserver' in window) {
     var shown = false, t1, t2;
-    function hide() { peek.classList.remove('show'); clearTimeout(t1); clearTimeout(t2); }
+    function hide() { peek.classList.remove('show'); if (ring) ring.classList.remove('show'); clearTimeout(t1); clearTimeout(t2); }
     var io = new IntersectionObserver(function (es) {
       if (shown || !es[0].isIntersecting) return;
       shown = true; io.disconnect();
-      t1 = setTimeout(function () { peek.classList.add('show'); }, 900);
-      t2 = setTimeout(hide, 5200);
-    }, { threshold: 0.35 });
+      t1 = setTimeout(function () { peek.classList.add('show'); if (ring) ring.classList.add('show'); }, 700);
+      t2 = setTimeout(hide, 12000);
+    }, { threshold: 0.5 });
     io.observe(open);
     open.addEventListener('click', hide);
   }
+})();
+
+(function () {
+  var box = document.getElementById('forWord');
+  if (!box) return;
+  var L = [
+    ['parents.', 'hand-heart', '#d4501f'], ['grandparents.', 'phone', '#b83a66'], ['students.', 'lightbulb', '#c98a00'],
+    ['developers.', 'hash', '#3f6fd8'], ['you.', 'smile', '#2f8f5b']
+  ];
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i = 0, use = box.querySelector('use'), word = box.querySelector('b');
+  function set(k) { var x = L[k]; word.textContent = x[0]; use.setAttribute('href', 'family/icons.svg#i-' + x[1]); box.style.setProperty('--fc', x[2]); }
+  set(0);
+  if (reduce) return;
+  setInterval(function () {
+    box.classList.add('out');
+    setTimeout(function () { i = (i + 1) % L.length; set(i); box.classList.remove('out'); }, 320);
+  }, 2400);
 })();

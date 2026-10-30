@@ -458,9 +458,15 @@
     var insideClose = document.getElementById('insideClose');
     if (insideClose && explodeBtn) insideClose.addEventListener('click', function () { explodeBtn.click(); explodeBtn.focus(); });
     var ready = false;
-    function load() { if (ready) return; ready = true; build(); }
+    function load() {
+      if (ready) return; ready = true; build();
+      var ims = Array.prototype.slice.call(stage.querySelectorAll('img'));
+      Promise.all(ims.map(function (im) { return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); })).then(function () { stage.classList.add('ready'); });
+    }
     if (heroEl && explodeBtn) {
       explodeBtn.addEventListener('pointerenter', load, { once: true });
+      var idle = function () { setTimeout(load, 1200); };
+      if (document.readyState === 'complete') idle(); else window.addEventListener('load', idle, { once: true });
     } else if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { load(); o.disconnect(); } }, { rootMargin: '800px 0px' }).observe(stage);
     } else load();

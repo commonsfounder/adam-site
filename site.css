@@ -1092,3 +1092,46 @@ footer a:hover { color: var(--bg); }
   .ptagb { white-space: normal; max-width: 27vw; padding: 3px 6px; font-size: 10.5px; line-height: 13px; }
 }
 #family.problem .fam-sentence { text-align: center; margin: 0 auto; }
+
+.opener { min-height: calc(100svh - 70px); }
+.op-d2 { position: absolute; left: 0.0105em; top: 0; width: 0.154em; height: 0.154em; border-radius: 50%; background: var(--acc); opacity: 0; animation: opFall 1.3s 3.1s cubic-bezier(0.5, 0, 0.75, 0) forwards, opBob 1.8s 4.5s ease-in-out infinite; }
+@keyframes opFall { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 1; transform: translateY(min(42svh, 4.2em)); } }
+@keyframes opBob { 0%, 100% { opacity: 1; transform: translateY(min(42svh, 4.2em)); } 50% { opacity: 1; transform: translateY(calc(min(42svh, 4.2em) - 0.12em)); } }
+.js:not(.opgo) .op-d2 { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .op-d2 { display: none; } }
+#family.problem { padding: 0; }
+#family.problem .fam-track { height: 420vh !important; }
+@media (max-width: 767px) { #family.problem .fam-track { height: 380vh !important; } }
+#family.problem .fam-sentence { font-size: clamp(28px, 3.8vw, 54px); max-width: 1000px; }
+.sol-h { margin: 0 0 var(--sp-300, 24px); font-size: clamp(34px, 3.8vw, 56px); line-height: 1.04; letter-spacing: -0.04em; font-weight: 500; }
+.peek { display: flex; align-items: center; gap: 8px; padding: 10px 16px 10px 12px; border-radius: 9999px; font-size: 15px; font-weight: 500; box-shadow: 0 10px 30px rgba(32, 30, 27, 0.25); top: 8%; }
+.peek svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: peekTap 1.4s ease-in-out infinite; }
+@keyframes peekTap { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px) scale(0.92); } }
+.peek::after { display: none; }
+.peek-ring { position: absolute; left: 34%; top: 46%; width: 0; height: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 400ms var(--ease); }
+.peek-ring.show { opacity: 1; }
+.peek-ring i { position: absolute; left: -36px; top: -36px; width: 72px; height: 72px; border-radius: 50%; border: 2px solid var(--acc); animation: peekPulse 1.8s ease-out infinite; }
+.peek-ring i + i { animation-delay: 0.9s; }
+@keyframes peekPulse { 0% { transform: scale(0.4); opacity: 0.9; } 100% { transform: scale(1.6); opacity: 0; } }
+.product-hero.open .peek-ring { display: none; }
+@media (prefers-reduced-motion: reduce) { .peek-ring i, .peek svg { animation: none; } }
+.product-hero.open .hero-assembled { opacity: 1; visibility: visible; }
+.product-hero.open:has(.gstage.ready) .hero-assembled { opacity: 0; visibility: hidden; }
+.product-hero.open .gstage:not(.ready) { opacity: 0; }
+.for-band { padding: var(--sp-700, 72px) 0; text-align: center; }
+.for-line { margin: 0; font-size: clamp(34px, 5vw, 72px); line-height: 1.1; letter-spacing: -0.04em; font-weight: 500; }
+.for-word { --fc: var(--acc); display: inline-flex; align-items: center; gap: 0.18em; color: var(--fc); transition: opacity 300ms var(--ease), transform 300ms var(--ease), color 300ms var(--ease); }
+.for-word svg { width: 0.7em; height: 0.7em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.for-word b { font-weight: inherit; }
+.for-word.out { opacity: 0; transform: translateY(0.18em); }
+#why .vows { display: grid; gap: 20px 40px; grid-template-columns: 1fr; margin: 0; border-top: 1px solid var(--line); padding-top: 28px; }
+@media (min-width: 800px) { #why .vows { grid-template-columns: repeat(3, 1fr); } }
+#why .vows li, #why .vows li:first-child, #why .vows li:nth-child(2) { font-size: 18px; line-height: 27px; letter-spacing: -0.005em; padding: 0; border: 0; color: var(--ink); }
+#faq .faq { display: grid; grid-template-columns: 1fr; gap: 0 56px; max-width: none; border-top: 1px solid var(--line); }
+@media (min-width: 900px) { #faq .faq { grid-template-columns: 1fr 1fr; } }
+#faq .acc-item { padding: 22px 0 24px; }
+#faq .acc-q { padding: 0; cursor: default; pointer-events: none; font-size: 19px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; }
+#faq .pm { display: none; }
+#faq .acc-p { grid-template-rows: 1fr !important; opacity: 1 !important; }
+#faq .acc-p p { margin: 8px 0 0; font-size: 16px; line-height: 25px; color: var(--mut); }
+.signup { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
