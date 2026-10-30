@@ -1215,3 +1215,7 @@ footer a:hover { color: var(--bg); }
 .what-fin .fam-sentence { text-align: left; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.5; letter-spacing: -0.04em; font-weight: 500; max-width: none; margin: 0; }
 @media (min-width: 1000px) { #make > .wrap .hero-bar { justify-content: flex-start; } }
 .head .hero-h { font-size: clamp(40px, 5vw, 72px); line-height: 1.02; letter-spacing: -0.05em; }
+.hero-h .for-word { display: inline; padding: 0; }
+.hero-h .for-fl { display: inline-flex; gap: 0.1em; margin-left: 0.16em; vertical-align: 0.06em; white-space: nowrap; }
+.hero-h .for-fl svg { position: static; width: 0.36em; height: 0.36em; margin: 0; }
+@media (max-width: 600px) { .hero-h .for-word { display: block; } }
