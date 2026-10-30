@@ -96,10 +96,10 @@
     var email = input.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { msg.className = 'signup-msg err'; msg.textContent = 'That email does not look right.'; input.focus(); return; }
     btn.disabled = true; msg.className = 'signup-msg'; msg.textContent = 'Sending...';
-    fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, company: f.querySelector('.hp').value }) })
+    fetch('/api/subscribe', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, for: (f.querySelector('input[name="for"]:checked') || {}).value || '', company: f.querySelector('.hp').value }) })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok && d.ok, d: d }; }); })
       .then(function (x) {
-        if (x.ok) { msg.className = 'signup-msg'; msg.textContent = 'Thank you. We will email you when Adam is ready.'; input.value = ''; }
+        if (x.ok) { msg.className = 'signup-msg'; msg.textContent = 'Thank you. We will be in touch when we choose the first homes.'; input.value = ''; }
         else { btn.disabled = false; msg.className = 'signup-msg err'; msg.textContent = x.d && x.d.error === 'too many tries' ? 'Too many tries. Please try again later.' : 'Something went wrong. Please email us instead.'; }
       })
       .catch(function () { btn.disabled = false; msg.className = 'signup-msg err'; msg.textContent = 'Something went wrong. Please email us instead.'; });

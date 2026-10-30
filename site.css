@@ -1005,3 +1005,14 @@ footer a:hover { color: var(--bg); }
 .vows li { font-size: clamp(28px, 4vw, 54px); line-height: 1.12; letter-spacing: -0.035em; font-weight: 500; padding: 0.42em 0; border-bottom: 1px solid var(--line); }
 .vows li:first-child { border-top: 1px solid var(--line); }
 .colours-label strong { display: inline-block; min-width: 5.4em; }
+
+.who-for { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 32px auto 20px; padding: 0; border: 0; max-width: 560px; }
+.who-for label { cursor: pointer; }
+.who-for input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.who-for span { display: inline-block; padding: 9px 18px; border-radius: 9999px; border: 1px solid rgba(244, 242, 237, 0.3); color: rgba(244, 242, 237, 0.85); font-size: 15px; line-height: 22px; transition: background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease); }
+.who-for label:hover span { border-color: var(--bg); }
+.who-for input:checked + span { background: var(--bg); color: var(--ink); border-color: var(--bg); }
+.who-for input:focus-visible + span { outline: 2px solid var(--acc); outline-offset: 2px; }
+.closing .fine + .fine { margin-top: 6px; }
+.try-band { padding: var(--sp-700, 72px) 0; text-align: center; }
+.try-band p { margin: 0 0 20px; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.15; letter-spacing: -0.03em; font-weight: 500; }
