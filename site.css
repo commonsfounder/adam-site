@@ -1235,3 +1235,4 @@ footer a:hover { color: var(--bg); }
 .wk-pop span { padding: 4px 10px; background: rgba(255, 255, 255, 0.1); border-radius: 9999px; }
 .wk-loop.show .wk-pop { display: flex; }
 .wk-loop.show .wk-lg { opacity: 0.15 !important; }
+@media (max-width: 600px) { .wk-pop { position: fixed; left: 16px; right: 16px; top: auto; bottom: 20px; transform: none; width: auto; max-width: none; } }
