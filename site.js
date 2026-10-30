@@ -161,8 +161,8 @@
   var op = document.getElementById('opener'), root = document.documentElement;
   if (!op || root.classList.contains('opdone')) return;
   function done() { try { sessionStorage.setItem('op', '1'); } catch (e) {} }
-  function skip() { root.classList.add('opskip'); done(); off(); }
+  function skip() { root.classList.add('opskip'); done(); off(); setTimeout(function () { root.classList.add('opdone'); }, 320); }
   function off() { ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { window.removeEventListener(e, skip); }); }
   ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (e) { window.addEventListener(e, skip, { passive: true }); });
-  op.addEventListener('animationend', function (e) { if (e.target === op) { done(); off(); } });
+  op.addEventListener('animationend', function (e) { if (e.target === op) { done(); off(); root.classList.add('opdone'); } });
 })();
