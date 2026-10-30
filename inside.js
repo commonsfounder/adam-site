@@ -459,7 +459,9 @@
     if (insideClose && explodeBtn) insideClose.addEventListener('click', function () { explodeBtn.click(); explodeBtn.focus(); });
     var ready = false;
     function load() { if (ready) return; ready = true; build(); }
-    if ('IntersectionObserver' in window) {
+    if (heroEl && explodeBtn) {
+      explodeBtn.addEventListener('pointerenter', load, { once: true });
+    } else if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { load(); o.disconnect(); } }, { rootMargin: '800px 0px' }).observe(stage);
     } else load();
   })();
