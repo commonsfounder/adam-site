@@ -1195,3 +1195,4 @@ footer a:hover { color: var(--bg); }
 @media (min-width: 800px) { .does { grid-template-columns: repeat(2, 1fr); } }
 .does li { font-size: 18px; line-height: 27px; color: var(--mut); }
 .does b { display: block; color: var(--ink); font-weight: 600; }
+@media (max-width: 999px) { #make > .wrap { display: flex; flex-direction: column; } #make > .wrap > .product-wrap { order: -1; } #make.card-sec { padding-top: 0; } #family.problem .fam-sticky { padding-bottom: 8px; } }
