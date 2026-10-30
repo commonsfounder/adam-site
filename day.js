@@ -16,7 +16,7 @@
   var TOAST = {
     s1: [['Dan', 'June is crying in the nursery.'], ['Maya', 'June is crying in the nursery.']], s2: [['Theo', 'PE today. Your kit is by the dryer.']],
     s3: [['Gran', 'Gran, have you taken your morning tablets?'], ['Maya', 'Gran has not taken her morning tablets.']],
-    s4: [['Dan', 'Someone is at the front door.'], null], s5: [['Dan', 'The smoke alarm is sounding in the kitchen.'], ['Maya', 'The smoke alarm is sounding in the kitchen.']],
+    s4: [['Dan', 'Someone is at the front door.'], null], s5: [['Maya', 'The smoke alarm is sounding in the kitchen.'], ['Dan', 'The smoke alarm is sounding in the kitchen.']],
     s6: [['999', 'Fall at home. Gran is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
   };
   var S = [
@@ -28,9 +28,9 @@
       from: 'Adam', msg: 'Someone is knocking at the front door.', chips: ['Tell Dan', 'Leave it'], pick: 0, done: 'Telling Dan. He is on his way.' },
     { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#ebe8e1', dark: false, at: 'hob', z: 2.2,
       narr: 'Adam always listens for smoke and CO alarms, day and night.',
-      from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Dan', 'Call Maya'], pick: 0, done: 'Dan has headphones on upstairs. Calling him now.' },
+      from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Maya', 'Call Dan'], pick: 0, done: 'Maya has headphones on upstairs. Calling her now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.2,
-      narr: 'Gran lives on her own. Adam hears the fall, and when she does not answer it calls 999 and tells Maya and Dan.',
+      narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there on time.',
       from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' },
     { img: 's1', time: '9:40 pm', head: 'June is awake.', bg: '#131316', dark: true, at: 'cot', z: 2.2,
       narr: 'Maya and Dan are downstairs with the TV on. Adam hears June upstairs and tells them.',
