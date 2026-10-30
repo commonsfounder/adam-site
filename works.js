@@ -25,10 +25,10 @@
   });
   function frame(now) {
     loops.forEach(function (L) {
-      var w = L.el.querySelector('b').offsetWidth, h = L.el.offsetHeight;
+      var w = L.el.querySelector('b').offsetWidth, h = (parseFloat(getComputedStyle(L.el).fontSize) || 30) * 1.1;
       if (L.w !== w || L.vw !== window.innerWidth) {
         L.w = w; L.vw = window.innerWidth;
-        var rx = w / 2 + 2, ry = h * (window.innerWidth >= 700 ? 1.3 : 1.05);
+        var sz = parseFloat(L.items[0].style.getPropertyValue('--s')) || 20, rx = Math.max(w / 2 + 2, sz * 2.4), ry = h * 1.3;
         var P = [], len = [0], d = '', on = false;
         for (var k = 0; k <= 400; k++) {
           var t = k / 400 * Math.PI * 2, c = Math.cos(t), q = [rx * c, ry * Math.sin(t), Math.sin(t), Math.max(0, Math.min(1, (0.93 - Math.abs(c)) / 0.18))]; P.push(q);
