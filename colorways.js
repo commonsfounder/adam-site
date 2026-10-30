@@ -1,6 +1,6 @@
 (function () {
   var ORDER = ['black', 'white', 'sandstone'];
-  var LABELS = { sandstone: 'Sandstone', black: 'Black', white: 'White' };
+  var LABELS = { sandstone: 'Sand', black: 'Charcoal', white: 'Chalk' };
   var PREFIX = { sandstone: '', black: 'colorways/black/', white: 'colorways/white/' };
   var KEY = 'adam-colour';
   var cur = 'sandstone';

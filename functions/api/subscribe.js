@@ -15,7 +15,7 @@ export async function onRequestPost({ request, env }) {
   const seen = parseInt((await env.ADAM_SIGNUPS.get(key)) || '0', 10);
   if (seen >= 8) return reply({ ok: false, error: 'too many tries' }, 429);
   await env.ADAM_SIGNUPS.put(key, String(seen + 1), { expirationTtl: 3600 });
-  const who = ['baby', 'parent', 'home'].includes(data.for) ? data.for : '';
+  const who = ['baby', 'parent', 'household', 'fun', 'other', 'home'].includes(data.for) ? data.for : '';
   const existing = await env.ADAM_SIGNUPS.get('e:' + email);
   const rec = existing ? JSON.parse(existing) : { at: new Date().toISOString(), from: request.headers.get('Referer') || '' };
   if (who) rec.for = who;

@@ -89,6 +89,11 @@
     });
   }
   function apply(p) { render(p); }
+  if (para.hasAttribute('data-static')) {
+    if (reduce || !('IntersectionObserver' in window)) { render(1); return; }
+    var sio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { render(1); sio.disconnect(); } }, { threshold: 0.6 });
+    sio.observe(para); return;
+  }
   function update() {
     ticking = false;
     var r = track.getBoundingClientRect(), total = r.height - window.innerHeight;
