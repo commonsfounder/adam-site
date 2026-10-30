@@ -1185,3 +1185,5 @@ footer a:hover { color: var(--bg); }
 .wk-ln, .wk-ln:is(*) { font-size: clamp(26px, 4.2vw, 54px); line-height: 3.4; white-space: normal; }
 .wk-loop { margin: 0; padding: 0; }
 @media (max-width: 699px) { .wk-ln, .wk-ln:is(*) { line-height: 4.4; } }
+#family.problem .fam-track { height: 280vh !important; }
+@media (max-width: 767px) { #family.problem .fam-track { height: 260vh !important; } }
