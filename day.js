@@ -75,7 +75,7 @@
       els.forEach(function (im) {
         if (!im) return;
         var w = geo.iw * f.z, h = geo.ih * f.z;
-        var l = Math.min(0, Math.max(geo.W - w, geo.W / 2 - f.z * f.x * geo.iw)), t = Math.min(0, Math.max(geo.H - h, geo.H / 2 - f.z * f.y * geo.ih));
+        var l = Math.min(0, Math.max(geo.W - w, geo.W / 2 - f.z * f.x * geo.iw)), t = Math.min(0, geo.H / 2 - f.z * f.y * geo.ih);
         im.style.width = w + 'px'; im.style.height = h + 'px';
         im.style.left = l + 'px'; im.style.top = t + 'px';
         if (im === imgs[i]) geo['spot' + i] = [l + f.z * f.x * geo.iw, t + f.z * f.y * geo.ih];
