@@ -1175,5 +1175,5 @@ footer a:hover { color: var(--bg); }
 @media (min-width: 700px) {
   .wk-br { display: none; }
   .wk-ln { white-space: nowrap; font-size: clamp(22px, 2.7vw, 42px); }
-  .wk-loop { margin: 0 0.45em; }
+  .wk-loop { margin: 0; padding: 0; }
 }

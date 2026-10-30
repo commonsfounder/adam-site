@@ -13,7 +13,7 @@
   var prog = reduce ? 1 : 0, running = false;
   function at(el) { return 0.04 + 0.66 * words.indexOf(el) / (words.length - 1); }
   var loops = Array.prototype.slice.call(root.querySelectorAll('.wk-loop')).map(function (el) {
-    var size = window.innerWidth < 700 ? 24 : Math.round(Math.min(34, Math.max(24, window.innerWidth * 0.022)));
+    var fs = parseFloat(getComputedStyle(el).fontSize) || 32, size = window.innerWidth < 700 ? 22 : Math.round(Math.max(16, fs * 0.52));
     var sv = document.createElementNS(NS, 'svg'); sv.setAttribute('class', 'wk-path'); sv.setAttribute('aria-hidden', 'true');
     var pa = document.createElementNS(NS, 'path'); sv.appendChild(pa); el.insertBefore(sv, el.firstChild);
     var items = SETS[el.dataset.set].map(function (x) {
@@ -31,7 +31,7 @@
       if (L.w !== w || L.vw !== window.innerWidth) {
         L.w = w; L.vw = window.innerWidth;
         var A, K;
-        if (wide) { var sz = parseFloat(L.items[0].style.getPropertyValue('--s')) || 30; A = gap + h * 2.8; K = Math.min(2, Math.max(w / 2 + 8, sz * 1.4) / (0.354 * A)); }
+        if (wide) { var sz = parseFloat(L.items[0].style.getPropertyValue('--s')) || 30; A = gap + h * 2.8; K = Math.min(2, Math.max(w / 2, sz) / (0.354 * A)); }
         else { A = Math.max(gap + 64, Math.min(h * 7.5, window.innerWidth / 2 - 34)); K = Math.min(1.5, (h * 0.8) / (0.354 * A)); }
         var P = [], len = [0], d = '', on = false;
         for (var k = 0; k <= 600; k++) {
