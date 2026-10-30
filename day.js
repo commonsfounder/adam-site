@@ -17,7 +17,7 @@
     s1: [['Maya', 'June is crying in the nursery.'], ['Dan', 'June is crying in the nursery.']], s2: [['Theo', 'PE today. Your kit is by the dryer.']],
     s3: [['Gran', 'Gran, have you taken your morning tablets?'], ['Maya', 'Gran has not taken her morning tablets.']],
     s4: [['Dan', 'Someone is at the front door.'], null], s5: [['Dan', 'The smoke alarm is sounding in the kitchen.'], ['Maya', 'The smoke alarm is sounding in the kitchen.']],
-    s6: [['999', 'Fall at home. Gran is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
+    s6: [['Maya', 'Gran has fallen in the living room and is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
   };
   var S = [
     { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#e3d9cc', dark: false, at: 'table', z: 2.2,
@@ -31,7 +31,7 @@
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Dan', 'Call Maya'], pick: 0, done: 'Dan has headphones on upstairs. Calling him now.' },
     { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2e2a26', dark: true, at: 'fall', z: 2.2,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there on time.',
-      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Yes, call 999', 'She’s okay'], pick: 0, done: 'Calling 999. Maya and Dan have been told.' },
+      from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Tell Maya and Dan', 'She’s okay'], pick: 0, done: 'Telling Maya and Dan. Calling 999 if they do not answer.' },
     { img: 's1', time: '9:40 pm', head: 'June is awake.', bg: '#131316', dark: true, at: 'cot', z: 2.2,
       narr: 'Maya and Dan are downstairs with the TV on. Adam hears June upstairs and tells them.',
       from: 'Adam', msg: 'June is crying in the nursery.', chips: ['Maya', 'Dan'], pick: 0, done: 'Telling Maya. It is her turn tonight.' }
