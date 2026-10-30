@@ -126,16 +126,16 @@
   var box = document.getElementById('forWord');
   if (!box) return;
   var L = [
-    ['new parents.', '#d4501f', ['baby', 'milk', 'bed-double', 'heart']],
-    ['grandparents.', '#b83a66', ['phone', 'hand-heart', 'coffee', 'heart-pulse']],
-    ['busy families.', '#c98a00', ['calendar', 'shopping-basket', 'utensils', 'house']],
-    ['flatmates.', '#3f6fd8', ['key-round', 'sofa', 'music-2', 'users']],
-    ['pet owners.', '#a0522d', ['paw-print', 'dog', 'cat', 'bone']],
-    ['carers.', '#2f8f5b', ['stethoscope', 'pill', 'hand-heart', 'phone']],
-    ['students.', '#7a4fd0', ['graduation-cap', 'book-open', 'backpack', 'lightbulb']],
-    ['night owls.', '#2b4a8a', ['moon', 'headphones', 'coffee', 'star']],
-    ['developers.', '#0f7c86', ['code', 'terminal', 'braces', 'cpu']],
-    ['you.', '#d4501f', ['smile', 'heart', 'party-popper', 'star']]
+    ['new parents.', '#d4501f', ['baby', 'milk', 'bed-double', 'heart', 'moon', 'smile']],
+    ['grandparents.', '#b83a66', ['phone', 'hand-heart', 'coffee', 'heart-pulse', 'users', 'sun']],
+    ['busy families.', '#c98a00', ['calendar', 'shopping-basket', 'utensils', 'house', 'bell-ring', 'users']],
+    ['flatmates.', '#3f6fd8', ['key-round', 'sofa', 'music-2', 'users', 'coffee', 'party-popper']],
+    ['pet owners.', '#a0522d', ['paw-print', 'dog', 'cat', 'bone', 'heart', 'house']],
+    ['carers.', '#2f8f5b', ['stethoscope', 'pill', 'hand-heart', 'phone', 'heart-pulse', 'calendar-check']],
+    ['students.', '#7a4fd0', ['graduation-cap', 'book-open', 'backpack', 'lightbulb', 'coffee', 'pencil']],
+    ['night owls.', '#2b4a8a', ['moon', 'headphones', 'coffee', 'star', 'music-2', 'film']],
+    ['developers.', '#0f7c86', ['code', 'terminal', 'braces', 'cpu', 'hash', 'zap']],
+    ['you.', '#d4501f', ['smile', 'heart', 'party-popper', 'star', 'sun', 'music']]
   ];
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var i = 0, word = box.querySelector('b'), fl = box.querySelector('.for-fl'), NS = 'http://www.w3.org/2000/svg';
@@ -145,7 +145,7 @@
     x[2].forEach(function (n, j) {
       var v = document.createElementNS(NS, 'svg'); v.setAttribute('viewBox', '0 0 24 24'); v.setAttribute('class', 'f' + j);
       v.style.setProperty('--d', (80 + j * 90) + 'ms');
-      var u = document.createElementNS(NS, 'use'); u.setAttribute('href', 'family/icons.svg?v=2#i-' + n);
+      var u = document.createElementNS(NS, 'use'); u.setAttribute('href', 'family/icons.svg?v=3#i-' + n);
       v.appendChild(u); fl.appendChild(v);
     });
   }
