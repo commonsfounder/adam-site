@@ -14,7 +14,7 @@
       o.appendChild(s); el.appendChild(o); if (i < txt.length - 1) el.appendChild(document.createTextNode(' '));
     });
   }
-  document.querySelectorAll('.problem h2, .story-head h2, .head h2, .closing h2').forEach(function (h) {
+  document.querySelectorAll('.story-head h2, .head h2, .closing h2').forEach(function (h) {
     if (h.querySelector('br')) { var parts = h.innerHTML.split(/<br\s*\/?>/i); h.innerHTML = ''; parts.forEach(function (p, i) { var d = document.createElement('span'); d.className = 'ml'; d.textContent = p.replace(/&rsquo;/g, '’'); h.appendChild(d); splitWords(d); if (i < parts.length - 1) h.appendChild(document.createElement('br')); }); }
     else splitWords(h);
     h.classList.add('msplit');
