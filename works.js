@@ -28,14 +28,14 @@
       var w = L.el.querySelector('b').offsetWidth, h = L.el.offsetHeight;
       if (L.w !== w || L.vw !== window.innerWidth) {
         L.w = w; L.vw = window.innerWidth;
-        var rx = w / 2 + 4, ry = h * (window.innerWidth >= 700 ? 1.15 : 0.95);
-        var P = [], len = [0], d = '';
+        var rx = w / 2 + 2, ry = h * (window.innerWidth >= 700 ? 1.3 : 1.05);
+        var P = [], len = [0], d = '', on = false;
         for (var k = 0; k <= 400; k++) {
-          var t = k / 400 * Math.PI * 2, q = [rx * Math.cos(t), ry * Math.sin(t), Math.sin(t)]; P.push(q);
+          var t = k / 400 * Math.PI * 2, c = Math.cos(t), q = [rx * c, ry * Math.sin(t), Math.sin(t), Math.max(0, Math.min(1, (0.93 - Math.abs(c)) / 0.18))]; P.push(q);
           if (k) len.push(len[k - 1] + Math.hypot(q[0] - P[k - 1][0], q[1] - P[k - 1][1]));
-          d += (k ? 'L' : 'M') + q[0].toFixed(1) + ',' + q[1].toFixed(1);
+          if (q[3] > 0.5) { d += (on ? 'L' : 'M') + q[0].toFixed(1) + ',' + q[1].toFixed(1); on = true; } else on = false;
         }
-        L.P = P; L.len = len; L.path.setAttribute('d', d + 'Z');
+        L.P = P; L.len = len; L.path.setAttribute('d', d);
       }
       var T = L.len[L.len.length - 1], n = L.items.length, R = Math.max(0, Math.min(1, (prog - L.t0) / 0.14)), g = 1 - Math.pow(1 - R, 3);
       L.path.style.opacity = R.toFixed(3);
@@ -44,7 +44,7 @@
         while (hi - lo > 1) { var m = (lo + hi) >> 1; if (L.len[m] < target) lo = m; else hi = m; }
         var q = L.P[lo], z = (q[2] + 1) / 2, s = 0.25 + 0.75 * g;
         it.style.transform = 'translate(' + (q[0] * s).toFixed(1) + 'px,' + (q[1] * s).toFixed(1) + 'px) scale(' + ((0.72 + 0.28 * z) * (0.4 + 0.6 * g)).toFixed(3) + ')';
-        it.style.opacity = ((0.5 + 0.5 * z) * R).toFixed(3);
+        it.style.opacity = ((0.5 + 0.5 * z) * q[3] * R).toFixed(3);
         it.style.zIndex = q[2] > 0 ? '3' : '1';
       });
     });
