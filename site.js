@@ -151,10 +151,16 @@
   }
   set(0);
   if (reduce) return;
-  setInterval(function () {
+  function start() { setInterval(function () {
     box.classList.add('out');
     setTimeout(function () { i = (i + 1) % L.length; set(i); box.classList.remove('out'); }, 320);
-  }, 2600);
+  }, 2600); }
+  var root = document.documentElement;
+  if (root.classList.contains('opdone') || !document.getElementById('opener')) start();
+  else {
+    var mo = new MutationObserver(function () { if (root.classList.contains('opdone')) { mo.disconnect(); set(0); start(); } });
+    mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+  }
 })();
 
 (function () {
