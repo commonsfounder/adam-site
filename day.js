@@ -2,6 +2,7 @@
   var track = document.getElementById('dayTrack');
   if (!track) return;
   var IMG = { w: 3200, h: 2048 };
+  var SMALL = Math.min(window.innerWidth, window.innerHeight) < 820;
   var P = {
     cot: [0.5565, 0.2551], table: [0.6968, 0.3041], entry: [0.634, 0.758], door: [0.6085, 0.8603],
     hob: [0.7682, 0.2527], kitchen: [0.7105, 0.3413], hallway: [0.5622, 0.3959], bedroom: [0.4357, 0.2549], fall: [0.5278, 0.4873]
@@ -51,7 +52,7 @@
   var cam = document.createElement('div'); cam.className = 'day-cam day-strip'; scroller.appendChild(cam);
   var panels = S.map(function () { var d = document.createElement('div'); d.className = 'day-panel'; cam.appendChild(d); return d; });
   var imgs = S.map(function (s, i) {
-    var im = document.createElement('img'); im.src = 'day/story/' + s.img + '.webp?v=3'; im.className = 'day-img'; im.decoding = 'async';
+    var im = document.createElement('img'); im.src = (SMALL ? s.img.replace(/^\.\.\//, '../sm/').replace(/^s/, 'sm/s') : s.img) .replace(/^/, 'day/story/') + '.webp?v=4'; im.className = 'day-img'; im.decoding = 'async';
     im.alt = i === 0 ? 'A three-dimensional cutaway of a family home with Adam in it' : ''; if (i) im.setAttribute('aria-hidden', 'true');
     panels[i].appendChild(im); return im;
   });

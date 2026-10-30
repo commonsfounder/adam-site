@@ -69,7 +69,6 @@
       var cr = closing.parentNode.getBoundingClientRect();
       var p = Math.max(0, Math.min(1, 1 - cr.top / h));
       closing.style.transform = 'scale(' + (0.9 + p * 0.1).toFixed(3) + ')';
-      closing.style.opacity = (0.3 + p * 0.7).toFixed(2);
     }
     requestAnimationFrame(frame);
   }

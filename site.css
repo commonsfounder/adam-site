@@ -1,3 +1,5 @@
+@font-face { font-family: 'Geist'; font-style: normal; font-weight: 400 600; font-display: swap; src: url(assets/fonts/geist.woff2) format('woff2'); }
+@font-face { font-family: 'Geist Mono'; font-style: normal; font-weight: 400 500; font-display: swap; src: url(assets/fonts/geist-mono.woff2) format('woff2'); }
 :root {
   --sp-0: 0; --sp-25: 2px; --sp-50: 4px; --sp-75: 8px; --sp-100: 12px; --sp-200: 16px; --sp-300: 24px;
   --sp-400: 32px; --sp-500: 40px; --sp-600: 48px; --sp-700: 64px; --sp-800: 80px; --sp-900: 96px;
