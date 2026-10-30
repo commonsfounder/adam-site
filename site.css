@@ -1230,5 +1230,3 @@ footer a:hover { color: var(--bg); }
 .hero-h .for-fl .f3 { left: -0.3em; bottom: -0.12em; right: auto; top: auto; --r: 10deg; width: 0.28em; height: 0.28em; }
 .hero-h .for-fl .f4 { left: 46%; bottom: -0.36em; right: auto; top: auto; --r: -6deg; width: 0.27em; height: 0.27em; }
 .hero-h .for-fl .f5 { right: 6%; top: -0.24em; left: auto; bottom: auto; --r: 16deg; width: 0.27em; height: 0.27em; }
-.hero-h .for-fl .f5 { right: 10%; top: auto; bottom: -0.3em; left: auto; }
-.hero-h .for-fl .f4 { left: 30%; }
