@@ -1159,3 +1159,4 @@ footer a:hover { color: var(--bg); }
 @media (prefers-reduced-motion: reduce) { .for-fl svg { animation: none; opacity: 1; transform: rotate(var(--r)); } }
 .hero-bar .seg { display: inline-flex; visibility: hidden; }
 .product-hero.open .hero-bar .seg { visibility: visible; }
+@media (max-width: 600px) { .for-word { display: table; margin: 0.12em auto 0; } }
