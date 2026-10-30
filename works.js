@@ -31,7 +31,7 @@
       if (L.w !== w || L.vw !== window.innerWidth) {
         L.w = w; L.vw = window.innerWidth;
         var A, K;
-        if (wide) { A = gap + h * 2.4; K = Math.min(1.6, (w / 2 + 8) / (0.354 * A)); }
+        if (wide) { var sz = parseFloat(L.items[0].style.getPropertyValue('--s')) || 30; A = gap + h * 2.8; K = Math.min(2, Math.max(w / 2 + 8, sz * 1.4) / (0.354 * A)); }
         else { A = Math.max(gap + 64, Math.min(h * 7.5, window.innerWidth / 2 - 34)); K = Math.min(1.5, (h * 0.8) / (0.354 * A)); }
         var P = [], len = [0], d = '', on = false;
         for (var k = 0; k <= 600; k++) {
