@@ -1328,3 +1328,13 @@ h2.what-l { font-size: clamp(30px, 4.2vw, 56px); }
 @keyframes pinPulse { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(2.2); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .day-pin i::after { animation: none; } }
 @media (min-width: 721px) { .day-strip .day-img { -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, #000 72%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent), linear-gradient(to bottom, #000 72%, transparent); mask-composite: intersect; } }
+
+/* a day with Adam on wide screens: the house fills the stage, the words sit in the sky beside the roof */
+@media (min-width: 1100px) {
+  .day-foot { top: 0; display: block; padding: 0; background: none; }
+  .day-narr { position: absolute; left: var(--pad); top: 150px; max-width: 290px; font-size: 19px; line-height: 1.45; }
+  .day-ticks { position: absolute; left: var(--pad); right: var(--pad); bottom: 44px; }
+  .day-note { position: absolute; left: var(--pad); bottom: 16px; }
+  .day-stage > .day-card { left: auto; right: var(--pad); top: 150px; bottom: auto; }
+  .day-strip .day-img { -webkit-mask-image: none; mask-image: none; }
+}

@@ -20,29 +20,30 @@
     s6: [['Maya', 'Gran has fallen in the living room and is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
   };
   var S = [
-    { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#4d5b71', dark: true, at: 'kit', z: 0.8,
+    { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#4d5b71', dark: true, at: 'kit', z: 1.4,
       narr: 'Adam remembers what the family has told it, and says it at the moment it matters.',
       from: 'Adam', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Thanks'], pick: 0, done: 'Reminding Theo.' },
-    { img: 's4', time: '11:30 am', head: 'A knock at the door.', bg: '#616e80', dark: true, at: 'door', z: 0.8,
+    { img: 's4', time: '11:30 am', head: 'A knock at the door.', bg: '#616e80', dark: true, at: 'door', z: 1.4,
       narr: 'Dan is in the garden and cannot hear the door. Adam hears the knock and tells him.',
       from: 'Adam', msg: 'Someone is knocking at the front door.', chips: ['Tell Dan', 'Leave it'], pick: 0, done: 'Telling Dan. He is on his way.' },
-    { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#616e80', dark: true, at: 'hob', z: 0.8,
+    { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#616e80', dark: true, at: 'hob', z: 1.4,
       narr: 'Adam always listens for smoke and CO alarms, day and night.',
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Dan', 'Call Maya'], pick: 0, done: 'Dan has headphones on upstairs. Calling him now.' },
-    { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#282e3d', dark: true, at: 'fall', z: 0.8,
+    { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#282e3d', dark: true, at: 'fall', z: 1.4,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there on time.',
       from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Tell Maya and Dan', 'She’s okay'], pick: 0, done: 'Telling Maya and Dan. Calling 999 if they do not answer.' },
-    { img: 's1', time: '9:40 pm', head: 'June is awake.', bg: '#0a0d15', dark: true, at: 'cot', z: 0.8,
+    { img: 's1', time: '9:40 pm', head: 'June is awake.', bg: '#0a0d15', dark: true, at: 'cot', z: 1.4,
       narr: 'Maya and Dan are downstairs with the TV on. Adam hears June upstairs and tells them.',
       from: 'Adam', msg: 'June is crying in the nursery.', chips: ['Maya', 'Dan'], pick: 0, done: 'Telling Maya. It is her turn tonight.' }
   ];
-  var WIDE = { x: 0.5, y: 0.52, z: 1.0 };
+  // the house's outline in the render, as fractions of its width and height
+  var WIDE = 1100, HOUSE = { l: 0.12, r: 0.96, t: 0.115, b: 0.82 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
   var scroller = document.createElement('div'); scroller.className = 'day-scroller'; scroller.tabIndex = 0; scroller.setAttribute('role', 'group'); scroller.setAttribute('aria-label', 'A day at home. Swipe or scroll sideways.'); stage.appendChild(scroller);
   var cam = document.createElement('div'); cam.className = 'day-cam day-strip'; scroller.appendChild(cam);
   var panels = S.map(function () { var d = document.createElement('div'); d.className = 'day-panel'; cam.appendChild(d); return d; });
   var imgs = S.map(function (s, i) {
-    var im = document.createElement('img'); im.src = (SMALL ? s.img.replace(/^\.\.\//, '../sm/').replace(/^s/, 'sm/s') : s.img) .replace(/^/, 'day/story/') + '.webp?v=6'; im.className = 'day-img'; im.decoding = 'async'; if (i) im.loading = 'lazy';
+    var im = document.createElement('img'); im.src = (SMALL ? s.img.replace(/^\.\.\//, '../sm/').replace(/^s/, 'sm/s') : s.img) .replace(/^/, 'day/story/') + '.webp?v=7'; im.className = 'day-img'; im.decoding = 'async'; if (i) im.loading = 'lazy';
     im.alt = i === 0 ? 'A cutaway of a two-storey family home, with Adam on the living-room sideboard' : ''; if (i) im.setAttribute('aria-hidden', 'true');
     panels[i].appendChild(im); return im;
   });
@@ -84,9 +85,15 @@
       var f = foc(i), els = [imgs[i], afters[i]];
       els.forEach(function (im) {
         if (!im) return;
-        var w = geo.iw * f.z, h = geo.ih * f.z;
-        // narrower than the stage: centre it (the backdrop matches the stage colour)
-        var l = w <= geo.W ? (geo.W - w) / 2 : Math.min(0, Math.max(geo.W - w, geo.W / 2 - f.z * f.x * geo.iw)), t = h <= geo.H ? Math.min(48, (geo.H - h) / 2) : Math.min(0, geo.H / 2 - f.z * f.y * geo.ih);
+        var w, h, l, t;
+        if (geo.W >= WIDE) {
+          // wide screens: the whole house, as large as the stage allows, with the words in the sky around it
+          f = { x: f.x, y: f.y, z: Math.min((geo.H - 190) / ((HOUSE.b - HOUSE.t) * geo.ih), geo.W * 0.98 / ((HOUSE.r - HOUSE.l) * geo.iw)) };
+          w = geo.iw * f.z; h = geo.ih * f.z; l = geo.W / 2 - (HOUSE.l + HOUSE.r) / 2 * w; t = 56 - HOUSE.t * h;
+        } else {
+          w = geo.iw * f.z; h = geo.ih * f.z;
+          l = Math.min(0, Math.max(geo.W - w, geo.W / 2 - f.z * f.x * geo.iw)); t = Math.min(0, geo.H / 2 - f.z * f.y * geo.ih);
+        }
         im.style.width = w + 'px'; im.style.height = h + 'px';
         im.style.left = l + 'px'; im.style.top = t + 'px';
         if (im === imgs[i]) {
