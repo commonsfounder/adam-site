@@ -1338,3 +1338,33 @@ h2.what-l { font-size: clamp(30px, 4.2vw, 56px); }
   .day-stage > .day-card { left: auto; right: var(--pad); top: 150px; bottom: auto; }
   .day-strip .day-img { -webkit-mask-image: none; mask-image: none; }
 }
+
+/* what Adam hears: one typographic row per sound and what Adam does about it */
+.hearsec { padding: clamp(56px, 8vw, 112px) 0 clamp(48px, 7vw, 96px); }
+.hearsec .wrap { max-width: 1360px; }
+.hs-title { max-width: 16ch; margin: 0 0 clamp(28px, 4vw, 48px); font-size: clamp(34px, 5vw, 68px); line-height: 1.02; letter-spacing: -0.045em; font-weight: 500; text-wrap: balance; }
+.hs-title em { font-style: normal; color: var(--accd); }
+.hs-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.hs-list li { display: grid; grid-template-columns: 1fr; gap: 8px 48px; padding: clamp(20px, 2.6vw, 30px) 0; border-bottom: 1px solid var(--line); transition: background-color 300ms var(--ease); }
+@media (min-width: 860px) { .hs-list li { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; } }
+.hs-sound { display: flex; align-items: center; gap: 0.45em; margin: 0; font-size: clamp(26px, 3.6vw, 48px); line-height: 1.08; letter-spacing: -0.035em; font-weight: 500; color: var(--ink); transition: color 300ms var(--ease); }
+.hs-do { margin: 0; max-width: 46ch; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.5; color: #4f4b44; text-wrap: pretty; }
+.hs-do strong { font-weight: 600; color: var(--ink); }
+.hs-fall .hs-sound { color: var(--accd); }
+.hs-fall .hs-do { color: var(--ink); }
+/* a small sound wave in front of each sound; it moves while you hover the row */
+.hs-wave { display: inline-flex; align-items: center; gap: 0.07em; height: 0.62em; flex: none; }
+.hs-wave b { display: block; width: 0.07em; height: 100%; border-radius: 1em; background: currentColor; opacity: 0.35; transform: scaleY(0.35); transition: opacity 300ms var(--ease), transform 300ms var(--ease); }
+.hs-wave b:nth-child(2) { transform: scaleY(0.7); } .hs-wave b:nth-child(3) { transform: scaleY(1); } .hs-wave b:nth-child(4) { transform: scaleY(0.6); } .hs-wave b:nth-child(5) { transform: scaleY(0.3); }
+.hs-fall .hs-wave b { opacity: 0.85; }
+@media (hover: hover) {
+  .hs-list li:hover .hs-sound { color: var(--accd); }
+  .hs-list li:hover .hs-wave b { opacity: 1; animation: hsWave 900ms var(--ease) infinite alternate; }
+  .hs-list li:hover .hs-wave b:nth-child(2) { animation-delay: 120ms; } .hs-list li:hover .hs-wave b:nth-child(3) { animation-delay: 240ms; }
+  .hs-list li:hover .hs-wave b:nth-child(4) { animation-delay: 360ms; } .hs-list li:hover .hs-wave b:nth-child(5) { animation-delay: 480ms; }
+}
+@keyframes hsWave { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .hs-list li:hover .hs-wave b { animation: none; } }
+.hs-room { margin: clamp(24px, 3vw, 36px) 0 0; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; color: var(--ink); max-width: 52ch; }
+.hs-also { margin: clamp(40px, 5vw, 72px) 0 0; max-width: 62ch; font-size: clamp(17px, 1.35vw, 20px); line-height: 1.6; color: #4f4b44; text-wrap: pretty; }
+.hs-also span { display: block; margin-bottom: 6px; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; letter-spacing: -0.025em; font-weight: 500; color: var(--ink); }
