@@ -9,6 +9,9 @@ Not to be confused with Intuitive Surgical, Intuit, or A.D.A.M. (adam-assistant.
 - Price: £299 for everything in the box. No subscription. Test homes from the waitlist get £100 off (£199).
 - Availability: ships in the second half of 2027. Join the free waitlist at https://www.heyintuitive.com/#who
 - Colours: Charcoal, Chalk, Sand.
+- Assistant: Adam is its own assistant (own voice, memory and actions). People can also keep the AI assistant they already use, such as ChatGPT, Gemini or Alexa.
+- Speaker: one 3-inch full-range driver tuned for clear speech; woven fabric body on an aluminium base. Plays radio, podcasts and music from your phone.
+- In the box: the speaker, two plugs for other rooms (they sense who is there), and a USB-C power supply.
 - Market: United Kingdom.
 - Contact: support@heyintuitive.com
 
