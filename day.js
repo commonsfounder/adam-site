@@ -5,7 +5,7 @@
   var SMALL = Math.min(window.innerWidth, window.innerHeight) < 820;
   // where each moment happens in the cutaway render (render/cutaway.py writes these to cut_pts.json)
   var P = {
-    kit: [0.70, 0.67], door: [0.1558, 0.7037], hob: [0.6957, 0.7086], fall: [0.3613, 0.7921], cot: [0.646, 0.5164]
+    kit: [0.70, 0.66], door: [0.155, 0.6889], hob: [0.6849, 0.6946], fall: [0.441, 0.7712], cot: [0.7388, 0.5153]
   };
   var OUTS = {
     s1: ['Maya is up. Dan sleeps on.', 'Dan is up. Maya sleeps on.'], s2: ['Theo has it.'], s3: ['Gran has been reminded.', 'Maya has been told.'],
@@ -37,25 +37,15 @@
       from: 'Adam', msg: 'June is crying in the nursery.', chips: ['Maya', 'Dan'], pick: 0, done: 'Telling Maya. It is her turn tonight.' }
   ];
   // the house's outline in the render, as fractions of its width and height
-  var WIDE = 1100, HOUSE = { l: 0.12, r: 0.96, t: 0.115, b: 0.82 };
+  var WIDE = 1100, HOUSE = { l: 0.07, r: 0.97, t: 0.145, b: 0.81 };
   var sec = track.parentNode, stage = document.getElementById('dayStage');
   var scroller = document.createElement('div'); scroller.className = 'day-scroller'; scroller.tabIndex = 0; scroller.setAttribute('role', 'group'); scroller.setAttribute('aria-label', 'A day at home. Swipe or scroll sideways.'); stage.appendChild(scroller);
   var cam = document.createElement('div'); cam.className = 'day-cam day-strip'; scroller.appendChild(cam);
   var panels = S.map(function () { var d = document.createElement('div'); d.className = 'day-panel'; cam.appendChild(d); return d; });
   var imgs = S.map(function (s, i) {
-    var im = document.createElement('img'); im.src = (SMALL ? s.img.replace(/^\.\.\//, '../sm/').replace(/^s/, 'sm/s') : s.img) .replace(/^/, 'day/story/') + '.webp?v=8'; im.className = 'day-img'; im.decoding = 'async'; if (i) im.loading = 'lazy';
+    var im = document.createElement('img'); im.src = (SMALL ? s.img.replace(/^\.\.\//, '../sm/').replace(/^s/, 'sm/s') : s.img) .replace(/^/, 'day/story/') + '.webp?v=9'; im.className = 'day-img'; im.decoding = 'async'; if (i) im.loading = 'lazy';
     im.alt = i === 0 ? 'A cutaway of a two-storey family home, with Adam on the living-room sideboard' : ''; if (i) im.setAttribute('aria-hidden', 'true');
     panels[i].appendChild(im); return im;
-  });
-  // a pin on the house for every moment; tapping one goes there
-  var pins = panels.map(function (pn, i) {
-    return S.map(function (s, k) {
-      var b = document.createElement('button'); b.type = 'button'; b.className = 'day-pin' + (k === i ? ' cur' : '');
-      b.setAttribute('aria-label', s.time + ', ' + s.head.replace(/\.$/, '')); b.innerHTML = '<i></i><span>' + s.time + '</span>';
-      if (k === i) b.tabIndex = -1;
-      b.addEventListener('click', function () { go(k); });
-      pn.appendChild(b); return b;
-    });
   });
   var afters = S.map(function (s, i) {
     if (!s.after) return null;
@@ -96,10 +86,7 @@
         }
         im.style.width = w + 'px'; im.style.height = h + 'px';
         im.style.left = l + 'px'; im.style.top = t + 'px';
-        if (im === imgs[i]) {
-          geo['spot' + i] = [l + f.z * f.x * geo.iw, t + f.z * f.y * geo.ih];
-          pins[i].forEach(function (b, k) { var q = P[S[k].at]; b.style.left = (l + f.z * q[0] * geo.iw) + 'px'; b.style.top = (t + f.z * q[1] * geo.ih) + 'px'; });
-        }
+        if (im === imgs[i]) geo['spot' + i] = [l + f.z * f.x * geo.iw, t + f.z * f.y * geo.ih];
         im.style.transformOrigin = (f.x * 100) + '% ' + (f.y * 100) + '%';
       });
     });
