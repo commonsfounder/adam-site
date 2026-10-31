@@ -114,8 +114,7 @@
     var io = new IntersectionObserver(function (es) {
       if (shown || !es[0].isIntersecting) return;
       shown = true; io.disconnect();
-      t1 = setTimeout(function () { peek.classList.add('show'); if (ring) ring.classList.add('show'); }, 700);
-      t2 = setTimeout(hide, 12000);
+      t1 = setTimeout(function () { peek.classList.add('show'); if (ring) ring.classList.add('show'); }, 150);
     }, { threshold: 0.5 });
     io.observe(open);
     open.addEventListener('click', hide);

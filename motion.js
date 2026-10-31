@@ -14,7 +14,7 @@
       o.appendChild(s); el.appendChild(o); if (i < txt.length - 1) el.appendChild(document.createTextNode(' '));
     });
   }
-  document.querySelectorAll('.story-head h2, .head h2:not(.hero-h), .closing h2').forEach(function (h) {
+  document.querySelectorAll('.story-head h2, .head h2:not(.hero-h)').forEach(function (h) {
     if (h.querySelector('br')) { var parts = h.innerHTML.split(/<br\s*\/?>/i); h.innerHTML = ''; parts.forEach(function (p, i) { var d = document.createElement('span'); d.className = 'ml'; d.textContent = p.replace(/&rsquo;/g, '’'); h.appendChild(d); splitWords(d); if (i < parts.length - 1) h.appendChild(document.createElement('br')); }); }
     else splitWords(h);
     h.classList.add('msplit');
@@ -42,7 +42,7 @@
   var par = Array.prototype.slice.call(document.querySelectorAll('[data-par]'));
   var hero = document.querySelector('.explode-wrap .device-col');
   var band = document.getElementById('marq');
-  var closing = document.querySelector('.closing .wrap');
+  var closing = null;
   var vy = 0, last = scrollY, pos = 0, tick = false;
 
   function frame() {

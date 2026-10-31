@@ -1239,3 +1239,79 @@ footer a:hover { color: var(--bg); }
 @media (min-width: 1000px) { #make.card-sec { padding-top: 40px; padding-bottom: 24px; } #make > .wrap { min-height: 0; } }
 #make .sol-lead .hero-h { margin: 0 0 var(--sp-300); font-size: clamp(40px, 5vw, 72px); line-height: 1.02; letter-spacing: -0.05em; font-weight: 500; max-width: none; }
 @media (min-width: 1000px) { #make .sol-lead .hero-h { font-size: clamp(40px, 4.3vw, 64px); } }
+
+/* homepage review, Oct 2026: say what Adam is, one clear action, safety first */
+#make > .wrap { max-width: 1360px; }
+@media (min-width: 1000px) { #make > .wrap { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 56px; min-height: calc(100svh - 96px); } }
+.hero-for { margin: 0 0 14px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.3; font-weight: 500; letter-spacing: -0.01em; color: #4f4b44; }
+.hero-for .for-word { gap: 0; }
+.hero-for .for-fl { display: none; }
+#make .sol-lead .hero-h, #make .sol-lead h1.hero-h { margin: 0 0 20px; font-size: clamp(31px, 3.4vw, 52px); line-height: 1.06; letter-spacing: -0.035em; text-wrap: balance; max-width: 20ch; }
+#make .sol-lead .sub { max-width: 34em; margin: 0 0 28px; font-size: clamp(17px, 1.3vw, 19px); line-height: 1.5; color: #4f4b44; text-wrap: pretty; }
+.hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.btn.hero-btn { min-height: 56px; padding: 14px 30px; font-size: 17px; background: var(--accd); border-color: var(--accd); color: #fff; }
+.btn.hero-btn:hover { background: var(--ink); border-color: var(--ink); }
+.hero-price { margin: 0; font-size: 16px; line-height: 1.35; color: #4f4b44; }
+.hero-price b { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+.hero-price .was { margin-left: 6px; text-decoration: line-through; color: var(--mut); }
+.hero-ship { display: block; margin-top: 2px; font-size: 15px; color: var(--mut); }
+.top .top-cta { background: var(--accd); border-color: var(--accd); color: #fff; }
+.top .top-cta:hover { background: var(--ink); border-color: var(--ink); }
+.hero-assembled { mix-blend-mode: multiply; -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 6%, #000 88%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 6%, #000 88%, transparent); mask-composite: intersect; }
+#colourPicker { gap: 12px; }
+#colourPicker .colour-name { order: 2; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--mut); }
+@media (max-width: 999px) { #make .sol-lead .hero-h { max-width: 22ch; } }
+
+/* privacy promise, straight after the hero */
+.promise { padding: 8px 0 clamp(40px, 6vw, 72px); }
+.promise .wrap { max-width: 1360px; }
+#why .vows { display: grid; grid-template-columns: 1fr; gap: 20px 48px; margin: 0; padding-top: 28px; border-top: 1px solid var(--line); }
+@media (min-width: 800px) { #why .vows { grid-template-columns: repeat(3, 1fr); } }
+#why .vows li, #why .vows li:first-child, #why .vows li:nth-child(2) { padding: 0; border: 0; font-size: 16px; line-height: 1.5; letter-spacing: 0; font-weight: 400; color: #4f4b44; }
+#why .vows b { display: block; margin-bottom: 4px; font-size: 20px; line-height: 1.25; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); }
+
+/* what Adam hears leads; the everyday help supports it */
+.what { padding-top: 0; }
+.what .wrap { max-width: 1360px; }
+h2.what-l { font-size: clamp(30px, 4.2vw, 56px); }
+.what .hears-tiles { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 800px) { .what .hears-tiles, .what .tiles.hears-tiles:first-of-type { grid-template-columns: repeat(3, 1fr); } }
+.hears-tiles li { gap: 28px; min-height: 148px; padding: 22px; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.25; letter-spacing: -0.015em; }
+.hears-tiles svg { width: 32px; height: 32px; stroke: var(--accd); stroke-width: 1.6; }
+.fall-flow { margin-top: clamp(40px, 5vw, 64px); }
+.fall-flow h3 { margin: 0 0 20px; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 500; }
+.fall-flow ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 20px 32px; counter-reset: ff; }
+@media (min-width: 800px) { .fall-flow ol { grid-template-columns: repeat(3, 1fr); } }
+.fall-flow li { counter-increment: ff; display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; padding-top: 16px; border-top: 1px solid rgba(32, 30, 27, 0.18); }
+.fall-flow li::before { content: counter(ff); grid-row: 1 / span 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--bg); font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.fall-flow li:last-child::before { background: var(--accd); }
+.fall-flow b { font-size: 18px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; }
+.fall-flow span { margin-top: 4px; font-size: 16px; line-height: 1.45; color: #4f4b44; }
+.what-also { margin: clamp(40px, 5vw, 64px) 0 16px; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.2; letter-spacing: -0.02em; font-weight: 500; }
+.also { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.also li { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px 9px 12px; border: 1px solid rgba(32, 30, 27, 0.16); border-radius: 9999px; font-size: 15px; line-height: 20px; color: var(--ink); }
+.also svg { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* a day with Adam: readable text and timeline */
+.day-kicker { font-size: 16px; opacity: 0.9; }
+.day-time { opacity: 1; }
+.day-ticks li { opacity: 0.65; }
+.day-ticks li b { font-size: 13px; }
+.day-note { font-size: 15px; line-height: 20px; opacity: 0.85; }
+.day-stage > .day-card { width: 290px; }
+.day-card .dc-from { font-size: 13px; }
+.day-card .dc-msg { font-size: 16px; line-height: 22px; }
+.day-card .dc-done { font-size: 14px; line-height: 20px; }
+
+/* bottom of the page: less dead space, readable answers */
+.try-band { padding: clamp(40px, 6vw, 64px) 0; }
+#faq .faq { grid-template-columns: 1fr !important; max-width: 1000px; }
+@media (min-width: 900px) { #faq .acc-item { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px; } #faq .acc-p p { margin-top: 0; } }
+#faq .acc-q { font-size: 19px; line-height: 27px; }
+#faq .acc-p p { font-size: 17px; line-height: 27px; color: #4f4b44; max-width: 60ch; padding: 0; }
+.closing .wrap { transform: none !important; will-change: auto; }
+#make .product-hero:not(.open) .hero-view { aspect-ratio: 1600 / 992; max-width: none; }
+.hero-assembled { -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 80%, transparent); mask-image: linear-gradient(to right, transparent, #000 12%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 80%, transparent); }
+@media (min-width: 1000px) { #make .product-wrap { margin-right: calc(var(--pad) * -1); } }
+.hero-for .for-word { display: inline-block; min-width: 0; width: auto; white-space: nowrap; }
+@media (max-width: 720px) { .day-card .dc-msg { font-size: 14px; line-height: 20px; } .day-card .dc-done { font-size: 13px; line-height: 18px; } .day-stage > .day-card { width: min(250px, calc(100vw - 80px)); } .day-note { font-size: 14px; } }

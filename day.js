@@ -66,7 +66,7 @@
   stage.appendChild(card);
   var time = document.getElementById('dayTime'), head = document.getElementById('dayHead'), narr = document.getElementById('dayNarr'), ticks = document.getElementById('dayTicks');
   var tickEls = S.map(function (s) { var li = document.createElement('li'); li.innerHTML = '<span></span><b>' + s.time + '</b>'; ticks.appendChild(li); return li; });
-  var NS = S.length, shown = -1;
+  var NS = S.length, shown = -1, START = S.findIndex(function (s) { return s.at === 'fall'; });
   var geo = { w: 0, h: 0, iw: 0, ih: 0, l: 0, t: 0 };
 
   function place() {
@@ -88,7 +88,7 @@
     geo.W = W; geo.H = H; geo.iw = IMG.w * k; geo.ih = IMG.h * k;
     cam.style.width = W * NS + 'px'; cam.style.height = H + 'px';
     panels.forEach(function (p) { p.style.width = W + 'px'; p.style.height = H + 'px'; });
-    scroller.scrollLeft = shown > 0 ? shown * W : 0;
+    scroller.scrollLeft = (shown >= 0 ? shown : Math.max(0, START)) * W;
     place();
   }
   layout(); window.addEventListener('resize', layout);
