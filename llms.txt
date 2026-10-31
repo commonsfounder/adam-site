@@ -1,0 +1,56 @@
+# Adam by Intuitive Devices
+
+> Adam is a £299 home speaker from Intuitive Devices, a UK start-up. It has microphones and sensors but no cameras. It hears what happens at home (a fall, smoke and CO alarms, a knock at the door, glass breaking, a baby crying), knows who is in which room, and tells the right person. It also gets things done for the household. No subscription needed. Website: https://www.heyintuitive.com/
+
+Not to be confused with Intuitive Surgical, Intuit, or A.D.A.M. (adam-assistant.com).
+
+## Key facts
+- Product: Adam, a speaker for the room you use most.
+- Price: £299 for everything in the box. No subscription. The first homes chosen for early access get it at half price.
+- Availability: early access. Apply with your email at https://www.heyintuitive.com/#who
+- Colours: Charcoal, Chalk, Sand.
+- Market: United Kingdom.
+- Contact: support@heyintuitive.com
+
+## What Adam hears
+- A fall: Adam asks the person if they are okay. With no answer within about 30 seconds it alerts family, and if they do not respond it calls 999. Saying "I'm fine" stops it at any point. If Wi-Fi and the phone hotspot are both down, it sounds an alarm out loud.
+- Smoke and CO alarms, day and night
+- A knock at the door
+- Glass breaking
+- A baby crying
+- Who is in which room (the room, never your exact position)
+
+## What Adam does
+- Orders and books, with your OK
+- Sends messages and emails
+- Keeps the family calendar
+- A briefing each morning
+- Reminders and routines
+- Remembers what you tell it
+- Answers out loud
+- Watches prices and deliveries
+
+## Privacy
+- No cameras. Nothing in Adam can see.
+- The sound itself never leaves your home. When you ask Adam something, only the text of your words goes online so your assistant can answer.
+- You can see, export or delete everything Adam keeps.
+- Anything that can't be undone (paying, booking, sending) needs your approval first.
+
+## Who it's for
+New parents, grandparents, busy families, flatmates, pet owners, carers, students, night owls, developers, and you.
+
+## A day with Adam
+- 6:50 am, Kit day: "Today is PE. Theo's kit is by the dryer."
+- 11:30 am, a knock at the door: Dan is in the garden and cannot hear the door. Adam hears the knock and tells him.
+- 2:15 pm, the smoke alarm: "The smoke alarm is sounding in the kitchen." Dan has headphones on upstairs, so Adam calls him.
+- 5:45 pm, a fall: "I heard a fall in the living room. Gran is not answering." Adam tells Maya and Dan, and calls 999 if they do not answer.
+- 9:40 pm, June is awake: Maya and Dan are downstairs with the TV on. Adam hears June upstairs and tells Maya.
+
+## Compatibility
+Works with any apps, assistants and smart devices you like, including your existing AI assistant. Runs on mains power. If Wi-Fi drops, it carries on through your phone's hotspot.
+
+## Pages
+- [Home](https://www.heyintuitive.com/): product, questions, early-access sign-up
+- [Questions](https://www.heyintuitive.com/#faq)
+- [Privacy](https://www.heyintuitive.com/privacy)
+- [Terms](https://www.heyintuitive.com/terms)
