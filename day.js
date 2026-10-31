@@ -5,7 +5,7 @@
   var SMALL = Math.min(window.innerWidth, window.innerHeight) < 820;
   // where each moment happens in the cutaway render (render/cutaway.py writes these to cut_pts.json)
   var P = {
-    kit: [0.7722, 0.6595], door: [0.1591, 0.7378], hob: [0.7159, 0.7305], fall: [0.392, 0.8272], cot: [0.6023, 0.5203]
+    kit: [0.754, 0.6324], door: [0.1558, 0.7037], hob: [0.6957, 0.7086], fall: [0.3613, 0.7921], cot: [0.646, 0.5164]
   };
   var OUTS = {
     s1: ['Maya is up. Dan sleeps on.', 'Dan is up. Maya sleeps on.'], s2: ['Theo has it.'], s3: ['Gran has been reminded.', 'Maya has been told.'],
@@ -20,19 +20,19 @@
     s6: [['Maya', 'Gran has fallen in the living room and is not answering.', 'red'], ['Maya', 'Gran is okay. Adam will keep listening.']], s7: [['Dan', 'June’s bath is yours tonight.'], ['Maya', 'Can you take June’s bath?']], s8: [null]
   };
   var S = [
-    { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#cdc9c4', dark: false, at: 'kit', z: 1.15,
+    { img: 's2', time: '6:50 am', head: 'Kit day.', bg: '#4d5b71', dark: true, at: 'kit', z: 0.8,
       narr: 'Adam remembers what the family has told it, and says it at the moment it matters.',
       from: 'Adam', msg: 'Today is PE. Theo’s kit is by the dryer.', chips: ['Thanks'], pick: 0, done: 'Reminding Theo.' },
-    { img: 's4', time: '11:30 am', head: 'A knock at the door.', bg: '#cfcecb', dark: false, at: 'door', z: 1.15,
+    { img: 's4', time: '11:30 am', head: 'A knock at the door.', bg: '#616e80', dark: true, at: 'door', z: 0.8,
       narr: 'Dan is in the garden and cannot hear the door. Adam hears the knock and tells him.',
       from: 'Adam', msg: 'Someone is knocking at the front door.', chips: ['Tell Dan', 'Leave it'], pick: 0, done: 'Telling Dan. He is on his way.' },
-    { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#cfcecb', dark: false, at: 'hob', z: 1.15,
+    { img: 's5', time: '2:15 pm', head: 'The smoke alarm.', bg: '#616e80', dark: true, at: 'hob', z: 0.8,
       narr: 'Adam always listens for smoke and CO alarms, day and night.',
       from: 'Adam', msg: 'The smoke alarm is sounding in the kitchen.', chips: ['Call Dan', 'Call Maya'], pick: 0, done: 'Dan has headphones on upstairs. Calling him now.' },
-    { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#2a2521', dark: true, at: 'fall', z: 1.15,
+    { img: 's6', time: '5:45 pm', head: 'A fall.', bg: '#282e3d', dark: true, at: 'fall', z: 0.8,
       narr: 'Adam listens for the sounds that mean something is wrong, and gets the right person there on time.',
       from: 'Adam', msg: 'I heard a fall in the living room. Gran is not answering.', chips: ['Tell Maya and Dan', 'She’s okay'], pick: 0, done: 'Telling Maya and Dan. Calling 999 if they do not answer.' },
-    { img: 's1', time: '9:40 pm', head: 'June is awake.', bg: '#111215', dark: true, at: 'cot', z: 1.15,
+    { img: 's1', time: '9:40 pm', head: 'June is awake.', bg: '#0a0d15', dark: true, at: 'cot', z: 0.8,
       narr: 'Maya and Dan are downstairs with the TV on. Adam hears June upstairs and tells them.',
       from: 'Adam', msg: 'June is crying in the nursery.', chips: ['Maya', 'Dan'], pick: 0, done: 'Telling Maya. It is her turn tonight.' }
   ];
@@ -42,7 +42,7 @@
   var cam = document.createElement('div'); cam.className = 'day-cam day-strip'; scroller.appendChild(cam);
   var panels = S.map(function () { var d = document.createElement('div'); d.className = 'day-panel'; cam.appendChild(d); return d; });
   var imgs = S.map(function (s, i) {
-    var im = document.createElement('img'); im.src = (SMALL ? s.img.replace(/^\.\.\//, '../sm/').replace(/^s/, 'sm/s') : s.img) .replace(/^/, 'day/story/') + '.webp?v=5'; im.className = 'day-img'; im.decoding = 'async'; if (i) im.loading = 'lazy';
+    var im = document.createElement('img'); im.src = (SMALL ? s.img.replace(/^\.\.\//, '../sm/').replace(/^s/, 'sm/s') : s.img) .replace(/^/, 'day/story/') + '.webp?v=6'; im.className = 'day-img'; im.decoding = 'async'; if (i) im.loading = 'lazy';
     im.alt = i === 0 ? 'A cutaway of a two-storey family home, with Adam on the living-room sideboard' : ''; if (i) im.setAttribute('aria-hidden', 'true');
     panels[i].appendChild(im); return im;
   });
@@ -85,7 +85,8 @@
       els.forEach(function (im) {
         if (!im) return;
         var w = geo.iw * f.z, h = geo.ih * f.z;
-        var l = Math.min(0, Math.max(geo.W - w, geo.W / 2 - f.z * f.x * geo.iw)), t = Math.min(0, geo.H / 2 - f.z * f.y * geo.ih);
+        // narrower than the stage: centre it (the backdrop matches the stage colour)
+        var l = w <= geo.W ? (geo.W - w) / 2 : Math.min(0, Math.max(geo.W - w, geo.W / 2 - f.z * f.x * geo.iw)), t = h <= geo.H ? Math.min(48, (geo.H - h) / 2) : Math.min(0, geo.H / 2 - f.z * f.y * geo.ih);
         im.style.width = w + 'px'; im.style.height = h + 'px';
         im.style.left = l + 'px'; im.style.top = t + 'px';
         if (im === imgs[i]) {
